@@ -1,0 +1,28 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: #ffffff;
+  --foreground: #0f172a;
+}
+
+* {
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  background: #f8fafc;
+  color: var(--foreground);
+}
+
+.dark body {
+  background: #0f172a; /* slate-900 */
+  color: #f1f5f9; /* slate-100 */
+}
+
+@media print {
+  body {
+    background: white;
+  }
+}

@@ -1,0 +1,37 @@
+export const ca = {
+  home: {
+    subtitle: "Troba on estan les coses guardades",
+    qrLink: "Codis QR",
+    searchPlaceholder: "Cerca qualsevol objecte…",
+    spacesHeading: "Espais d'emmagatzematge",
+    items: (n: number) => (n === 1 ? "1 element" : `${n} elements`),
+    results: (n: number) => (n === 1 ? "1 resultat" : `${n} resultats`),
+    seeAll: (n: number) => `Veure els ${n} resultats`,
+    nothingFound: "Res trobat",
+    nothingFoundHint: "Prova amb una paraula diferent",
+  },
+  space: {
+    back: "← Inici",
+    searchPlaceholder: (name: string) => `Cerca a ${name}…`,
+    searchEverywhereBtn: "Cerca a tot arreu →",
+    nothingFoundHere: "Res trobat aquí",
+    nothingFoundHint: "Prova amb una paraula diferent, o",
+    searchEverywhereLink: "cerca a tot arreu",
+    listView: "Llista",
+    planView: "Plànol",
+  },
+  search: {
+    back: "← Inici",
+    title: "Cerca a tot arreu",
+    typeToSearch: "Escriu per cercar a tots els espais",
+    results: (n: number) => (n === 1 ? "1 resultat" : `${n} resultats`),
+    nothingFound: "Res trobat",
+    nothingFoundHint: "Prova amb una paraula diferent",
+  },
+  qr: {
+    back: "← Inici",
+    title: "Codis QR",
+    subtitle: "Imprimeix i enganxa als teus espais d'emmagatzematge",
+    printButton: "Imprimeix els codis QR",
+  },
+};
