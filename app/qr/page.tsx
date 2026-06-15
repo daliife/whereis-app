@@ -26,14 +26,28 @@ export default function QRPage() {
       <header className="pt-8 pb-4">
         <Link
           href="/"
-          className="text-sm text-slate-400 hover:text-slate-600 print:hidden dark:text-slate-500 dark:hover:text-slate-300"
+          className="inline-flex items-center justify-center rounded-lg p-1.5 text-zinc-400 transition-colors hover:bg-zinc-100 hover:text-zinc-700 print:hidden dark:text-zinc-600 dark:hover:bg-zinc-800 dark:hover:text-zinc-300"
+          aria-label={t.qr.back}
         >
-          {t.qr.back}
+          <svg
+            className="h-5 w-5"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+            aria-hidden="true"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M15 19l-7-7 7-7"
+            />
+          </svg>
         </Link>
-        <h1 className="mt-2 text-2xl font-bold text-slate-900 dark:text-slate-100">
+        <h1 className="mt-2 text-xl font-bold text-zinc-900 dark:text-zinc-100">
           {t.qr.title}
         </h1>
-        <p className="text-sm text-slate-400">{t.qr.subtitle}</p>
+        <p className="text-sm text-zinc-400">{t.qr.subtitle}</p>
       </header>
 
       {/* QR cards */}
@@ -41,7 +55,7 @@ export default function QRPage() {
         {spaces.map((space) => (
           <div
             key={space.id}
-            className="rounded-2xl border border-slate-100 bg-white p-6 shadow-sm print:break-inside-avoid dark:border-slate-700 dark:bg-slate-800"
+            className="rounded-2xl border border-zinc-100 bg-white p-6 shadow-sm print:break-inside-avoid dark:border-zinc-800 dark:bg-zinc-900"
           >
             <div className="flex items-start gap-5">
               <div className="flex-shrink-0">
@@ -54,25 +68,25 @@ export default function QRPage() {
                   />
                 ) : (
                   /* Placeholder during SSR / before hydration */
-                  <div className="h-[100px] w-[100px] animate-pulse rounded-lg bg-slate-100 dark:bg-slate-700" />
+                  <div className="h-[100px] w-[100px] animate-pulse rounded-lg bg-zinc-100 dark:bg-zinc-800" />
                 )}
               </div>
               <div className="min-w-0">
                 <div className="flex items-center gap-2">
                   <div
-                    className={`flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-md ${TYPE_COLOR[space.type] ?? "bg-slate-100 text-slate-500"}`}
+                    className={`flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-md ${TYPE_COLOR[space.type] ?? "bg-zinc-100 text-zinc-500"}`}
                   >
                     <SpaceIcon type={space.type} className="h-3.5 w-3.5" />
                   </div>
-                  <p className="font-semibold text-slate-900 dark:text-slate-100">
+                  <p className="font-semibold text-zinc-900 dark:text-zinc-100">
                     {space.name}
                   </p>
                 </div>
-                <p className="mt-0.5 text-sm capitalize text-slate-400">
+                <p className="mt-0.5 text-sm capitalize text-zinc-400">
                   {space.type}
                 </p>
                 {baseUrl && (
-                  <p className="mt-2 break-all text-xs text-slate-300 dark:text-slate-600">
+                  <p className="mt-2 break-all text-xs text-zinc-300 dark:text-zinc-700">
                     {baseUrl}/space/{space.id}
                   </p>
                 )}
@@ -85,7 +99,7 @@ export default function QRPage() {
       {/* Print button */}
       <button
         onClick={() => window.print()}
-        className="mt-6 w-full rounded-xl bg-slate-900 py-3.5 text-base font-medium text-white transition-colors active:bg-slate-700 print:hidden"
+        className="mt-6 w-full rounded-xl bg-zinc-900 py-4 text-base font-semibold text-white transition-colors active:bg-zinc-700 print:hidden dark:bg-amber-500 dark:text-zinc-950 dark:active:bg-amber-400"
       >
         {t.qr.printButton}
       </button>

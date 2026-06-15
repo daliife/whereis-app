@@ -29,22 +29,25 @@ export default function HomePage() {
   return (
     <div className="mx-auto max-w-lg px-4 pb-12">
       {/* Header */}
-      <header className="flex items-start justify-between pt-10 pb-6">
+      <header className="flex items-start justify-between pt-10 pb-7">
         <div>
-          <h1 className="text-2xl font-bold tracking-tight text-slate-900 dark:text-slate-100">
-            Stashly
-          </h1>
-          <p className="mt-0.5 text-sm text-slate-500 dark:text-slate-400">
+          <div className="flex items-center gap-2">
+            <span className="inline-block h-4 w-1 rounded-full bg-amber-400" />
+            <h1 className="text-2xl font-bold tracking-tight text-zinc-900 dark:text-zinc-100">
+              Stashly
+            </h1>
+          </div>
+          <p className="mt-0.5 pl-3 text-sm text-zinc-500 dark:text-zinc-400">
             {t.home.subtitle}
           </p>
         </div>
         <div className="flex items-center gap-0.5 pt-0.5">
           <ThemeToggle />
           <LocaleSwitcher />
-          <div className="mx-1.5 h-4 w-px bg-slate-200 dark:bg-slate-700" />
+          <div className="mx-1.5 h-4 w-px bg-zinc-200 dark:bg-zinc-700" />
           <Link
             href="/qr"
-            className="rounded-lg px-2.5 py-1.5 text-xs font-medium text-slate-400 hover:bg-slate-100 hover:text-slate-700 dark:text-slate-500 dark:hover:bg-slate-800 dark:hover:text-slate-300"
+            className="rounded-lg px-2.5 py-1.5 text-xs font-medium text-zinc-400 hover:bg-zinc-100 hover:text-zinc-700 dark:text-zinc-500 dark:hover:bg-zinc-800 dark:hover:text-zinc-300"
           >
             {t.home.qrLink}
           </Link>
@@ -52,7 +55,7 @@ export default function HomePage() {
       </header>
 
       {/* Sticky search bar */}
-      <div className="sticky top-0 z-10 -mx-4 bg-slate-50/90 px-4 pb-3 pt-2 backdrop-blur-sm dark:bg-slate-900/90">
+      <div className="sticky top-0 z-10 -mx-4 bg-zinc-50/90 px-4 pb-3 pt-2 backdrop-blur-sm dark:bg-zinc-950/90">
         {/* eslint-disable-next-line jsx-a11y/no-static-element-interactions */}
         <div onKeyDown={handleKeyDown}>
           <SearchBar
@@ -69,7 +72,7 @@ export default function HomePage() {
         <section className="mt-4">
           {results.length > 0 ? (
             <>
-              <p className="mb-3 text-xs font-medium text-slate-400">
+              <p className="mb-3 text-xs font-medium text-zinc-400">
                 {t.home.results(results.length)}
               </p>
               <div className="flex flex-col gap-2">
@@ -89,7 +92,7 @@ export default function HomePage() {
               {results.length > 5 && (
                 <Link
                   href={`/search?q=${encodeURIComponent(query)}`}
-                  className="mt-4 block text-center text-sm font-medium text-indigo-600 dark:text-indigo-400"
+                  className="mt-4 block text-center text-sm font-medium text-amber-600 dark:text-amber-400"
                 >
                   {t.home.seeAll(results.length)}
                 </Link>
@@ -97,9 +100,9 @@ export default function HomePage() {
             </>
           ) : (
             <div className="mt-20 text-center">
-              <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-slate-100 dark:bg-slate-800">
+              <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-zinc-100 dark:bg-zinc-800">
                 <svg
-                  className="h-6 w-6 text-slate-400"
+                  className="h-6 w-6 text-zinc-400"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
@@ -113,10 +116,10 @@ export default function HomePage() {
                   />
                 </svg>
               </div>
-              <p className="mt-4 text-base font-semibold text-slate-700 dark:text-slate-300">
+              <p className="mt-4 text-base font-semibold text-zinc-700 dark:text-zinc-300">
                 {t.home.nothingFound}
               </p>
-              <p className="mt-1 text-sm text-slate-400">
+              <p className="mt-1 text-sm text-zinc-400">
                 {t.home.nothingFoundHint}
               </p>
             </div>
@@ -124,13 +127,13 @@ export default function HomePage() {
         </section>
       ) : (
         <section className="mt-4">
-          <p className="mb-3 text-xs font-medium uppercase tracking-widest text-slate-400">
+          <p className="mb-3 text-xs font-medium uppercase tracking-widest text-zinc-400">
             {t.home.spacesHeading}
           </p>
           <div className="flex flex-col gap-2">
             {spaces.map((space) => (
               <Link key={space.id} href={`/space/${space.id}`}>
-                <div className="flex items-center gap-3.5 rounded-xl border border-slate-100 bg-white px-4 py-3.5 transition-colors active:bg-slate-50 dark:border-slate-700/60 dark:bg-slate-800 dark:active:bg-slate-700">
+                <div className="flex items-center gap-3.5 rounded-xl border border-zinc-100 bg-white px-4 py-4 transition-colors active:bg-zinc-50 dark:border-zinc-800 dark:bg-zinc-900 dark:active:bg-zinc-800">
                   <div
                     className={`flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-lg ${TYPE_COLOR[space.type] ?? "bg-slate-100 text-slate-500"}`}
                   >
@@ -140,10 +143,10 @@ export default function HomePage() {
                     />
                   </div>
                   <div className="min-w-0 flex-1">
-                    <p className="text-sm font-semibold text-slate-900 dark:text-slate-100">
+                    <p className="text-sm font-semibold text-zinc-900 dark:text-zinc-100">
                       {space.name}
                     </p>
-                    <p className="text-xs text-slate-400">
+                    <p className="text-xs text-zinc-400">
                       {t.home.items(
                         space.sections.reduce(
                           (acc, s) => acc + s.items.length,
@@ -153,7 +156,7 @@ export default function HomePage() {
                     </p>
                   </div>
                   <svg
-                    className="h-4 w-4 flex-shrink-0 text-slate-300 dark:text-slate-600"
+                    className="h-4 w-4 flex-shrink-0 text-zinc-200 dark:text-zinc-700"
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"

@@ -26,7 +26,7 @@ export default function RootLayout({
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
       </head>
       <body
-        className={`${inter.variable} font-sans min-h-screen bg-slate-50 dark:bg-slate-900`}
+        className={`${inter.variable} font-sans min-h-screen bg-zinc-50 dark:bg-zinc-950`}
       >
         <ThemeProvider>
           <I18nProvider>{children}</I18nProvider>

@@ -13,8 +13,8 @@ export default function LocaleSwitcher() {
           onClick={() => setLocale(code)}
           className={`rounded-md px-2 py-1 text-xs font-semibold transition-colors ${
             locale === code
-              ? "bg-slate-900 text-white dark:bg-slate-100 dark:text-slate-900"
-              : "text-slate-400 hover:bg-slate-100 hover:text-slate-700 dark:text-slate-500 dark:hover:bg-slate-700 dark:hover:text-slate-300"
+              ? "bg-amber-400 text-zinc-900 dark:bg-amber-500 dark:text-zinc-950"
+              : "text-zinc-400 hover:bg-zinc-100 hover:text-zinc-700 dark:text-zinc-500 dark:hover:bg-zinc-800 dark:hover:text-zinc-300"
           }`}
           aria-label={`Switch to ${LOCALE_LABELS[code]}`}
         >

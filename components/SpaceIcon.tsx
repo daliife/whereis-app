@@ -1,9 +1,9 @@
 export const TYPE_COLOR: Record<string, string> = {
   cabinet:
-    "bg-indigo-50 text-indigo-600 dark:bg-indigo-900/20 dark:text-indigo-400",
-  drawers:
-    "bg-emerald-50 text-emerald-600 dark:bg-emerald-900/20 dark:text-emerald-400",
-  shelf: "bg-amber-50 text-amber-600 dark:bg-amber-900/20 dark:text-amber-400",
+    "bg-amber-100 text-amber-700 dark:bg-amber-950/50 dark:text-amber-400",
+  drawers: "bg-zinc-100 text-zinc-600 dark:bg-zinc-800 dark:text-zinc-300",
+  shelf:
+    "bg-orange-50 text-orange-600 dark:bg-orange-950/40 dark:text-orange-400",
 };
 
 interface Props {

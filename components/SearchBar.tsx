@@ -25,7 +25,7 @@ export default function SearchBar({
     <div className="relative w-full">
       <div className="pointer-events-none absolute inset-y-0 left-4 flex items-center">
         <svg
-          className="h-5 w-5 text-slate-400"
+          className="h-5 w-5 text-zinc-400"
           fill="none"
           stroke="currentColor"
           viewBox="0 0 24 24"
@@ -45,7 +45,7 @@ export default function SearchBar({
         value={value}
         onChange={(e) => onChange(e.target.value)}
         placeholder={placeholder}
-        className="w-full rounded-xl border border-slate-200 bg-white py-3.5 pl-12 pr-10 text-base text-slate-900 shadow-sm placeholder:text-slate-400 focus:border-slate-400 focus:outline-none focus:ring-2 focus:ring-slate-200 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-100 dark:placeholder:text-slate-500 dark:focus:border-slate-500 dark:focus:ring-slate-700"
+        className="w-full rounded-xl border border-zinc-200 bg-white py-3.5 pl-12 pr-10 text-base text-zinc-900 shadow-sm placeholder:text-zinc-400 focus:border-amber-400 focus:outline-none focus:ring-2 focus:ring-amber-200 dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-100 dark:placeholder:text-zinc-500 dark:focus:border-amber-500 dark:focus:ring-amber-900/40"
         style={{ minHeight: 52 }}
       />
       {value && (

@@ -35,17 +35,31 @@ export default function SearchResults() {
       <header className="pt-8 pb-4">
         <Link
           href="/"
-          className="text-sm text-slate-400 hover:text-slate-600 dark:text-slate-500 dark:hover:text-slate-300"
+          className="inline-flex items-center justify-center rounded-lg p-1.5 text-zinc-400 transition-colors hover:bg-zinc-100 hover:text-zinc-700 dark:text-zinc-600 dark:hover:bg-zinc-800 dark:hover:text-zinc-300"
+          aria-label={t.search.back}
         >
-          {t.search.back}
+          <svg
+            className="h-5 w-5"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+            aria-hidden="true"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M15 19l-7-7 7-7"
+            />
+          </svg>
         </Link>
-        <h1 className="mt-2 text-xl font-bold text-slate-900 dark:text-slate-100">
+        <h1 className="mt-2 text-xl font-bold text-zinc-900 dark:text-zinc-100">
           {t.search.title}
         </h1>
       </header>
 
       {/* Sticky search bar */}
-      <div className="sticky top-0 z-10 -mx-4 bg-slate-50/90 px-4 pb-3 pt-2 backdrop-blur-sm dark:bg-slate-900/90">
+      <div className="sticky top-0 z-10 -mx-4 bg-zinc-50/90 px-4 pb-3 pt-2 backdrop-blur-sm dark:bg-zinc-950/90">
         <SearchBar
           value={query}
           onChange={setQuery}
@@ -62,7 +76,7 @@ export default function SearchResults() {
           </p>
         ) : results.length > 0 ? (
           <>
-            <p className="mb-3 text-xs font-medium text-slate-400">
+            <p className="mb-3 text-xs font-medium text-zinc-400">
               {t.search.results(results.length)}
             </p>
             <div className="flex flex-col gap-2">
@@ -98,7 +112,7 @@ export default function SearchResults() {
                 />
               </svg>
             </div>
-            <p className="mt-4 text-base font-semibold text-slate-700 dark:text-slate-300">
+            <p className="mt-4 text-base font-semibold text-zinc-700 dark:text-zinc-300">
               {t.search.nothingFound}
             </p>
             <p className="mt-1 text-sm text-slate-400">

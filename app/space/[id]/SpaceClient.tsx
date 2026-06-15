@@ -37,27 +37,41 @@ export default function SpaceClient({ space }: { space: Space }) {
       <header className="pt-8 pb-4">
         <Link
           href="/"
-          className="text-sm text-slate-400 hover:text-slate-600 dark:text-slate-500 dark:hover:text-slate-300"
+          className="inline-flex items-center justify-center rounded-lg p-1.5 text-zinc-400 transition-colors hover:bg-zinc-100 hover:text-zinc-700 dark:text-zinc-600 dark:hover:bg-zinc-800 dark:hover:text-zinc-300"
+          aria-label={t.space.back}
         >
-          {t.space.back}
+          <svg
+            className="h-5 w-5"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+            aria-hidden="true"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M15 19l-7-7 7-7"
+            />
+          </svg>
         </Link>
         <div className="mt-2 flex items-center gap-3">
           <div
-            className={`flex h-11 w-11 flex-shrink-0 items-center justify-center rounded-xl ${TYPE_COLOR[space.type] ?? "bg-slate-100 text-slate-500"}`}
+            className={`flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-lg ${TYPE_COLOR[space.type] ?? "bg-zinc-100 text-zinc-500"}`}
           >
-            <SpaceIcon type={space.type} className="h-5 w-5" />
+            <SpaceIcon type={space.type} className="h-4 w-4" />
           </div>
           <div>
-            <h1 className="text-2xl font-bold text-slate-900 dark:text-slate-100">
+            <h1 className="text-2xl font-bold text-zinc-900 dark:text-zinc-100">
               {space.name}
             </h1>
-            <p className="text-sm capitalize text-slate-400">{space.type}</p>
+            <p className="text-sm capitalize text-zinc-400">{space.type}</p>
           </div>
         </div>
       </header>
 
       {/* Sticky search bar */}
-      <div className="sticky top-0 z-10 -mx-4 bg-slate-50/90 px-4 pb-3 pt-2 backdrop-blur-sm dark:bg-slate-900/90">
+      <div className="sticky top-0 z-10 -mx-4 bg-zinc-50/90 px-4 pb-3 pt-2 backdrop-blur-sm dark:bg-zinc-950/90">
         <SearchBar
           value={query}
           onChange={setQuery}
@@ -65,13 +79,13 @@ export default function SpaceClient({ space }: { space: Space }) {
         />
         {/* View toggle — only visible when not searching */}
         {!query.trim() && (
-          <div className="mt-2 flex rounded-lg bg-slate-100 p-0.5 dark:bg-slate-800">
+          <div className="mt-2 flex rounded-lg bg-zinc-100 p-0.5 dark:bg-zinc-800">
             <button
               onClick={() => setView("list")}
               className={`flex flex-1 items-center justify-center gap-1.5 rounded-md py-1.5 text-sm font-medium transition-all ${
                 view === "list"
-                  ? "bg-white text-slate-900 shadow-sm dark:bg-slate-700 dark:text-slate-100"
-                  : "text-slate-500 dark:text-slate-400"
+                  ? "bg-white text-zinc-900 shadow-sm dark:bg-zinc-700 dark:text-zinc-100"
+                  : "text-zinc-500 hover:text-zinc-700 dark:text-zinc-400"
               }`}
             >
               <svg
@@ -93,8 +107,8 @@ export default function SpaceClient({ space }: { space: Space }) {
               onClick={() => setView("plan")}
               className={`flex flex-1 items-center justify-center gap-1.5 rounded-md py-1.5 text-sm font-medium transition-all ${
                 view === "plan"
-                  ? "bg-white text-slate-900 shadow-sm dark:bg-slate-700 dark:text-slate-100"
-                  : "text-slate-500 dark:text-slate-400"
+                  ? "bg-white text-zinc-900 shadow-sm dark:bg-zinc-700 dark:text-zinc-100"
+                  : "text-zinc-500 hover:text-zinc-700 dark:text-zinc-400"
               }`}
             >
               <svg
@@ -120,7 +134,7 @@ export default function SpaceClient({ space }: { space: Space }) {
           <div className="mt-2 text-center">
             <Link
               href={`/search?q=${encodeURIComponent(query)}`}
-              className="text-sm font-medium text-indigo-600"
+              className="text-sm font-medium text-amber-600 dark:text-amber-400"
             >
               {t.space.searchEverywhereBtn}
             </Link>
@@ -145,9 +159,9 @@ export default function SpaceClient({ space }: { space: Space }) {
             </div>
           ) : (
             <div className="mt-20 text-center">
-              <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-slate-100 dark:bg-slate-800">
+              <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-zinc-100 dark:bg-zinc-800">
                 <svg
-                  className="h-6 w-6 text-slate-400"
+                  className="h-6 w-6 text-zinc-400"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
@@ -161,14 +175,14 @@ export default function SpaceClient({ space }: { space: Space }) {
                   />
                 </svg>
               </div>
-              <p className="mt-4 text-base font-semibold text-slate-700 dark:text-slate-300">
+              <p className="mt-4 text-base font-semibold text-zinc-700 dark:text-zinc-300">
                 {t.space.nothingFoundHere}
               </p>
               <p className="mt-1 text-sm text-slate-400">
                 {t.space.nothingFoundHint}{" "}
                 <Link
                   href={`/search?q=${encodeURIComponent(query)}`}
-                  className="font-medium text-indigo-600"
+                  className="font-medium text-amber-600 dark:text-amber-400"
                 >
                   {t.space.searchEverywhereLink}
                 </Link>
@@ -185,7 +199,7 @@ export default function SpaceClient({ space }: { space: Space }) {
           // List view
           space.sections.map((section) => (
             <div key={section.id} className="mb-8">
-              <h2 className="mb-2 text-xs font-semibold uppercase tracking-widest text-slate-400">
+              <h2 className="mb-2 text-xs font-semibold uppercase tracking-widest text-zinc-400">
                 {section.name}
               </h2>
               <div className="flex flex-col gap-2">
