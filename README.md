@@ -8,14 +8,14 @@ Mobile-first static web app that helps find where household items are stored. Sc
 
 ## Stack
 
-| Layer | Choice |
-|---|---|
-| Framework | Next.js 14 · App Router · TypeScript |
-| Styling | Tailwind CSS (`darkMode: "class"`) |
-| Search | fuse.js — fuzzy, client-side, no backend |
-| QR codes | qrcode.react |
+| Layer           | Choice                                              |
+| --------------- | --------------------------------------------------- |
+| Framework       | Next.js 14 · App Router · TypeScript                |
+| Styling         | Tailwind CSS (`darkMode: "class"`)                  |
+| Search          | fuse.js — fuzzy, client-side, no backend            |
+| QR codes        | qrcode.react                                        |
 | Package manager | **pnpm** (enforced via `packageManager` + `.npmrc`) |
-| Deployment | Static export (`output: 'export'`) → GitHub Pages |
+| Deployment      | Static export (`output: 'export'`) → GitHub Pages   |
 
 ---
 
@@ -84,20 +84,20 @@ All inventory lives in `data/inventory.json`. **The content language is fixed (C
 {
   "spaces": [
     {
-      "id": "armari-soterrani",   // used in URL: /space/armari-soterrani
+      "id": "armari-soterrani", // used in URL: /space/armari-soterrani
       "name": "Armari soterrani",
-      "type": "cabinet",          // cabinet | drawers | shelf
+      "type": "cabinet", // cabinet | drawers | shelf
       "sections": [
         {
           "id": "prestatge-a",
           "name": "Prestatge A",
           "items": [
-            { "name": "Barbacoa", "tags": ["barbacoa", "graella", "cuina"] }
-          ]
-        }
-      ]
-    }
-  ]
+            { "name": "Barbacoa", "tags": ["barbacoa", "graella", "cuina"] },
+          ],
+        },
+      ],
+    },
+  ],
 }
 ```
 
@@ -109,12 +109,12 @@ To **add items**: edit the relevant `sections[].items[]` array.
 
 ## Routes
 
-| Route | Description |
-|---|---|
-| `/` | Home — sticky search bar + space cards |
+| Route         | Description                                                                                             |
+| ------------- | ------------------------------------------------------------------------------------------------------- |
+| `/`           | Home — sticky search bar + space cards                                                                  |
 | `/space/[id]` | Space detail — QR code landing page. Supports `?highlight=Item%20name` to scroll to + highlight an item |
-| `/search?q=…` | Global fuzzy search across all spaces |
-| `/qr` | Printable QR codes for all spaces |
+| `/search?q=…` | Global fuzzy search across all spaces                                                                   |
+| `/qr`         | Printable QR codes for all spaces                                                                       |
 
 ---
 
