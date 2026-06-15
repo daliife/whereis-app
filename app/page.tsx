@@ -7,16 +7,11 @@ import SearchBar from "@/components/SearchBar";
 import ItemCard from "@/components/ItemCard";
 import LocaleSwitcher from "@/components/LocaleSwitcher";
 import ThemeToggle from "@/components/ThemeToggle";
+import SpaceIcon, { TYPE_COLOR } from "@/components/SpaceIcon";
 import { getAllSpaces, searchAll } from "@/lib/search";
 import { useI18n } from "@/lib/i18n";
 
 const spaces = getAllSpaces();
-
-const TYPE_ICON: Record<string, string> = {
-  cabinet: "🗄️",
-  drawers: "🗂️",
-  shelf: "📚",
-};
 
 export default function HomePage() {
   const [query, setQuery] = useState("");
@@ -36,21 +31,20 @@ export default function HomePage() {
       {/* Header */}
       <header className="flex items-start justify-between pt-10 pb-6">
         <div>
-          <h1 className="text-3xl font-bold tracking-tight text-slate-900 dark:text-slate-100">
+          <h1 className="text-2xl font-bold tracking-tight text-slate-900 dark:text-slate-100">
             Stashly
           </h1>
-          <p className="mt-1 text-slate-500 dark:text-slate-400">
+          <p className="mt-0.5 text-sm text-slate-500 dark:text-slate-400">
             {t.home.subtitle}
           </p>
         </div>
-        <div className="mt-1 flex flex-col items-end gap-2">
-          <div className="flex items-center gap-1">
-            <ThemeToggle />
-            <LocaleSwitcher />
-          </div>
+        <div className="flex items-center gap-0.5 pt-0.5">
+          <ThemeToggle />
+          <LocaleSwitcher />
+          <div className="mx-1.5 h-4 w-px bg-slate-200 dark:bg-slate-700" />
           <Link
             href="/qr"
-            className="rounded-lg px-3 py-1.5 text-sm font-medium text-slate-500 hover:bg-slate-100 hover:text-slate-800 dark:text-slate-400 dark:hover:bg-slate-800 dark:hover:text-slate-200"
+            className="rounded-lg px-2.5 py-1.5 text-xs font-medium text-slate-400 hover:bg-slate-100 hover:text-slate-700 dark:text-slate-500 dark:hover:bg-slate-800 dark:hover:text-slate-300"
           >
             {t.home.qrLink}
           </Link>
@@ -75,7 +69,7 @@ export default function HomePage() {
         <section className="mt-4">
           {results.length > 0 ? (
             <>
-              <p className="mb-2 text-sm text-slate-400">
+              <p className="mb-3 text-xs font-medium text-slate-400">
                 {t.home.results(results.length)}
               </p>
               <div className="flex flex-col gap-2">
@@ -95,16 +89,31 @@ export default function HomePage() {
               {results.length > 5 && (
                 <Link
                   href={`/search?q=${encodeURIComponent(query)}`}
-                  className="mt-3 block text-center text-sm font-medium text-indigo-600 underline underline-offset-2"
+                  className="mt-4 block text-center text-sm font-medium text-indigo-600 dark:text-indigo-400"
                 >
                   {t.home.seeAll(results.length)}
                 </Link>
               )}
             </>
           ) : (
-            <div className="mt-16 text-center">
-              <p className="text-5xl">🔍</p>
-              <p className="mt-4 text-lg font-semibold text-slate-700 dark:text-slate-300">
+            <div className="mt-20 text-center">
+              <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-slate-100 dark:bg-slate-800">
+                <svg
+                  className="h-6 w-6 text-slate-400"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                  aria-hidden="true"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={1.5}
+                    d="M21 21l-4.35-4.35M17 11A6 6 0 1 1 5 11a6 6 0 0 1 12 0z"
+                  />
+                </svg>
+              </div>
+              <p className="mt-4 text-base font-semibold text-slate-700 dark:text-slate-300">
                 {t.home.nothingFound}
               </p>
               <p className="mt-1 text-sm text-slate-400">
@@ -114,22 +123,27 @@ export default function HomePage() {
           )}
         </section>
       ) : (
-        <section className="mt-6">
-          <h2 className="mb-3 text-xs font-semibold uppercase tracking-widest text-slate-400">
+        <section className="mt-4">
+          <p className="mb-3 text-xs font-medium uppercase tracking-widest text-slate-400">
             {t.home.spacesHeading}
-          </h2>
-          <div className="flex flex-col gap-3">
+          </p>
+          <div className="flex flex-col gap-2">
             {spaces.map((space) => (
               <Link key={space.id} href={`/space/${space.id}`}>
-                <div className="flex items-center gap-4 rounded-2xl border border-slate-100 bg-white px-4 py-4 shadow-sm transition-colors active:bg-slate-50 dark:border-slate-700 dark:bg-slate-800 dark:active:bg-slate-700">
-                  <span className="text-3xl" role="img" aria-label={space.type}>
-                    {TYPE_ICON[space.type] ?? "📦"}
-                  </span>
-                  <div className="min-w-0">
-                    <p className="font-semibold text-slate-900 dark:text-slate-100">
+                <div className="flex items-center gap-3.5 rounded-xl border border-slate-100 bg-white px-4 py-3.5 transition-colors active:bg-slate-50 dark:border-slate-700/60 dark:bg-slate-800 dark:active:bg-slate-700">
+                  <div
+                    className={`flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-lg ${TYPE_COLOR[space.type] ?? "bg-slate-100 text-slate-500"}`}
+                  >
+                    <SpaceIcon
+                      type={space.type}
+                      className="h-[18px] w-[18px]"
+                    />
+                  </div>
+                  <div className="min-w-0 flex-1">
+                    <p className="text-sm font-semibold text-slate-900 dark:text-slate-100">
                       {space.name}
                     </p>
-                    <p className="text-sm text-slate-400">
+                    <p className="text-xs text-slate-400">
                       {t.home.items(
                         space.sections.reduce(
                           (acc, s) => acc + s.items.length,
@@ -139,7 +153,7 @@ export default function HomePage() {
                     </p>
                   </div>
                   <svg
-                    className="ml-auto h-4 w-4 flex-shrink-0 text-slate-300 dark:text-slate-600"
+                    className="h-4 w-4 flex-shrink-0 text-slate-300 dark:text-slate-600"
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"

@@ -33,7 +33,7 @@ export default function SpaceFloorPlan({ space, highlightItemName }: Props) {
 
   return (
     <div
-      className="overflow-hidden rounded-2xl border-[3px] border-slate-700 bg-white shadow-md dark:border-slate-500 dark:bg-slate-800"
+      className="overflow-hidden rounded-xl border border-slate-200 bg-white dark:border-slate-700 dark:bg-slate-800"
       role="list"
       aria-label={space.name}
     >
@@ -52,7 +52,7 @@ export default function SpaceFloorPlan({ space, highlightItemName }: Props) {
               className={[
                 "flex w-full items-center gap-3 px-4 py-4 text-left transition-colors",
                 idx > 0
-                  ? "border-t-2 border-slate-200 dark:border-slate-700"
+                  ? "border-t border-slate-100 dark:border-slate-700/60"
                   : "",
                 hasHighlight
                   ? "bg-amber-50 dark:bg-amber-900/20"
@@ -128,10 +128,10 @@ export default function SpaceFloorPlan({ space, highlightItemName }: Props) {
             {/* Expanded: item list inside the shelf/drawer */}
             {isExp && (
               <div
-                className={`border-t-2 border-slate-200 px-4 pb-4 pt-3 dark:border-slate-700 ${
+                className={`border-t border-slate-100 px-4 pb-4 pt-3 dark:border-slate-700/60 ${
                   hasHighlight
-                    ? "bg-amber-50/50 dark:bg-amber-900/10"
-                    : "bg-slate-50 dark:bg-slate-900/40"
+                    ? "bg-amber-50/40 dark:bg-amber-900/10"
+                    : "bg-slate-50/60 dark:bg-slate-900/30"
                 }`}
               >
                 <div className="flex flex-col gap-1.5">

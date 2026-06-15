@@ -6,15 +6,10 @@ import Link from "next/link";
 import SearchBar from "@/components/SearchBar";
 import ItemCard from "@/components/ItemCard";
 import SpaceFloorPlan from "@/components/SpaceFloorPlan";
+import SpaceIcon, { TYPE_COLOR } from "@/components/SpaceIcon";
 import type { Space } from "@/lib/search";
 import { searchWithinSpace } from "@/lib/search";
 import { useI18n } from "@/lib/i18n";
-
-const TYPE_ICON: Record<string, string> = {
-  cabinet: "🗄️",
-  drawers: "🗂️",
-  shelf: "📚",
-};
 
 export default function SpaceClient({ space }: { space: Space }) {
   const searchParams = useSearchParams();
@@ -47,9 +42,11 @@ export default function SpaceClient({ space }: { space: Space }) {
           {t.space.back}
         </Link>
         <div className="mt-2 flex items-center gap-3">
-          <span className="text-3xl" role="img" aria-label={space.type}>
-            {TYPE_ICON[space.type] ?? "📦"}
-          </span>
+          <div
+            className={`flex h-11 w-11 flex-shrink-0 items-center justify-center rounded-xl ${TYPE_COLOR[space.type] ?? "bg-slate-100 text-slate-500"}`}
+          >
+            <SpaceIcon type={space.type} className="h-5 w-5" />
+          </div>
           <div>
             <h1 className="text-2xl font-bold text-slate-900 dark:text-slate-100">
               {space.name}
@@ -68,26 +65,54 @@ export default function SpaceClient({ space }: { space: Space }) {
         />
         {/* View toggle — only visible when not searching */}
         {!query.trim() && (
-          <div className="mt-2 flex justify-center gap-1">
+          <div className="mt-2 flex rounded-lg bg-slate-100 p-0.5 dark:bg-slate-800">
             <button
               onClick={() => setView("list")}
-              className={`rounded-lg px-4 py-1.5 text-sm font-medium transition-colors ${
+              className={`flex flex-1 items-center justify-center gap-1.5 rounded-md py-1.5 text-sm font-medium transition-all ${
                 view === "list"
-                  ? "bg-slate-900 text-white dark:bg-slate-100 dark:text-slate-900"
-                  : "text-slate-400 hover:bg-slate-100 hover:text-slate-700 dark:text-slate-500 dark:hover:bg-slate-700 dark:hover:text-slate-300"
+                  ? "bg-white text-slate-900 shadow-sm dark:bg-slate-700 dark:text-slate-100"
+                  : "text-slate-500 dark:text-slate-400"
               }`}
             >
-              ☰ {t.space.listView}
+              <svg
+                className="h-3.5 w-3.5"
+                viewBox="0 0 16 16"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth={1.75}
+                strokeLinecap="round"
+                aria-hidden="true"
+              >
+                <line x1="2" y1="4" x2="14" y2="4" />
+                <line x1="2" y1="8" x2="14" y2="8" />
+                <line x1="2" y1="12" x2="14" y2="12" />
+              </svg>
+              {t.space.listView}
             </button>
             <button
               onClick={() => setView("plan")}
-              className={`rounded-lg px-4 py-1.5 text-sm font-medium transition-colors ${
+              className={`flex flex-1 items-center justify-center gap-1.5 rounded-md py-1.5 text-sm font-medium transition-all ${
                 view === "plan"
-                  ? "bg-slate-900 text-white dark:bg-slate-100 dark:text-slate-900"
-                  : "text-slate-400 hover:bg-slate-100 hover:text-slate-700 dark:text-slate-500 dark:hover:bg-slate-700 dark:hover:text-slate-300"
+                  ? "bg-white text-slate-900 shadow-sm dark:bg-slate-700 dark:text-slate-100"
+                  : "text-slate-500 dark:text-slate-400"
               }`}
             >
-              ⊞ {t.space.planView}
+              <svg
+                className="h-3.5 w-3.5"
+                viewBox="0 0 16 16"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth={1.75}
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                aria-hidden="true"
+              >
+                <rect x="2" y="2" width="5" height="5" rx="1" />
+                <rect x="9" y="2" width="5" height="5" rx="1" />
+                <rect x="2" y="9" width="5" height="5" rx="1" />
+                <rect x="9" y="9" width="5" height="5" rx="1" />
+              </svg>
+              {t.space.planView}
             </button>
           </div>
         )}
@@ -119,9 +144,24 @@ export default function SpaceClient({ space }: { space: Space }) {
               ))}
             </div>
           ) : (
-            <div className="mt-16 text-center">
-              <p className="text-5xl">🔍</p>
-              <p className="mt-4 text-lg font-semibold text-slate-700 dark:text-slate-300">
+            <div className="mt-20 text-center">
+              <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-slate-100 dark:bg-slate-800">
+                <svg
+                  className="h-6 w-6 text-slate-400"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                  aria-hidden="true"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={1.5}
+                    d="M21 21l-4.35-4.35M17 11A6 6 0 1 1 5 11a6 6 0 0 1 12 0z"
+                  />
+                </svg>
+              </div>
+              <p className="mt-4 text-base font-semibold text-slate-700 dark:text-slate-300">
                 {t.space.nothingFoundHere}
               </p>
               <p className="mt-1 text-sm text-slate-400">

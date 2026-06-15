@@ -39,7 +39,7 @@ export default function SearchResults() {
         >
           {t.search.back}
         </Link>
-        <h1 className="mt-2 text-2xl font-bold text-slate-900 dark:text-slate-100">
+        <h1 className="mt-2 text-xl font-bold text-slate-900 dark:text-slate-100">
           {t.search.title}
         </h1>
       </header>
@@ -62,7 +62,7 @@ export default function SearchResults() {
           </p>
         ) : results.length > 0 ? (
           <>
-            <p className="mb-3 text-sm text-slate-400">
+            <p className="mb-3 text-xs font-medium text-slate-400">
               {t.search.results(results.length)}
             </p>
             <div className="flex flex-col gap-2">
@@ -81,9 +81,24 @@ export default function SearchResults() {
             </div>
           </>
         ) : (
-          <div className="mt-16 text-center">
-            <p className="text-5xl">🔍</p>
-            <p className="mt-4 text-lg font-semibold text-slate-700 dark:text-slate-300">
+          <div className="mt-20 text-center">
+            <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-slate-100 dark:bg-slate-800">
+              <svg
+                className="h-6 w-6 text-slate-400"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+                aria-hidden="true"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={1.5}
+                  d="M21 21l-4.35-4.35M17 11A6 6 0 1 1 5 11a6 6 0 0 1 12 0z"
+                />
+              </svg>
+            </div>
+            <p className="mt-4 text-base font-semibold text-slate-700 dark:text-slate-300">
               {t.search.nothingFound}
             </p>
             <p className="mt-1 text-sm text-slate-400">

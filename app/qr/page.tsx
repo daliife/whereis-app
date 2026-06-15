@@ -5,6 +5,7 @@ import Link from "next/link";
 import { QRCodeSVG } from "qrcode.react";
 import { getAllSpaces } from "@/lib/search";
 import { useI18n } from "@/lib/i18n";
+import SpaceIcon, { TYPE_COLOR } from "@/components/SpaceIcon";
 
 const spaces = getAllSpaces();
 const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
@@ -57,9 +58,16 @@ export default function QRPage() {
                 )}
               </div>
               <div className="min-w-0">
-                <p className="font-semibold text-slate-900 dark:text-slate-100">
-                  {space.name}
-                </p>
+                <div className="flex items-center gap-2">
+                  <div
+                    className={`flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-md ${TYPE_COLOR[space.type] ?? "bg-slate-100 text-slate-500"}`}
+                  >
+                    <SpaceIcon type={space.type} className="h-3.5 w-3.5" />
+                  </div>
+                  <p className="font-semibold text-slate-900 dark:text-slate-100">
+                    {space.name}
+                  </p>
+                </div>
                 <p className="mt-0.5 text-sm capitalize text-slate-400">
                   {space.type}
                 </p>
