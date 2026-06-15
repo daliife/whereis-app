@@ -32,54 +32,53 @@ export default function SpaceClient({ space }: { space: Space }) {
   const { t } = useI18n();
 
   return (
-    <div className="mx-auto max-w-lg px-4 pb-12">
-      {/* Header */}
-      <header className="pt-8 pb-4">
-        <Link
-          href="/"
-          className="inline-flex items-center justify-center rounded-lg p-1.5 text-zinc-400 transition-colors hover:bg-zinc-100 hover:text-zinc-700 dark:text-zinc-600 dark:hover:bg-zinc-800 dark:hover:text-zinc-300"
-          aria-label={t.space.back}
-        >
-          <svg
-            className="h-5 w-5"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-            aria-hidden="true"
+    <div className="mx-auto max-w-lg pb-12">
+      {/* ── Sticky nav: back + title + search + toggle ── */}
+      <div className="sticky top-0 z-10 border-b border-zinc-100 bg-zinc-50/95 backdrop-blur-sm dark:border-zinc-800 dark:bg-zinc-950/95">
+        {/* Title row */}
+        <div className="flex items-center gap-2 px-3 pt-3 pb-2">
+          <Link
+            href="/"
+            className="flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-lg text-zinc-400 transition-colors hover:bg-zinc-100 hover:text-zinc-700 dark:text-zinc-600 dark:hover:bg-zinc-800 dark:hover:text-zinc-300"
+            aria-label={t.space.back}
           >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M15 19l-7-7 7-7"
-            />
-          </svg>
-        </Link>
-        <div className="mt-2 flex items-center gap-3">
+            <svg
+              className="h-5 w-5"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              aria-hidden="true"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M15 19l-7-7 7-7"
+              />
+            </svg>
+          </Link>
           <div
-            className={`flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-lg ${TYPE_COLOR[space.type] ?? "bg-zinc-100 text-zinc-500"}`}
+            className={`flex h-7 w-7 flex-shrink-0 items-center justify-center rounded-md ${TYPE_COLOR[space.type] ?? "bg-zinc-100 text-zinc-500"}`}
           >
-            <SpaceIcon type={space.type} className="h-4 w-4" />
+            <SpaceIcon type={space.type} className="h-3.5 w-3.5" />
           </div>
-          <div>
-            <h1 className="text-2xl font-bold text-zinc-900 dark:text-zinc-100">
-              {space.name}
-            </h1>
-            <p className="text-sm capitalize text-zinc-400">{space.type}</p>
-          </div>
+          <h1 className="flex-1 truncate text-base font-bold text-zinc-900 dark:text-zinc-100">
+            {space.name}
+          </h1>
         </div>
-      </header>
 
-      {/* Sticky search bar */}
-      <div className="sticky top-0 z-10 -mx-4 bg-zinc-50/90 px-4 pb-3 pt-2 backdrop-blur-sm dark:bg-zinc-950/90">
-        <SearchBar
-          value={query}
-          onChange={setQuery}
-          placeholder={t.space.searchPlaceholder(space.name)}
-        />
+        {/* Sticky search bar */}
+        {/* Search bar */}
+        <div className="px-3 pb-2">
+          <SearchBar
+            value={query}
+            onChange={setQuery}
+            placeholder={t.space.searchPlaceholder(space.name)}
+          />
+        </div>
         {/* View toggle — only visible when not searching */}
         {!query.trim() && (
-          <div className="mt-2 flex rounded-lg bg-zinc-100 p-0.5 dark:bg-zinc-800">
+          <div className="mx-3 mb-2 flex rounded-lg bg-zinc-100 p-0.5 dark:bg-zinc-800">
             <button
               onClick={() => setView("list")}
               className={`flex flex-1 items-center justify-center gap-1.5 rounded-md py-1.5 text-sm font-medium transition-all ${
@@ -131,7 +130,7 @@ export default function SpaceClient({ space }: { space: Space }) {
           </div>
         )}
         {query.trim() && (
-          <div className="mt-2 text-center">
+          <div className="px-3 pb-2 text-center">
             <Link
               href={`/search?q=${encodeURIComponent(query)}`}
               className="text-sm font-medium text-amber-600 dark:text-amber-400"
@@ -143,7 +142,7 @@ export default function SpaceClient({ space }: { space: Space }) {
       </div>
 
       {/* Content */}
-      <div className="mt-4">
+      <div className="mt-4 px-4">
         {localResults ? (
           // Local search results
           localResults.length > 0 ? (

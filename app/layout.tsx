@@ -9,6 +9,7 @@ const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 export const metadata: Metadata = {
   title: "Stashly",
   description: "Find where your household items are stored",
+  icons: { icon: "/icon.svg" },
 };
 
 // Inline script that sets dark class before first paint to avoid flicker

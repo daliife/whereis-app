@@ -60,21 +60,19 @@ export default function SpaceFloorPlan({ space, highlightItemName }: Props) {
               ].join(" ")}
               aria-expanded={isExp}
             >
-              {/* Physical decoration: drawer handle vs shelf label */}
-              <span className="flex w-6 flex-shrink-0 flex-col items-center gap-[3px]">
-                {isDrawers ? (
-                  // Three horizontal lines = drawer handle
-                  <>
-                    <span className="block h-px w-5 rounded-full bg-zinc-400 dark:bg-zinc-600" />
-                    <span className="block h-px w-5 rounded-full bg-zinc-400 dark:bg-zinc-600" />
-                    <span className="block h-px w-5 rounded-full bg-zinc-400 dark:bg-zinc-600" />
-                  </>
-                ) : (
-                  // Shelf letter label (A, B, C…)
-                  <span className="text-[10px] font-bold uppercase leading-none text-zinc-400 dark:text-zinc-600">
-                    {String.fromCharCode(65 + idx)}
-                  </span>
-                )}
+              {/* Physical decoration: position number */}
+              <span
+                className={`flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-md text-[11px] font-bold tabular-nums ${
+                  hasHighlight
+                    ? "bg-amber-200 text-amber-800 dark:bg-amber-800 dark:text-amber-200"
+                    : "bg-zinc-100 text-zinc-500 dark:bg-zinc-800 dark:text-zinc-400"
+                }`}
+              >
+                {isDrawers
+                  ? // drawer number
+                    idx + 1
+                  : // shelf number from top
+                    idx + 1}
               </span>
 
               {/* Section name + item count */}

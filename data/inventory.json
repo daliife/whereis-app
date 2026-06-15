@@ -21,8 +21,8 @@
           ]
         },
         {
-          "id": "prestatge-a",
-          "name": "Prestatge A",
+          "id": "prestatge-1",
+          "name": "Prestatge 1",
           "items": [
             {
               "name": "2 bosses bandolera grans",
@@ -40,8 +40,8 @@
           ]
         },
         {
-          "id": "prestatge-b",
-          "name": "Prestatge B",
+          "id": "prestatge-2",
+          "name": "Prestatge 2",
           "items": [
             {
               "name": "2 caixetes buides",
@@ -76,8 +76,8 @@
           ]
         },
         {
-          "id": "prestatge-c",
-          "name": "Prestatge C",
+          "id": "prestatge-3",
+          "name": "Prestatge 3",
           "items": [
             {
               "name": "Caixetes: cargols i estris petits diversos",
@@ -119,8 +119,8 @@
           ]
         },
         {
-          "id": "prestatge-d",
-          "name": "Prestatge D",
+          "id": "prestatge-4",
+          "name": "Prestatge 4",
           "items": [
             {
               "name": "Caixa: telèfon dutxa / cables bateria cotxe",

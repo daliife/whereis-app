@@ -7,6 +7,7 @@ import SearchBar from "@/components/SearchBar";
 import ItemCard from "@/components/ItemCard";
 import LocaleSwitcher from "@/components/LocaleSwitcher";
 import ThemeToggle from "@/components/ThemeToggle";
+import AppIcon from "@/components/AppIcon";
 import SpaceIcon, { TYPE_COLOR } from "@/components/SpaceIcon";
 import { getAllSpaces, searchAll } from "@/lib/search";
 import { useI18n } from "@/lib/i18n";
@@ -31,13 +32,13 @@ export default function HomePage() {
       {/* Header */}
       <header className="flex items-start justify-between pt-10 pb-7">
         <div>
-          <div className="flex items-center gap-2">
-            <span className="inline-block h-4 w-1 rounded-full bg-amber-400" />
+          <div className="flex items-center gap-2.5">
+            <AppIcon size={28} />
             <h1 className="text-2xl font-bold tracking-tight text-zinc-900 dark:text-zinc-100">
               Stashly
             </h1>
           </div>
-          <p className="mt-0.5 pl-3 text-sm text-zinc-500 dark:text-zinc-400">
+          <p className="mt-0.5 pl-[38px] text-sm text-zinc-500 dark:text-zinc-400">
             {t.home.subtitle}
           </p>
         </div>
