@@ -21,12 +21,12 @@ export default function QRPage() {
   const baseUrl = origin ? `${origin}${BASE_PATH}` : "";
 
   return (
-    <div className="mx-auto max-w-lg px-4 pb-12">
+    <div className="mx-auto max-w-5xl px-4 pb-12 sm:px-6 lg:px-8">
       {/* Header */}
-      <header className="pt-8 pb-4">
+      <header className="pt-8 pb-4 lg:pt-12">
         <Link
           href="/"
-          className="inline-flex items-center justify-center rounded-lg p-1.5 text-zinc-400 transition-colors hover:bg-zinc-100 hover:text-zinc-700 print:hidden dark:text-zinc-600 dark:hover:bg-zinc-800 dark:hover:text-zinc-300"
+          className="inline-flex items-center justify-center rounded-lg p-1.5 text-zinc-400 transition-colors hover:bg-zinc-100 hover:text-zinc-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 print:hidden dark:text-zinc-600 dark:hover:bg-zinc-800 dark:hover:text-zinc-300"
           aria-label={t.qr.back}
         >
           <svg
@@ -51,11 +51,11 @@ export default function QRPage() {
       </header>
 
       {/* QR cards */}
-      <div className="flex flex-col gap-6">
+      <div className="grid gap-4 md:grid-cols-2 print:grid-cols-2">
         {spaces.map((space) => (
           <div
             key={space.id}
-            className="rounded-2xl border border-zinc-100 bg-white p-6 shadow-sm print:break-inside-avoid dark:border-zinc-800 dark:bg-zinc-900"
+            className="rounded-lg border border-zinc-100 bg-white p-5 shadow-sm print:break-inside-avoid dark:border-zinc-800 dark:bg-zinc-900 lg:p-6"
           >
             <div className="flex items-start gap-5">
               <div className="flex-shrink-0">
@@ -83,7 +83,7 @@ export default function QRPage() {
                   </p>
                 </div>
                 <p className="mt-0.5 text-sm capitalize text-zinc-400">
-                  {space.type}
+                  {t.space.types[space.type] ?? space.type}
                 </p>
                 {baseUrl && (
                   <p className="mt-2 break-all text-xs text-zinc-300 dark:text-zinc-700">
@@ -99,7 +99,7 @@ export default function QRPage() {
       {/* Print button */}
       <button
         onClick={() => window.print()}
-        className="mt-6 w-full rounded-xl bg-zinc-900 py-4 text-base font-semibold text-white transition-colors active:bg-zinc-700 print:hidden dark:bg-amber-500 dark:text-zinc-950 dark:active:bg-amber-400"
+        className="mt-6 w-full rounded-lg bg-amber-500 py-4 text-base font-semibold text-zinc-950 transition-colors hover:bg-amber-400 active:bg-amber-600 focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 focus-visible:ring-offset-2 focus-visible:ring-offset-zinc-50 print:hidden dark:focus-visible:ring-offset-zinc-950 sm:max-w-sm"
       >
         {t.qr.printButton}
       </button>

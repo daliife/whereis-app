@@ -1,16 +1,18 @@
 "use client";
 
 import { useTheme } from "@/lib/theme";
+import { useI18n } from "@/lib/i18n";
 
 export default function ThemeToggle() {
   const { theme, setTheme } = useTheme();
+  const { t } = useI18n();
   const isDark = theme === "dark";
 
   return (
     <button
       onClick={() => setTheme(isDark ? "light" : "dark")}
-      className="rounded-lg p-1.5 text-zinc-400 transition-colors hover:bg-zinc-100 hover:text-zinc-700 dark:text-zinc-500 dark:hover:bg-zinc-800 dark:hover:text-zinc-300"
-      aria-label={isDark ? "Canvia a mode clar" : "Canvia a mode fosc"}
+      className="flex h-8 w-8 items-center justify-center rounded-lg text-zinc-400 transition-colors hover:bg-zinc-100 hover:text-zinc-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 dark:text-zinc-500 dark:hover:bg-zinc-800 dark:hover:text-zinc-300"
+      aria-label={isDark ? t.common.switchToLight : t.common.switchToDark}
     >
       {isDark ? (
         // Sun — shown in dark mode to switch back to light

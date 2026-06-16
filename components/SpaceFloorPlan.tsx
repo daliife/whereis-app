@@ -33,7 +33,7 @@ export default function SpaceFloorPlan({ space, highlightItemName }: Props) {
 
   return (
     <div
-      className="overflow-hidden rounded-xl border border-zinc-200 bg-white dark:border-zinc-800 dark:bg-zinc-900"
+      className="overflow-hidden rounded-lg border border-zinc-200 bg-white shadow-sm dark:border-zinc-800 dark:bg-zinc-900"
       role="list"
       aria-label={space.name}
     >
@@ -50,7 +50,7 @@ export default function SpaceFloorPlan({ space, highlightItemName }: Props) {
               ref={hasHighlight ? activeRef : undefined}
               onClick={() => setExpanded(isExp ? null : section.id)}
               className={[
-                "flex w-full items-center gap-3 px-4 py-4 text-left transition-colors",
+                "flex w-full items-center gap-3 px-4 py-4 text-left transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-amber-400",
                 idx > 0 ? "border-t border-zinc-100 dark:border-zinc-800" : "",
                 hasHighlight
                   ? "bg-amber-50 dark:bg-amber-950/20"
@@ -131,13 +131,13 @@ export default function SpaceFloorPlan({ space, highlightItemName }: Props) {
                 }`}
               >
                 <div className="flex flex-col gap-1.5">
-                  {section.items.map((item) => {
+                  {section.items.map((item, itemIndex) => {
                     const isHighlighted =
                       item.name.toLowerCase() === normalizedHighlight;
                     return (
                       <div
-                        key={item.name}
-                        className={`rounded-xl px-3 py-2.5 text-sm leading-snug ${
+                        key={`${section.id}-${item.name}-${itemIndex}`}
+                        className={`rounded-lg px-3 py-2.5 text-sm leading-snug ${
                           isHighlighted
                             ? "border border-amber-300 bg-amber-50 font-semibold text-amber-900 dark:border-amber-700 dark:bg-amber-950/30 dark:text-amber-300"
                             : "border border-zinc-100 bg-white text-zinc-700 dark:border-zinc-800 dark:bg-zinc-900 dark:text-zinc-300"

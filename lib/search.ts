@@ -1,6 +1,8 @@
 import Fuse from "fuse.js";
 import inventoryData from "@/data/inventory.json";
 
+export type SpaceType = "cabinet" | "drawers" | "shelf";
+
 export interface Item {
   name: string;
   tags: string[];
@@ -15,7 +17,7 @@ export interface Section {
 export interface Space {
   id: string;
   name: string;
-  type: string;
+  type: SpaceType;
   sections: Section[];
 }
 
@@ -39,12 +41,19 @@ function buildSearchIndex(): SearchResult[] {
 }
 
 const searchIndex = buildSearchIndex();
-
-const globalFuse = new Fuse(searchIndex, {
+const searchOptions = {
   keys: ["item.name", "item.tags"],
   threshold: 0.35,
   includeScore: true,
-});
+};
+
+const globalFuse = new Fuse(searchIndex, searchOptions);
+const spaceFuses = new Map<string, Fuse<SearchResult>>();
+
+for (const space of inventoryData.spaces as Space[]) {
+  const spaceIndex = searchIndex.filter((r) => r.space.id === space.id);
+  spaceFuses.set(space.id, new Fuse(spaceIndex, searchOptions));
+}
 
 export function searchAll(query: string): SearchResult[] {
   if (!query.trim()) return [];
@@ -56,13 +65,7 @@ export function searchWithinSpace(
   query: string,
 ): SearchResult[] {
   if (!query.trim()) return [];
-  const spaceIndex = searchIndex.filter((r) => r.space.id === spaceId);
-  const spaceFuse = new Fuse(spaceIndex, {
-    keys: ["item.name", "item.tags"],
-    threshold: 0.35,
-    includeScore: true,
-  });
-  return spaceFuse.search(query).map((r) => r.item);
+  return (spaceFuses.get(spaceId)?.search(query) ?? []).map((r) => r.item);
 }
 
 export function getSpace(id: string): Space | undefined {

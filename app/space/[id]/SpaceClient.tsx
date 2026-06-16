@@ -31,15 +31,20 @@ export default function SpaceClient({ space }: { space: Space }) {
   const localResults = query.trim() ? searchWithinSpace(space.id, query) : null;
   const { t } = useI18n();
 
+  const itemCount = space.sections.reduce(
+    (acc, section) => acc + section.items.length,
+    0,
+  );
+
   return (
-    <div className="mx-auto max-w-lg pb-12">
+    <div className="mx-auto max-w-6xl px-0 pb-12 sm:px-6 lg:px-8">
       {/* ── Sticky nav: back + title + search + toggle ── */}
-      <div className="sticky top-0 z-10 border-b border-zinc-100 bg-zinc-50/95 backdrop-blur-sm dark:border-zinc-800 dark:bg-zinc-950/95">
+      <div className="sticky top-0 z-10 border-b border-zinc-100 bg-zinc-50/95 backdrop-blur-sm dark:border-zinc-800 dark:bg-zinc-950/95 sm:top-4 sm:mt-4 sm:rounded-lg sm:border sm:bg-white sm:shadow-sm sm:dark:bg-zinc-900 lg:top-6">
         {/* Title row */}
-        <div className="flex items-center gap-2 px-3 pt-3 pb-2">
+        <div className="flex items-center gap-2 px-3 pt-3 pb-2 sm:px-4">
           <Link
             href="/"
-            className="flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-lg text-zinc-400 transition-colors hover:bg-zinc-100 hover:text-zinc-700 dark:text-zinc-600 dark:hover:bg-zinc-800 dark:hover:text-zinc-300"
+            className="flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-lg text-zinc-400 transition-colors hover:bg-zinc-100 hover:text-zinc-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 dark:text-zinc-600 dark:hover:bg-zinc-800 dark:hover:text-zinc-300"
             aria-label={t.space.back}
           >
             <svg
@@ -62,26 +67,30 @@ export default function SpaceClient({ space }: { space: Space }) {
           >
             <SpaceIcon type={space.type} className="h-3.5 w-3.5" />
           </div>
-          <h1 className="flex-1 truncate text-base font-bold text-zinc-900 dark:text-zinc-100">
+          <h1 className="flex-1 truncate text-base font-bold text-zinc-900 dark:text-zinc-100 lg:text-lg">
             {space.name}
           </h1>
+          <span className="hidden rounded-full bg-zinc-100 px-2.5 py-1 text-xs font-semibold text-zinc-500 dark:bg-zinc-800 dark:text-zinc-400 sm:inline-flex">
+            {t.home.items(itemCount)}
+          </span>
         </div>
 
         {/* Sticky search bar */}
         {/* Search bar */}
-        <div className="px-3 pb-2">
+        <div className="px-3 pb-2 sm:px-4">
           <SearchBar
             value={query}
             onChange={setQuery}
             placeholder={t.space.searchPlaceholder(space.name)}
+            clearLabel={t.common.clearSearch}
           />
         </div>
         {/* View toggle — only visible when not searching */}
         {!query.trim() && (
-          <div className="mx-3 mb-2 flex rounded-lg bg-zinc-100 p-0.5 dark:bg-zinc-800">
+          <div className="mx-3 mb-2 flex rounded-lg bg-zinc-100 p-0.5 dark:bg-zinc-800 sm:mx-4 sm:max-w-sm">
             <button
               onClick={() => setView("list")}
-              className={`flex flex-1 items-center justify-center gap-1.5 rounded-md py-1.5 text-sm font-medium transition-all ${
+              className={`flex flex-1 items-center justify-center gap-1.5 rounded-md py-1.5 text-sm font-medium transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 ${
                 view === "list"
                   ? "bg-white text-zinc-900 shadow-sm dark:bg-zinc-700 dark:text-zinc-100"
                   : "text-zinc-500 hover:text-zinc-700 dark:text-zinc-400"
@@ -104,7 +113,7 @@ export default function SpaceClient({ space }: { space: Space }) {
             </button>
             <button
               onClick={() => setView("plan")}
-              className={`flex flex-1 items-center justify-center gap-1.5 rounded-md py-1.5 text-sm font-medium transition-all ${
+              className={`flex flex-1 items-center justify-center gap-1.5 rounded-md py-1.5 text-sm font-medium transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 ${
                 view === "plan"
                   ? "bg-white text-zinc-900 shadow-sm dark:bg-zinc-700 dark:text-zinc-100"
                   : "text-zinc-500 hover:text-zinc-700 dark:text-zinc-400"
@@ -133,7 +142,7 @@ export default function SpaceClient({ space }: { space: Space }) {
           <div className="px-3 pb-2 text-center">
             <Link
               href={`/search?q=${encodeURIComponent(query)}`}
-              className="text-sm font-medium text-amber-600 dark:text-amber-400"
+              className="inline-flex rounded-lg px-2 py-1 text-sm font-semibold text-amber-600 transition-colors hover:bg-amber-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 dark:text-amber-400 dark:hover:bg-amber-950/30"
             >
               {t.space.searchEverywhereBtn}
             </Link>
@@ -142,14 +151,14 @@ export default function SpaceClient({ space }: { space: Space }) {
       </div>
 
       {/* Content */}
-      <div className="mt-4 px-4">
+      <div className="mt-4 px-4 sm:px-0 lg:mt-6">
         {localResults ? (
           // Local search results
           localResults.length > 0 ? (
-            <div className="flex flex-col gap-2">
+            <div className="grid gap-2 md:grid-cols-2 xl:grid-cols-3">
               {localResults.map((r, i) => (
                 <ItemCard
-                  key={i}
+                  key={`${r.space.id}-${r.section.id}-${r.item.name}-${i}`}
                   itemName={r.item.name}
                   spaceName={r.space.name}
                   sectionName={r.section.name}
@@ -190,38 +199,42 @@ export default function SpaceClient({ space }: { space: Space }) {
           )
         ) : // No active search: list or plan view
         view === "plan" ? (
-          <SpaceFloorPlan
-            space={space}
-            highlightItemName={highlightItem || undefined}
-          />
+          <div className="lg:max-w-5xl">
+            <SpaceFloorPlan
+              space={space}
+              highlightItemName={highlightItem || undefined}
+            />
+          </div>
         ) : (
           // List view
-          space.sections.map((section) => (
-            <div key={section.id} className="mb-8">
-              <h2 className="mb-2 text-xs font-semibold uppercase tracking-widest text-zinc-400">
-                {section.name}
-              </h2>
-              <div className="flex flex-col gap-2">
-                {section.items.map((item) => {
-                  const isHighlighted =
-                    highlightItem.toLowerCase() === item.name.toLowerCase();
-                  return (
-                    <div
-                      key={item.name}
-                      ref={isHighlighted ? highlightRef : undefined}
-                    >
-                      <ItemCard
-                        itemName={item.name}
-                        spaceName={space.name}
-                        sectionName={section.name}
-                        highlighted={isHighlighted}
-                      />
-                    </div>
-                  );
-                })}
+          <div className="grid gap-x-6 gap-y-8 lg:grid-cols-2">
+            {space.sections.map((section) => (
+              <div key={section.id}>
+                <h2 className="mb-2 text-xs font-semibold uppercase tracking-widest text-zinc-400">
+                  {section.name}
+                </h2>
+                <div className="flex flex-col gap-2">
+                  {section.items.map((item, itemIndex) => {
+                    const isHighlighted =
+                      highlightItem.toLowerCase() === item.name.toLowerCase();
+                    return (
+                      <div
+                        key={`${section.id}-${item.name}-${itemIndex}`}
+                        ref={isHighlighted ? highlightRef : undefined}
+                      >
+                        <ItemCard
+                          itemName={item.name}
+                          spaceName={space.name}
+                          sectionName={section.name}
+                          highlighted={isHighlighted}
+                        />
+                      </div>
+                    );
+                  })}
+                </div>
               </div>
-            </div>
-          ))
+            ))}
+          </div>
         )}
       </div>
     </div>

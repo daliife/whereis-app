@@ -1,5 +1,6 @@
 import { Suspense } from "react";
 import { getAllSpaces, getSpace } from "@/lib/search";
+import { ca } from "@/lib/translations/ca";
 import SpaceClient from "./SpaceClient";
 
 export function generateStaticParams() {
@@ -14,7 +15,7 @@ export default function SpacePage({ params }: { params: { id: string } }) {
       <div className="mx-auto max-w-lg px-4 pt-16 text-center">
         <p className="text-4xl">📦</p>
         <p className="mt-4 text-lg font-semibold text-slate-700">
-          Space not found
+          {ca.space.notFound}
         </p>
       </div>
     );
@@ -24,7 +25,7 @@ export default function SpacePage({ params }: { params: { id: string } }) {
     <Suspense
       fallback={
         <div className="mx-auto max-w-lg px-4 pt-8 text-slate-400">
-          Loading…
+          {ca.common.loading}
         </div>
       }
     >

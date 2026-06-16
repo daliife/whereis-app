@@ -1,4 +1,6 @@
-export const TYPE_COLOR: Record<string, string> = {
+import type { SpaceType } from "@/lib/search";
+
+export const TYPE_COLOR: Record<SpaceType, string> = {
   cabinet:
     "bg-amber-100 text-amber-700 dark:bg-amber-950/50 dark:text-amber-400",
   drawers: "bg-zinc-100 text-zinc-600 dark:bg-zinc-800 dark:text-zinc-300",
@@ -7,7 +9,7 @@ export const TYPE_COLOR: Record<string, string> = {
 };
 
 interface Props {
-  type: string;
+  type: SpaceType;
   className?: string;
 }
 

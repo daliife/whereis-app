@@ -30,12 +30,12 @@ export default function SearchResults() {
   const { t } = useI18n();
 
   return (
-    <div className="mx-auto max-w-lg px-4 pb-12">
+    <div className="mx-auto max-w-5xl px-4 pb-12 sm:px-6 lg:px-8">
       {/* Header */}
-      <header className="pt-8 pb-4">
+      <header className="pt-8 pb-4 lg:pt-12">
         <Link
           href="/"
-          className="inline-flex items-center justify-center rounded-lg p-1.5 text-zinc-400 transition-colors hover:bg-zinc-100 hover:text-zinc-700 dark:text-zinc-600 dark:hover:bg-zinc-800 dark:hover:text-zinc-300"
+          className="inline-flex items-center justify-center rounded-lg p-1.5 text-zinc-400 transition-colors hover:bg-zinc-100 hover:text-zinc-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 dark:text-zinc-600 dark:hover:bg-zinc-800 dark:hover:text-zinc-300"
           aria-label={t.search.back}
         >
           <svg
@@ -59,17 +59,18 @@ export default function SearchResults() {
       </header>
 
       {/* Sticky search bar */}
-      <div className="sticky top-0 z-10 -mx-4 bg-zinc-50/90 px-4 pb-3 pt-2 backdrop-blur-sm dark:bg-zinc-950/90">
+      <div className="sticky top-0 z-10 -mx-4 bg-zinc-50/90 px-4 pb-3 pt-2 backdrop-blur-sm dark:bg-zinc-950/90 sm:-mx-6 sm:px-6 lg:mx-0 lg:rounded-lg lg:border lg:border-zinc-100 lg:bg-white lg:p-4 lg:shadow-sm lg:backdrop-blur-none lg:dark:border-zinc-800 lg:dark:bg-zinc-900">
         <SearchBar
           value={query}
           onChange={setQuery}
           placeholder={t.home.searchPlaceholder}
+          clearLabel={t.common.clearSearch}
           autoFocus
         />
       </div>
 
       {/* Results */}
-      <div className="mt-4">
+      <div className="mt-4 lg:mt-6">
         {!query.trim() ? (
           <p className="mt-10 text-center text-slate-400">
             {t.search.typeToSearch}
@@ -79,11 +80,12 @@ export default function SearchResults() {
             <p className="mb-3 text-xs font-medium text-zinc-400">
               {t.search.results(results.length)}
             </p>
-            <div className="flex flex-col gap-2">
+            <div className="grid gap-2 md:grid-cols-2">
               {results.map((r, i) => (
                 <Link
-                  key={i}
+                  key={`${r.space.id}-${r.section.id}-${r.item.name}-${i}`}
                   href={`/space/${r.space.id}?highlight=${encodeURIComponent(r.item.name)}`}
+                  className="group block rounded-lg focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 focus-visible:ring-offset-2 focus-visible:ring-offset-zinc-50 dark:focus-visible:ring-offset-zinc-950"
                 >
                   <ItemCard
                     itemName={r.item.name}
