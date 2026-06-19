@@ -82,22 +82,15 @@ export default function SpaceFloorPlan({
   return (
     <div className="flex flex-col gap-5" aria-label={space.name}>
       <div
-        className={
-          compact
-            ? ""
-            : "panel-elevated p-4"
-        }
+        className={[
+          "mx-auto flex w-full flex-col",
+          compact ? "max-w-sm gap-1.5" : "max-w-sm gap-2",
+          isDrawers ? "gap-1.5" : "gap-2",
+        ].join(" ")}
       >
-        <div
-          className={[
-            "mx-auto flex w-full flex-col",
-            compact ? "max-w-sm gap-1.5" : "max-w-sm gap-2",
-            isDrawers ? "gap-1.5" : "gap-2",
-          ].join(" ")}
-        >
-          {topSections.length > 0 && (
-            <div className="rounded-lg border border-dashed border-amber-200/50 bg-amber-50/30 p-2 dark:border-amber-500/15 dark:bg-amber-950/15">
-              {topSections.map((section) => (
+        {topSections.length > 0 && (
+          <div className="flex flex-col gap-1.5">
+            {topSections.map((section) => (
                 <PlanSectionButton
                   key={section.id}
                   section={section}
@@ -116,30 +109,25 @@ export default function SpaceFloorPlan({
                   itemsLabel={t.home.items(section.items.length)}
                 />
               ))}
-            </div>
-          )}
+          </div>
+        )}
 
-          <div
-            className={[
-              "relative overflow-hidden border bg-amber-50/20 shadow-inner shadow-amber-500/5 dark:bg-zinc-950/40 dark:shadow-amber-500/5",
-              isDrawers
-                ? "rounded-lg border-amber-200/40 p-2 dark:border-amber-500/15"
-                : "rounded-t-lg rounded-b-md border-amber-200/50 p-2 dark:border-amber-500/20",
-            ].join(" ")}
-          >
-            <div
-              className={[
-                "relative flex flex-col gap-1.5",
-                isDrawers
-                  ? compact
-                    ? "min-h-[220px]"
-                    : "min-h-[280px]"
-                  : compact
-                    ? "min-h-[260px]"
-                    : "min-h-[320px]",
-              ].join(" ")}
-            >
-              {bodySections.map((section) => {
+        <div
+          className={[
+            "relative flex flex-col gap-1.5",
+            isDrawers && compact && !interactive
+              ? "rounded-lg border border-zinc-200/80 bg-zinc-50/40 p-2 dark:border-zinc-800 dark:bg-zinc-900/50"
+              : "",
+            isDrawers
+              ? compact
+                ? "min-h-[220px]"
+                : "min-h-[280px]"
+              : compact
+                ? "min-h-[260px]"
+                : "min-h-[320px]",
+          ].join(" ")}
+        >
+          {bodySections.map((section) => {
                 const hasHighlight = sectionHasHighlight(
                   section,
                   normalizedHighlight,
@@ -166,20 +154,31 @@ export default function SpaceFloorPlan({
                     itemsLabel={t.home.items(section.items.length)}
                   />
                 );
-              })}
-            </div>
-          </div>
-
-          {!isDrawers && !compact && (
-            <div
-              className="mx-auto grid w-[86%] grid-cols-2 gap-24 px-5"
-              aria-hidden="true"
-            >
-              <div className="h-3 rounded-b bg-amber-300/70 dark:bg-amber-700/40" />
-              <div className="h-3 rounded-b bg-amber-300/70 dark:bg-amber-700/40" />
-            </div>
-          )}
+            })}
         </div>
+
+        {!isDrawers && (
+          <div
+            className={[
+              "mx-auto grid w-[86%] grid-cols-2 px-5",
+              compact ? "gap-16" : "gap-24",
+            ].join(" ")}
+            aria-hidden="true"
+          >
+            <div
+              className={[
+                "rounded-b bg-amber-300/70 dark:bg-amber-700/40",
+                compact ? "h-2" : "h-3",
+              ].join(" ")}
+            />
+            <div
+              className={[
+                "rounded-b bg-amber-300/70 dark:bg-amber-700/40",
+                compact ? "h-2" : "h-3",
+              ].join(" ")}
+            />
+          </div>
+        )}
       </div>
 
       {!planOnly && selectedSection && (
@@ -324,7 +323,7 @@ function PlanSectionButton({
           ? "border-amber-300 bg-amber-50 text-amber-900 shadow-sm ring-1 ring-amber-300 dark:border-amber-700 dark:bg-amber-950/30 dark:text-amber-200 dark:ring-amber-700"
           : isStatic
             ? "border-zinc-200 bg-zinc-100 text-zinc-600 dark:border-zinc-700 dark:bg-zinc-800/80 dark:text-zinc-300"
-            : "border-zinc-200 bg-white text-zinc-800 hover:border-amber-200 hover:bg-amber-50/50 dark:border-zinc-800 dark:bg-zinc-900 dark:text-zinc-200 dark:hover:border-amber-900 dark:hover:bg-amber-950/10",
+            : "border-zinc-200/80 bg-white text-zinc-800 hover:border-zinc-300 hover:bg-zinc-50 dark:border-zinc-800 dark:bg-zinc-900/80 dark:text-zinc-200 dark:hover:border-zinc-700 dark:hover:bg-zinc-800/80",
       ].join(" ")}
       aria-pressed={onClick ? active : undefined}
     >

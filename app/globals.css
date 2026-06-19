@@ -91,10 +91,6 @@ input[type="search"]::-webkit-search-results-decoration {
     @apply shrink-0 rounded-full bg-amber-100 px-2 py-0.5 text-[11px] font-semibold text-amber-900 dark:bg-amber-950/50 dark:text-amber-300 sm:px-2.5 sm:py-1 sm:text-xs;
   }
 
-  .panel-elevated {
-    @apply rounded-lg border border-zinc-200/80 bg-white dark:border-zinc-800 dark:bg-zinc-900/80;
-  }
-
   .search-field {
     @apply w-full rounded-lg border border-zinc-200 bg-white py-2.5 pl-11 pr-11 text-base text-zinc-900 placeholder:text-zinc-400 focus:border-zinc-400 focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400/40 dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-100 dark:placeholder:text-zinc-500 dark:focus:border-zinc-600;
   }
