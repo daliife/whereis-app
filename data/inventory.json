@@ -7,7 +7,7 @@
       "sections": [
         {
           "id": "prestatge-1",
-          "name": "Prestatge 1",
+          "name": "Prestatge 4t pis (dalt)",
           "items": [
             { "name": "2 bosses bandolera grans" },
             { "name": "Barbacoa" },
@@ -16,7 +16,7 @@
         },
         {
           "id": "prestatge-2",
-          "name": "Prestatge 2",
+          "name": "Prestatge 3r pis",
           "items": [
             { "name": "2 caixetes buides" },
             { "name": "Maletí buit" },
@@ -26,7 +26,7 @@
         },
         {
           "id": "prestatge-3",
-          "name": "Prestatge 3",
+          "name": "Prestatge 2n pis",
           "items": [
             { "name": "Caixetes: cargols i estris petits diversos" },
             { "name": "Caixa: cordills i fils" },
@@ -37,7 +37,7 @@
         },
         {
           "id": "prestatge-4",
-          "name": "Prestatge 4",
+          "name": "Prestatge 1r pis (baix)",
           "items": [
             { "name": "Caixa: telèfon dutxa / cables bateria cotxe" },
             { "name": "Caixa: peus de rei / mini enclusa / similars" },
@@ -54,7 +54,7 @@
         },
         {
           "id": "terra",
-          "name": "Terra armari",
+          "name": "Terra",
           "items": [{ "name": "Vi (garrafes i ampolles)" }]
         }
       ]
@@ -66,7 +66,7 @@
       "sections": [
         {
           "id": "sobre-armari",
-          "name": "A sobre de l'armari",
+          "name": "Damunt l'armari",
           "items": [
             { "name": "Borrassa" },
             { "name": "2 màquines d'escriure" },
@@ -75,12 +75,12 @@
         },
         {
           "id": "prestatge-1",
-          "name": "Prestatge 1",
+          "name": "Prestatge 4t pis (dalt)",
           "items": [{ "name": "Estris pintura i pintures" }]
         },
         {
           "id": "prestatge-2",
-          "name": "Prestatge 2",
+          "name": "Prestatge 3r pis",
           "items": [
             { "name": "Taladro gran" },
             { "name": "Tapa WC" },
@@ -91,7 +91,7 @@
         },
         {
           "id": "prestatge-3",
-          "name": "Prestatge 3",
+          "name": "Prestatge 2n pis",
           "items": [
             { "name": "Caixa: bombetes i focus" },
             { "name": "Caixa: endolls, interruptors, etc" },
@@ -102,7 +102,7 @@
         },
         {
           "id": "prestatge-4",
-          "name": "Prestatge 4",
+          "name": "Prestatge 1r pis (baix)",
           "items": [
             { "name": "Caixa eines" },
             { "name": "Caixa amb taladro i altres eines" },
@@ -111,7 +111,7 @@
         },
         {
           "id": "terra",
-          "name": "Terra armari",
+          "name": "Terra",
           "items": [
             { "name": "Allargos electricitat" },
             { "name": "Caixa plàstic: fils elèctrics" }
@@ -126,7 +126,7 @@
       "sections": [
         {
           "id": "calaix-1",
-          "name": "Calaix 1",
+          "name": "Calaix 4t (dalt)",
           "items": [
             { "name": "Brides" },
             { "name": "Regletes" },
@@ -138,7 +138,7 @@
         },
         {
           "id": "calaix-2",
-          "name": "Calaix 2",
+          "name": "Calaix 3r",
           "items": [
             { "name": "Focus" },
             { "name": "Draps" },
@@ -148,7 +148,7 @@
         },
         {
           "id": "calaix-3",
-          "name": "Calaix 3",
+          "name": "Calaix 2n",
           "items": [
             { "name": "Cel·lo gran" },
             { "name": "Màquina embalar" },
@@ -158,7 +158,7 @@
         },
         {
           "id": "calaix-4",
-          "name": "Calaix 4",
+          "name": "Calaix 1r (baix)",
           "items": [
             { "name": "Capses buides de diferents tamanys i materials" }
           ]

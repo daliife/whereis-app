@@ -30,7 +30,19 @@ export default function SettingsMenu() {
 
   const closeMenu = useCallback(() => setOpen(false), []);
 
-  useDialogA11y(open, containerRef, closeMenu, {
+  const [isMobileViewport, setIsMobileViewport] = useState(false);
+
+  useEffect(() => {
+    const media = window.matchMedia("(max-width: 639px)");
+    function update() {
+      setIsMobileViewport(media.matches);
+    }
+    update();
+    media.addEventListener("change", update);
+    return () => media.removeEventListener("change", update);
+  }, []);
+
+  useDialogA11y(open && isMobileViewport, containerRef, closeMenu, {
     returnFocusRef: buttonRef,
   });
 
@@ -75,7 +87,7 @@ export default function SettingsMenu() {
     function handlePointerDown(event: PointerEvent) {
       const target = event.target as Node;
       if (
-        containerRef.current?.contains(target) ||
+        panelRef.current?.contains(target) ||
         menuRef.current?.contains(target)
       ) {
         return;
@@ -83,20 +95,29 @@ export default function SettingsMenu() {
       setOpen(false);
     }
 
+    function handleKeyDown(event: KeyboardEvent) {
+      if (event.key === "Escape") setOpen(false);
+    }
+
     document.addEventListener("pointerdown", handlePointerDown);
+    document.addEventListener("keydown", handleKeyDown);
 
     return () => {
       document.removeEventListener("pointerdown", handlePointerDown);
+      document.removeEventListener("keydown", handleKeyDown);
     };
   }, [open]);
 
   const panel =
     open && mounted
       ? createPortal(
-          <div ref={containerRef} className="fixed inset-0 z-40">
+          <div
+            ref={containerRef}
+            className="fixed inset-0 z-40 pointer-events-none sm:pointer-events-none"
+          >
             <button
               type="button"
-              className="fixed inset-0 bg-zinc-950/50 backdrop-blur-[1px] motion-reduce:backdrop-blur-none sm:hidden"
+              className="pointer-events-auto fixed inset-0 bg-zinc-950/50 backdrop-blur-[1px] motion-reduce:backdrop-blur-none sm:hidden"
               onClick={closeMenu}
               aria-label={t.common.close}
             />
@@ -105,9 +126,9 @@ export default function SettingsMenu() {
               ref={panelRef}
               id="settings-panel"
               role="dialog"
-              aria-modal="true"
+              aria-modal={isMobileViewport ? "true" : "false"}
               aria-labelledby="settings-title"
-              className="fixed z-50 w-[calc(100%-2rem)] max-w-sm rounded-2xl border border-zinc-200 bg-white p-4 text-sm shadow-2xl dark:border-zinc-800 dark:bg-zinc-900 dark:shadow-black/40 inset-x-4 bottom-[max(1rem,env(safe-area-inset-bottom))] sm:inset-x-auto sm:bottom-auto sm:w-64 sm:max-w-none sm:rounded-lg sm:p-3 sm:shadow-lg sm:shadow-zinc-200/70 sm:dark:shadow-black/30"
+              className="pointer-events-auto fixed z-50 w-[calc(100%-2rem)] max-w-sm rounded-2xl border border-zinc-200 bg-white p-4 text-sm shadow-2xl dark:border-zinc-800 dark:bg-zinc-900 dark:shadow-black/40 inset-x-4 bottom-[max(1rem,env(safe-area-inset-bottom))] sm:inset-x-auto sm:bottom-auto sm:w-64 sm:max-w-none sm:rounded-lg sm:p-3 sm:shadow-lg sm:shadow-zinc-200/70 sm:dark:shadow-black/30"
               style={
                 desktopPos
                   ? {
