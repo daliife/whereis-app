@@ -15,6 +15,8 @@ interface Props {
   /** Allow tapping sections on the diagram */
   interactive?: boolean;
   highlightItemRef?: RefObject<HTMLDivElement>;
+  /** Called when the user picks a section (e.g. to clear URL highlight) */
+  onSectionSelect?: (sectionId: string) => void;
 }
 
 export default function SpaceFloorPlan({
@@ -24,6 +26,7 @@ export default function SpaceFloorPlan({
   compact = false,
   interactive = true,
   highlightItemRef,
+  onSectionSelect,
 }: Props) {
   const { t } = useI18n();
   const normalizedHighlight = highlightItemName?.toLowerCase() ?? "";
@@ -71,6 +74,11 @@ export default function SpaceFloorPlan({
     }
   }, [autoSection]);
 
+  function selectSection(sectionId: string) {
+    setSelectedSectionId(sectionId);
+    onSectionSelect?.(sectionId);
+  }
+
   return (
     <div className="flex flex-col gap-5" aria-label={space.name}>
       <div
@@ -93,15 +101,11 @@ export default function SpaceFloorPlan({
                 <PlanSectionButton
                   key={section.id}
                   section={section}
-                  selected={selectedSectionId === section.id}
-                  highlighted={sectionHasHighlight(
-                    section,
-                    normalizedHighlight,
-                  )}
+                  active={selectedSectionId === section.id}
                   shape="top"
                   onClick={
                     interactive
-                      ? () => setSelectedSectionId(section.id)
+                      ? () => selectSection(section.id)
                       : undefined
                   }
                   refProp={
@@ -145,8 +149,7 @@ export default function SpaceFloorPlan({
                   <PlanSectionButton
                     key={section.id}
                     section={section}
-                    selected={selectedSectionId === section.id}
-                    highlighted={hasHighlight}
+                    active={selectedSectionId === section.id}
                     shape={
                       isDrawers
                         ? "drawer"
@@ -156,7 +159,7 @@ export default function SpaceFloorPlan({
                     }
                     onClick={
                       interactive
-                        ? () => setSelectedSectionId(section.id)
+                        ? () => selectSection(section.id)
                         : undefined
                     }
                     refProp={hasHighlight ? activeRef : undefined}
@@ -279,16 +282,14 @@ function ItemIcon() {
 
 function PlanSectionButton({
   section,
-  selected,
-  highlighted,
+  active,
   shape,
   onClick,
   refProp,
   itemsLabel,
 }: {
   section: Section;
-  selected: boolean;
-  highlighted: boolean;
+  active: boolean;
   shape: "drawer" | "floor" | "shelf" | "top";
   onClick?: () => void;
   refProp?: RefObject<HTMLButtonElement | HTMLDivElement>;
@@ -319,19 +320,19 @@ function PlanSectionButton({
             : shape === "top"
               ? "rounded-md border px-3 py-2.5"
               : "rounded-sm border px-3 py-3",
-        selected || highlighted
+        active
           ? "border-amber-300 bg-amber-50 text-amber-900 shadow-sm ring-1 ring-amber-300 dark:border-amber-700 dark:bg-amber-950/30 dark:text-amber-200 dark:ring-amber-700"
           : isStatic
             ? "border-zinc-200 bg-zinc-100 text-zinc-600 dark:border-zinc-700 dark:bg-zinc-800/80 dark:text-zinc-300"
             : "border-zinc-200 bg-white text-zinc-800 hover:border-amber-200 hover:bg-amber-50/50 dark:border-zinc-800 dark:bg-zinc-900 dark:text-zinc-200 dark:hover:border-amber-900 dark:hover:bg-amber-950/10",
       ].join(" ")}
-      aria-pressed={onClick ? selected : undefined}
+      aria-pressed={onClick ? active : undefined}
     >
       <span
         className={[
           "flex flex-shrink-0 items-center justify-center rounded text-[11px] font-bold tabular-nums",
           isDrawer ? "h-6 w-8" : "h-6 w-6",
-          selected || highlighted
+          active
             ? "bg-amber-200 text-amber-900 dark:bg-amber-800 dark:text-amber-100"
             : "bg-zinc-100 text-zinc-500 dark:bg-zinc-800 dark:text-zinc-400",
         ].join(" ")}
@@ -350,7 +351,7 @@ function PlanSectionButton({
         <span
           className={[
             "h-1.5 w-10 flex-shrink-0 rounded-full",
-            selected || highlighted
+            active
               ? "bg-amber-300 dark:bg-amber-700"
               : isStatic
                 ? "bg-zinc-200 dark:bg-zinc-700"

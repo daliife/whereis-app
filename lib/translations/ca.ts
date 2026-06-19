@@ -8,7 +8,8 @@ export const ca = {
     locateFoundIn: "es troba a",
     locateFoundAt: (item: string, place: string) =>
       `«${item}» es troba a ${place}`,
-    browseHeading: "Els teus espais",
+    browseHeading: "Navega pels espais",
+    browseHint: "Toca un armari o calaixera per veure el seu plànol",
     statsSpaces: "Espais",
     statsItems: "Elements",
     items: (n: number) => (n === 1 ? "1 element" : `${n} elements`),

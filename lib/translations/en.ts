@@ -10,7 +10,8 @@ export const en: typeof ca = {
     locateFoundIn: "is in",
     locateFoundAt: (item: string, place: string) =>
       `«${item}» is in ${place}`,
-    browseHeading: "Your spaces",
+    browseHeading: "Browse your spaces",
+    browseHint: "Tap a cabinet or drawer unit to see its floor plan",
     statsSpaces: "Spaces",
     statsItems: "Items",
     items: (n: number) => (n === 1 ? "1 item" : `${n} items`),

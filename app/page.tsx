@@ -87,7 +87,6 @@ export default function HomePage() {
             </div>
             <div className="flex shrink-0 items-center gap-1">
               <SettingsMenu />
-              <div className="divider-toolbar" aria-hidden="true" />
               <Link
                 href="/qr"
                 className="btn-toolbar h-9 w-9 gap-1.5 text-xs font-semibold sm:w-auto sm:px-2.5"
@@ -198,12 +197,13 @@ export default function HomePage() {
 
         {/* Secondary navigation: browse spaces */}
         <section
-          className={`mt-10 border-t border-amber-200/40 pt-8 dark:border-amber-500/10 ${isSearching ? "opacity-80" : ""}`}
+          className={`mt-12 ${isSearching ? "opacity-70" : ""}`}
           aria-label={t.home.browseHeading}
         >
-          <h2 className="section-label">
-            {t.home.browseHeading}
-          </h2>
+          <h2 className="section-label">{t.home.browseHeading}</h2>
+          <p className="mb-4 mt-1 text-sm text-zinc-600 dark:text-zinc-400">
+            {t.home.browseHint}
+          </p>
           <div className="grid gap-2 sm:grid-cols-2">
             {spaces.map((space) => (
               <Link
