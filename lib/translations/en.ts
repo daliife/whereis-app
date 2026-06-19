@@ -21,6 +21,14 @@ export const en: typeof ca = {
     switchToLight: "Switch to light mode",
     switchToDark: "Switch to dark mode",
   },
+  settings: {
+    open: "Settings",
+    title: "Settings",
+    appearance: "Appearance",
+    light: "Light",
+    dark: "Dark",
+    language: "Language",
+  },
   space: {
     back: "← Home",
     notFound: "Space not found",
@@ -50,5 +58,7 @@ export const en: typeof ca = {
     title: "QR Codes",
     subtitle: "Print and stick on your storage units",
     printButton: "Print QR codes",
+    expandCode: (name: string) => `Enlarge ${name} QR code`,
+    closeExpanded: "Close enlarged QR code",
   },
 };

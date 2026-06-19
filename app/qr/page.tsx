@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { QRCodeSVG } from "qrcode.react";
-import { getAllSpaces } from "@/lib/search";
+import { getAllSpaces, type Space } from "@/lib/search";
 import { useI18n } from "@/lib/i18n";
 import SpaceIcon, { TYPE_COLOR } from "@/components/SpaceIcon";
 
@@ -12,13 +12,31 @@ const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
 
 export default function QRPage() {
   const [origin, setOrigin] = useState("");
+  const [selectedSpace, setSelectedSpace] = useState<Space | null>(null);
   const { t } = useI18n();
 
   useEffect(() => {
     setOrigin(window.location.origin);
   }, []);
 
+  useEffect(() => {
+    function handleKeyDown(event: KeyboardEvent) {
+      if (event.key === "Escape") {
+        setSelectedSpace(null);
+      }
+    }
+
+    if (selectedSpace) {
+      document.addEventListener("keydown", handleKeyDown);
+    }
+
+    return () => document.removeEventListener("keydown", handleKeyDown);
+  }, [selectedSpace]);
+
   const baseUrl = origin ? `${origin}${BASE_PATH}` : "";
+  const getSpaceUrl = (spaceId: string) =>
+    baseUrl ? `${baseUrl}/space/${spaceId}` : "";
+  const selectedUrl = selectedSpace ? getSpaceUrl(selectedSpace.id) : "";
 
   return (
     <div className="mx-auto max-w-5xl px-4 pb-12 sm:px-6 lg:px-8">
@@ -53,15 +71,19 @@ export default function QRPage() {
       {/* QR cards */}
       <div className="grid gap-4 md:grid-cols-2 print:grid-cols-2">
         {spaces.map((space) => (
-          <div
+          <button
             key={space.id}
-            className="rounded-lg border border-zinc-100 bg-white p-5 shadow-sm print:break-inside-avoid dark:border-zinc-800 dark:bg-zinc-900 lg:p-6"
+            type="button"
+            onClick={() => setSelectedSpace(space)}
+            disabled={!baseUrl}
+            className="rounded-lg border border-zinc-100 bg-white p-5 text-left shadow-sm transition-colors hover:border-amber-200 hover:bg-amber-50/40 focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 disabled:cursor-wait print:break-inside-avoid dark:border-zinc-800 dark:bg-zinc-900 dark:hover:border-amber-900 dark:hover:bg-amber-950/10 lg:p-6"
+            aria-label={t.qr.expandCode(space.name)}
           >
             <div className="flex items-start gap-5">
               <div className="flex-shrink-0">
                 {baseUrl ? (
                   <QRCodeSVG
-                    value={`${baseUrl}/space/${space.id}`}
+                    value={getSpaceUrl(space.id)}
                     size={100}
                     level="M"
                     includeMargin={false}
@@ -87,14 +109,77 @@ export default function QRPage() {
                 </p>
                 {baseUrl && (
                   <p className="mt-2 break-all text-xs text-zinc-300 dark:text-zinc-700">
-                    {baseUrl}/space/{space.id}
+                    {getSpaceUrl(space.id)}
                   </p>
                 )}
               </div>
             </div>
-          </div>
+          </button>
         ))}
       </div>
+
+      {selectedSpace && selectedUrl && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center bg-zinc-950/70 px-4 py-6 backdrop-blur-sm print:hidden"
+          onClick={() => setSelectedSpace(null)}
+        >
+          <div
+            className="w-full max-w-sm rounded-lg border border-zinc-200 bg-white p-4 shadow-2xl dark:border-zinc-800 dark:bg-zinc-900"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="qr-dialog-title"
+            onClick={(event) => event.stopPropagation()}
+          >
+            <div className="mb-3 flex items-start justify-between gap-3">
+              <div className="min-w-0">
+                <p
+                  id="qr-dialog-title"
+                  className="font-semibold text-zinc-900 dark:text-zinc-100"
+                >
+                  {selectedSpace.name}
+                </p>
+                <p className="text-sm capitalize text-zinc-400">
+                  {t.space.types[selectedSpace.type] ?? selectedSpace.type}
+                </p>
+              </div>
+              <button
+                type="button"
+                onClick={() => setSelectedSpace(null)}
+                className="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-lg text-zinc-400 transition-colors hover:bg-zinc-100 hover:text-zinc-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 dark:text-zinc-500 dark:hover:bg-zinc-800 dark:hover:text-zinc-300"
+                aria-label={t.qr.closeExpanded}
+              >
+                <svg
+                  className="h-5 w-5"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                  aria-hidden="true"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M6 18L18 6M6 6l12 12"
+                  />
+                </svg>
+              </button>
+            </div>
+
+            <div className="flex justify-center rounded-lg bg-white p-4">
+              <QRCodeSVG
+                value={selectedUrl}
+                size={320}
+                level="M"
+                includeMargin
+                className="h-auto w-full max-w-[320px]"
+              />
+            </div>
+            <p className="mt-3 break-all text-center text-xs text-zinc-400 dark:text-zinc-500">
+              {selectedUrl}
+            </p>
+          </div>
+        </div>
+      )}
 
       {/* Print button */}
       <button

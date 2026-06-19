@@ -2,7 +2,7 @@
   "spaces": [
     {
       "id": "armari-1",
-      "name": "Armari 1",
+      "name": "Armari sòtan esquerra",
       "type": "cabinet",
       "sections": [
         {
@@ -61,7 +61,7 @@
     },
     {
       "id": "armari-2",
-      "name": "Armari 2",
+      "name": "Armari sòtan dret",
       "type": "cabinet",
       "sections": [
         {
@@ -121,7 +121,7 @@
     },
     {
       "id": "calaixera",
-      "name": "Calaixera",
+      "name": "Calaixera sòtan",
       "type": "drawers",
       "sections": [
         {

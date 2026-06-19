@@ -5,8 +5,7 @@ import { useRouter } from "next/navigation";
 import Link from "next/link";
 import SearchBar from "@/components/SearchBar";
 import ItemCard from "@/components/ItemCard";
-import LocaleSwitcher from "@/components/LocaleSwitcher";
-import ThemeToggle from "@/components/ThemeToggle";
+import SettingsMenu from "@/components/SettingsMenu";
 import AppIcon from "@/components/AppIcon";
 import SpaceIcon, { TYPE_COLOR } from "@/components/SpaceIcon";
 import { getAllSpaces, searchAll } from "@/lib/search";
@@ -50,8 +49,7 @@ export default function HomePage() {
           </p>
         </div>
         <div className="flex flex-wrap items-center gap-1 pt-0.5">
-          <ThemeToggle />
-          <LocaleSwitcher />
+          <SettingsMenu />
           <div className="mx-1.5 h-4 w-px bg-zinc-200 dark:bg-zinc-700" />
           <Link
             href="/qr"

@@ -21,6 +21,14 @@ export const es: typeof ca = {
     switchToLight: "Cambiar a modo claro",
     switchToDark: "Cambiar a modo oscuro",
   },
+  settings: {
+    open: "Ajustes",
+    title: "Ajustes",
+    appearance: "Apariencia",
+    light: "Claro",
+    dark: "Oscuro",
+    language: "Idioma",
+  },
   space: {
     back: "← Inicio",
     notFound: "Espacio no encontrado",
@@ -50,5 +58,7 @@ export const es: typeof ca = {
     title: "Códigos QR",
     subtitle: "Imprime y pega en tus espacios de almacenamiento",
     printButton: "Imprimir códigos QR",
+    expandCode: (name: string) => `Ampliar el código QR de ${name}`,
+    closeExpanded: "Cerrar el código QR ampliado",
   },
 };

@@ -19,6 +19,14 @@ export const ca = {
     switchToLight: "Canvia a mode clar",
     switchToDark: "Canvia a mode fosc",
   },
+  settings: {
+    open: "Configuració",
+    title: "Configuració",
+    appearance: "Aparença",
+    light: "Clar",
+    dark: "Fosc",
+    language: "Idioma",
+  },
   space: {
     back: "← Inici",
     notFound: "Espai no trobat",
@@ -48,5 +56,7 @@ export const ca = {
     title: "Codis QR",
     subtitle: "Imprimeix i enganxa als teus espais d'emmagatzematge",
     printButton: "Imprimeix els codis QR",
+    expandCode: (name: string) => `Amplia el codi QR de ${name}`,
+    closeExpanded: "Tanca el codi QR ampliat",
   },
 };
