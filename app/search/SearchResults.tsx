@@ -34,7 +34,7 @@ export default function SearchResults() {
   return (
     <div className="mx-auto max-w-3xl px-4 pb-[max(3rem,env(safe-area-inset-bottom))] sm:px-6 lg:px-8">
       {/* Header */}
-      <header className="pb-4 pt-[max(1.5rem,env(safe-area-inset-top))] sm:pt-8 lg:pt-12">
+      <header className="pb-3 pt-[max(1rem,env(safe-area-inset-top))] sm:pt-6">
         <Link
           href="/"
           className="btn-toolbar p-1.5"
@@ -61,25 +61,22 @@ export default function SearchResults() {
       </header>
 
       <main id="main-content">
-      {/* Sticky search bar */}
-      <div className="search-dock">
-        <SearchBar
-          value={query}
-          onChange={setQuery}
-          placeholder={t.home.searchPlaceholder}
-          clearLabel={t.common.clearSearch}
-          autoFocus
-        />
-        <SearchStatus
-          query={debouncedQuery}
-          resultCount={results.length}
-          resultsLabel={t.search.results}
-          nothingFoundLabel={t.search.nothingFound}
-        />
-      </div>
+      <SearchBar
+        value={query}
+        onChange={setQuery}
+        placeholder={t.home.searchPlaceholder}
+        clearLabel={t.common.clearSearch}
+        autoFocus
+      />
+      <SearchStatus
+        query={debouncedQuery}
+        resultCount={results.length}
+        resultsLabel={t.search.results}
+        nothingFoundLabel={t.search.nothingFound}
+      />
 
       {/* Results */}
-      <div className="mt-4 lg:mt-6">
+      <div className="mt-4">
         {!query.trim() ? (
           <p className="mt-10 text-center text-zinc-600 dark:text-zinc-400">
             {t.search.typeToSearch}

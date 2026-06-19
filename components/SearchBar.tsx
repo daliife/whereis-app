@@ -26,16 +26,16 @@ export default function SearchBar({
 
   const iconClass = value.trim()
     ? "text-amber-600 dark:text-amber-400"
-    : "text-zinc-500 group-focus-within/search:text-amber-600 dark:text-zinc-400 dark:group-focus-within/search:text-amber-400";
+    : "text-zinc-400 group-focus-within/search:text-amber-600 dark:text-zinc-500 dark:group-focus-within/search:text-amber-400";
 
   return (
     <div className="group/search relative w-full" role="search">
       <label htmlFor={inputId} className="sr-only">
         {placeholder}
       </label>
-      <div className="pointer-events-none absolute inset-y-0 left-4 flex items-center">
+      <div className="pointer-events-none absolute inset-y-0 left-3.5 flex items-center">
         <svg
-          className={`h-5 w-5 transition-colors ${iconClass}`}
+          className={`h-[18px] w-[18px] transition-colors ${iconClass}`}
           fill="none"
           stroke="currentColor"
           viewBox="0 0 24 24"
@@ -63,7 +63,7 @@ export default function SearchBar({
         onChange={(e) => onChange(e.target.value)}
         placeholder={placeholder}
         className="search-field"
-        style={{ minHeight: 48 }}
+        style={{ minHeight: 44 }}
       />
       {value && (
         <button

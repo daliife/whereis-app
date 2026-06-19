@@ -227,10 +227,10 @@ function SectionItemsList({
               <div
                 ref={ref}
                 className={[
-                  "flex items-center gap-3 rounded-lg border px-3 py-2.5",
+                  "flex items-center gap-3 px-3 py-2.5",
                   isHighlighted
-                    ? "border-amber-400/60 border-l-[3px] border-l-amber-500 bg-amber-50/60 pl-[calc(0.75rem-2px)] dark:border-amber-600/50 dark:bg-amber-950/20"
-                    : "border-zinc-200/80 bg-white dark:border-zinc-800 dark:bg-zinc-900",
+                    ? "card-highlighted pl-[calc(0.75rem-2px)]"
+                    : "card-base",
                 ].join(" ")}
               >
                 <span

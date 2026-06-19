@@ -73,8 +73,8 @@ export default function SpaceClient({ space }: { space: Space }) {
 
   return (
     <div className="mx-auto max-w-3xl pb-[max(3rem,env(safe-area-inset-bottom))] sm:px-6 lg:max-w-4xl lg:px-8">
-      <div className="sticky top-0 isolate z-20 border-b border-zinc-200/60 bg-zinc-50/85 backdrop-blur-md dark:border-zinc-800/80 dark:bg-zinc-950/85 sm:top-4 sm:mx-0 sm:mt-4 sm:rounded-xl sm:border sm:border-zinc-200/80 sm:bg-white/90 sm:shadow-sm sm:dark:border-zinc-800 sm:dark:bg-zinc-900/90 lg:top-6">
-        <div className="flex items-center gap-2 px-4 pb-2 pt-[max(0.75rem,env(safe-area-inset-top))] sm:px-4 sm:pt-3">
+      <div className="page-toolbar">
+        <div className="flex items-center gap-2 px-4 pb-2 pt-[max(0.75rem,env(safe-area-inset-top))]">
           <Link
             href="/"
             className="btn-toolbar-icon flex-shrink-0"
@@ -108,7 +108,7 @@ export default function SpaceClient({ space }: { space: Space }) {
           </span>
         </div>
 
-        <div className="px-4 pb-3 sm:px-4">
+        <div className="px-4 pb-3">
           <SearchBar
             value={query}
             onChange={setQuery}
@@ -129,7 +129,7 @@ export default function SpaceClient({ space }: { space: Space }) {
         )}
       </div>
 
-      <main id="main-content" className="relative z-0 mt-4 px-4 sm:px-0 lg:mt-6">
+      <main id="main-content" className="mt-4 px-4 sm:px-0">
         <SearchStatus
           query={debouncedQuery}
           resultCount={localResults?.length ?? 0}

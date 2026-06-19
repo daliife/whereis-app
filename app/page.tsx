@@ -56,7 +56,7 @@ export default function HomePage() {
     <>
       <div className="mx-auto max-w-3xl px-4 pb-[max(3rem,env(safe-area-inset-bottom))] sm:px-6 lg:px-8">
         {/* Header */}
-        <header className="relative overflow-visible pb-5 pt-[max(1.5rem,env(safe-area-inset-top))] sm:pb-6 sm:pt-10 lg:pt-12">
+        <header className="relative overflow-visible pb-4 pt-[max(1rem,env(safe-area-inset-top))] sm:pb-5 sm:pt-8">
           <div className="flex items-center justify-between gap-3">
             <div className="flex min-w-0 items-center gap-2">
               <AppIcon size={36} />
@@ -115,25 +115,23 @@ export default function HomePage() {
         <main id="main-content">
         {/* Primary flow: search */}
         <section aria-label={t.home.searchPlaceholder}>
-          <div className="search-dock">
-            <SearchBar
-              value={query}
-              onChange={setQuery}
-              placeholder={t.home.searchPlaceholder}
-              clearLabel={t.common.clearSearch}
-            />
-            <SearchStatus
-              query={debouncedQuery}
-              resultCount={results.length}
-              resultsLabel={t.home.results}
-              nothingFoundLabel={t.home.nothingFound}
-            />
-            {!isSearching && (
-              <p className="mt-2.5 text-center text-sm text-zinc-600 dark:text-zinc-400">
-                {t.home.searchHint}
-              </p>
-            )}
-          </div>
+          <SearchBar
+            value={query}
+            onChange={setQuery}
+            placeholder={t.home.searchPlaceholder}
+            clearLabel={t.common.clearSearch}
+          />
+          <SearchStatus
+            query={debouncedQuery}
+            resultCount={results.length}
+            resultsLabel={t.home.results}
+            nothingFoundLabel={t.home.nothingFound}
+          />
+          {!isSearching && (
+            <p className="mt-2 text-sm text-zinc-500 dark:text-zinc-400">
+              {t.home.searchHint}
+            </p>
+          )}
 
           {isSearching && (
             <div className="mt-4">
@@ -197,7 +195,7 @@ export default function HomePage() {
 
         {/* Secondary navigation: browse spaces */}
         <section
-          className={`mt-12 ${isSearching ? "opacity-70" : ""}`}
+          className={`mt-10 ${isSearching ? "opacity-60" : ""}`}
           aria-label={t.home.browseHeading}
         >
           <h2 className="section-label">{t.home.browseHeading}</h2>
