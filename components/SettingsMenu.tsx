@@ -1,6 +1,7 @@
 "use client";
 
 import { createPortal } from "react-dom";
+import Link from "next/link";
 import {
   useCallback,
   useEffect,
@@ -14,7 +15,11 @@ import { useDialogA11y } from "@/lib/useDialogA11y";
 
 const PANEL_WIDTH = 256;
 
-export default function SettingsMenu() {
+interface SettingsMenuProps {
+  onOpenAbout?: () => void;
+}
+
+export default function SettingsMenu({ onOpenAbout }: SettingsMenuProps) {
   const [open, setOpen] = useState(false);
   const [mounted, setMounted] = useState(false);
   const [desktopPos, setDesktopPos] = useState<{
@@ -234,6 +239,61 @@ export default function SettingsMenu() {
                     ))}
                   </div>
                 </div>
+
+                <div>
+                  <p className="mb-2 text-xs font-medium uppercase tracking-widest text-zinc-600 dark:text-zinc-400">
+                    {t.settings.more}
+                  </p>
+                  <div className="flex flex-col gap-1">
+                    {onOpenAbout && (
+                      <button
+                        type="button"
+                        onClick={() => {
+                          closeMenu();
+                          onOpenAbout();
+                        }}
+                        className="flex w-full items-center gap-2.5 rounded-lg px-2.5 py-2.5 text-left text-sm font-medium text-zinc-700 transition-colors hover:bg-zinc-100 dark:text-zinc-300 dark:hover:bg-zinc-800"
+                      >
+                        <svg
+                          className="h-4 w-4 shrink-0 text-amber-700 dark:text-amber-500"
+                          fill="none"
+                          stroke="currentColor"
+                          viewBox="0 0 24 24"
+                          aria-hidden="true"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                          />
+                        </svg>
+                        {t.about.open}
+                      </button>
+                    )}
+                    <Link
+                      href="/qr"
+                      onClick={closeMenu}
+                      className="flex w-full items-center gap-2.5 rounded-lg px-2.5 py-2.5 text-left text-sm font-medium text-zinc-700 transition-colors hover:bg-zinc-100 dark:text-zinc-300 dark:hover:bg-zinc-800"
+                    >
+                      <svg
+                        className="h-4 w-4 shrink-0 text-amber-700 dark:text-amber-500"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                        aria-hidden="true"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M4 4h6v6H4zM14 4h6v6h-6zM4 14h6v6H4zM14 14h2v2h-2zM18 14h2v6h-6v-2h4zM14 18h2v2h-2z"
+                        />
+                      </svg>
+                      {t.home.qrLink}
+                    </Link>
+                  </div>
+                </div>
               </div>
             </div>
           </div>,
@@ -247,7 +307,7 @@ export default function SettingsMenu() {
         ref={buttonRef}
         type="button"
         onClick={() => setOpen((current) => !current)}
-        className="btn-header-action h-9 w-9 gap-1.5 text-xs font-semibold sm:w-auto sm:px-2.5"
+        className="btn-header-action h-9 w-9 sm:w-auto sm:gap-1.5 sm:px-2.5"
         aria-label={t.settings.open}
         aria-expanded={open}
         aria-controls="settings-panel"

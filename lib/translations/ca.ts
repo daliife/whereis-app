@@ -19,6 +19,8 @@ export const ca = {
     seeAll: (n: number) => `Veure els ${n} resultats`,
     nothingFound: "Res trobat",
     nothingFoundHint: "Prova amb una paraula diferent",
+    orBrowseSpaces: "O navega pels espais",
+    locate: "Localitza",
   },
   about: {
     open: "Com funciona Stashly",
@@ -53,6 +55,7 @@ export const ca = {
     light: "Clar",
     dark: "Fosc",
     language: "Idioma",
+    more: "Més",
   },
   space: {
     back: "← Inici",

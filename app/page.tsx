@@ -6,6 +6,7 @@ import Link from "next/link";
 import SearchBar from "@/components/SearchBar";
 import SearchStatus from "@/components/SearchStatus";
 import ItemCard from "@/components/ItemCard";
+import EmptyState from "@/components/EmptyState";
 import SettingsMenu from "@/components/SettingsMenu";
 import AppIcon from "@/components/AppIcon";
 import SpaceIcon, { TYPE_COLOR } from "@/components/SpaceIcon";
@@ -65,52 +66,8 @@ export default function HomePage() {
                   {t.home.appName}
                 </h1>
               </div>
-              <button
-                type="button"
-                onClick={() => setAboutOpen(true)}
-                className="btn-header-action h-9 w-9"
-                aria-label={t.about.open}
-              >
-                <svg
-                  className="h-5 w-5"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                  aria-hidden="true"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-                  />
-                </svg>
-              </button>
             </div>
-            <div className="flex shrink-0 items-center gap-1">
-              <SettingsMenu />
-              <Link
-                href="/qr"
-                className="btn-header-action h-9 w-9 gap-1.5 text-xs font-semibold sm:w-auto sm:px-2.5"
-                aria-label={t.home.qrLink}
-              >
-                <svg
-                  className="h-4 w-4 shrink-0"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                  aria-hidden="true"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M4 4h6v6H4zM14 4h6v6h-6zM4 14h6v6H4zM14 14h2v2h-2zM18 14h2v6h-6v-2h4zM14 18h2v2h-2z"
-                  />
-                </svg>
-                <span className="hidden sm:inline">{t.home.qrLink}</span>
-              </Link>
-            </div>
+            <SettingsMenu onOpenAbout={() => setAboutOpen(true)} />
           </div>
         </header>
 
@@ -168,37 +125,36 @@ export default function HomePage() {
                               spaceName={r.space.name}
                               sectionName={r.section.name}
                               highlighted={isActive}
+                              embedded
+                              showAction
+                              locateLabel={t.home.locate}
                             />
                           </button>
                         );
                       })}
                     </div>
+                    <button
+                      type="button"
+                      onClick={() => setQuery("")}
+                      className="home-browse-link"
+                    >
+                      {t.home.orBrowseSpaces}
+                    </button>
                   </>
                 ) : (
-                  <div className="py-8 text-center">
-                    <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-zinc-100 dark:bg-zinc-800">
-                      <svg
-                        className="h-5 w-5 text-zinc-500 dark:text-zinc-400"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                        aria-hidden="true"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth={1.5}
-                          d="M21 21l-4.35-4.35M17 11A6 6 0 1 1 5 11a6 6 0 0 1 12 0z"
-                        />
-                      </svg>
-                    </div>
-                    <p className="mt-3 text-sm font-semibold text-zinc-700 dark:text-zinc-300">
-                      {t.home.nothingFound}
-                    </p>
-                    <p className="mt-1 text-xs text-zinc-500 dark:text-zinc-400">
-                      {t.home.nothingFoundHint}
-                    </p>
-                  </div>
+                  <>
+                    <EmptyState
+                      title={t.home.nothingFound}
+                      hint={t.home.nothingFoundHint}
+                    />
+                    <button
+                      type="button"
+                      onClick={() => setQuery("")}
+                      className="home-browse-link -mt-2"
+                    >
+                      {t.home.orBrowseSpaces}
+                    </button>
+                  </>
                 )}
               </div>
             )}
@@ -250,7 +206,7 @@ export default function HomePage() {
                             <p className="card-meta">{t.home.items(itemCount)}</p>
                           </div>
                           <svg
-                            className="h-4 w-4 flex-shrink-0 text-zinc-300 transition-colors group-hover:text-zinc-500 dark:text-zinc-600 dark:group-hover:text-zinc-400"
+                            className="h-4 w-4 flex-shrink-0 text-zinc-300 transition-colors group-hover:text-amber-600 dark:text-zinc-600 dark:group-hover:text-amber-500"
                             fill="none"
                             stroke="currentColor"
                             viewBox="0 0 24 24"

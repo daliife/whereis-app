@@ -113,7 +113,7 @@ export default function LocateItemSheet({ result, onClose }: Props) {
             highlightItemName={item.name}
             planOnly
             compact
-            interactive={false}
+            interactive={true}
           />
         </div>
 

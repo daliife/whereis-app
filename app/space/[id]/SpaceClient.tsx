@@ -6,6 +6,7 @@ import Link from "next/link";
 import SearchBar from "@/components/SearchBar";
 import SearchStatus from "@/components/SearchStatus";
 import ItemCard from "@/components/ItemCard";
+import EmptyState from "@/components/EmptyState";
 import SpaceFloorPlan from "@/components/SpaceFloorPlan";
 import SpaceIcon, { TYPE_COLOR } from "@/components/SpaceIcon";
 import type { Space } from "@/lib/inventory";
@@ -103,7 +104,7 @@ export default function SpaceClient({ space }: { space: Space }) {
           <h1 className="min-w-0 flex-1 truncate text-base font-bold text-zinc-900 dark:text-zinc-100 sm:text-lg">
             {space.name}
           </h1>
-          <span className="badge-soft">
+          <span className="badge-neutral">
             {t.home.items(itemCount)}
           </span>
         </div>
@@ -150,41 +151,28 @@ export default function SpaceClient({ space }: { space: Space }) {
                     itemName={r.item.name}
                     spaceName={r.space.name}
                     sectionName={r.section.name}
+                    embedded
+                    showAction
+                    locateLabel={t.home.locate}
                   />
                 </button>
               ))}
             </div>
           ) : (
-            <div className="py-10 text-center sm:mt-20">
-              <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-zinc-100 dark:bg-zinc-800">
-                <svg
-                  className="h-6 w-6 text-zinc-500 dark:text-zinc-400"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                  aria-hidden="true"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={1.5}
-                    d="M21 21l-4.35-4.35M17 11A6 6 0 1 1 5 11a6 6 0 0 1 12 0z"
-                  />
-                </svg>
-              </div>
-              <p className="mt-4 text-base font-semibold text-zinc-700 dark:text-zinc-300">
-                {t.space.nothingFoundHere}
-              </p>
-              <p className="mt-1 text-sm text-zinc-600 dark:text-zinc-400">
-                {t.space.nothingFoundHint}{" "}
-                <Link
-                  href={`/search?q=${encodeURIComponent(query)}`}
-                  className="font-medium text-zinc-800 underline-offset-2 hover:underline dark:text-zinc-200"
-                >
-                  {t.space.searchEverywhereLink}
-                </Link>
-              </p>
-            </div>
+            <EmptyState
+              title={t.space.nothingFoundHere}
+              hint={
+                <>
+                  {t.space.nothingFoundHint}{" "}
+                  <Link
+                    href={`/search?q=${encodeURIComponent(query)}`}
+                    className="font-medium text-zinc-800 underline-offset-2 hover:underline dark:text-zinc-200"
+                  >
+                    {t.space.searchEverywhereLink}
+                  </Link>
+                </>
+              }
+            />
           )
         ) : (
           <SpaceFloorPlan

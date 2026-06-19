@@ -42,6 +42,8 @@ export default function SpaceFloorPlan({
   const [selectedSectionId, setSelectedSectionId] = useState<string | null>(
     autoSection ?? space.sections[0]?.id ?? null,
   );
+  const [planExpanded, setPlanExpanded] = useState(false);
+  const [isMobile, setIsMobile] = useState(true);
   const activeRef = useRef<HTMLButtonElement>(null);
 
   const isDrawers = space.type === "drawers";
@@ -74,13 +76,75 @@ export default function SpaceFloorPlan({
     }
   }, [autoSection]);
 
+  useEffect(() => {
+    if (compact || planOnly) return;
+
+    const media = window.matchMedia("(max-width: 639px)");
+    function update() {
+      const mobile = media.matches;
+      setIsMobile(mobile);
+      setPlanExpanded(!mobile);
+    }
+    update();
+    media.addEventListener("change", update);
+    return () => media.removeEventListener("change", update);
+  }, [compact, planOnly]);
+
   function selectSection(sectionId: string) {
     setSelectedSectionId(sectionId);
     onSectionSelect?.(sectionId);
   }
 
+  const showMobileChrome = isMobile && !compact && !planOnly;
+  const showPlanDiagram = !showMobileChrome || planExpanded;
+
   return (
     <div className="flex flex-col gap-5" aria-label={space.name}>
+      {showMobileChrome && (
+        <>
+          <div className="section-tabs" role="tablist" aria-label={space.name}>
+            {space.sections.map((section) => (
+              <button
+                key={section.id}
+                type="button"
+                role="tab"
+                aria-selected={selectedSectionId === section.id}
+                onClick={() => selectSection(section.id)}
+                className={[
+                  "section-tab",
+                  selectedSectionId === section.id ? "section-tab--active" : "",
+                ].join(" ")}
+              >
+                {section.name}
+              </button>
+            ))}
+          </div>
+          <button
+            type="button"
+            className="plan-toggle"
+            onClick={() => setPlanExpanded((open) => !open)}
+            aria-expanded={planExpanded}
+          >
+            <span>{planExpanded ? t.space.hidePlan : t.space.showPlan}</span>
+            <svg
+              className={`h-4 w-4 shrink-0 text-zinc-400 transition-transform ${planExpanded ? "rotate-180" : ""}`}
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              aria-hidden="true"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M19 9l-7 7-7-7"
+              />
+            </svg>
+          </button>
+        </>
+      )}
+
+      {showPlanDiagram && (
       <div
         className={[
           "mx-auto flex w-full flex-col",
@@ -180,6 +244,7 @@ export default function SpaceFloorPlan({
           </div>
         )}
       </div>
+      )}
 
       {!planOnly && selectedSection && (
         <SectionItemsList

@@ -21,6 +21,8 @@ export const es: typeof ca = {
     seeAll: (n: number) => `Ver los ${n} resultados`,
     nothingFound: "Sin resultados",
     nothingFoundHint: "Prueba con otra palabra",
+    orBrowseSpaces: "O navega por los espacios",
+    locate: "Localizar",
   },
   about: {
     open: "Cómo funciona Stashly",
@@ -55,6 +57,7 @@ export const es: typeof ca = {
     light: "Claro",
     dark: "Oscuro",
     language: "Idioma",
+    more: "Más",
   },
   space: {
     back: "← Inicio",

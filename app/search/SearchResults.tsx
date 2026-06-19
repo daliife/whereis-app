@@ -6,6 +6,7 @@ import Link from "next/link";
 import SearchBar from "@/components/SearchBar";
 import SearchStatus from "@/components/SearchStatus";
 import ItemCard from "@/components/ItemCard";
+import EmptyState from "@/components/EmptyState";
 import { searchAll } from "@/lib/fuse-search";
 import { useDebouncedValue } from "@/lib/useDebouncedValue";
 import { useI18n } from "@/lib/i18n";
@@ -97,36 +98,18 @@ export default function SearchResults() {
                     itemName={r.item.name}
                     spaceName={r.space.name}
                     sectionName={r.section.name}
+                    embedded
+                    showAction
                   />
                 </Link>
               ))}
             </div>
           </>
         ) : (
-          <div className="py-10 text-center sm:mt-20">
-            <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-zinc-100 dark:bg-zinc-800">
-              <svg
-                className="h-6 w-6 text-zinc-500 dark:text-zinc-400"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-                aria-hidden="true"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={1.5}
-                  d="M21 21l-4.35-4.35M17 11A6 6 0 1 1 5 11a6 6 0 0 1 12 0z"
-                />
-              </svg>
-            </div>
-            <p className="mt-4 text-base font-semibold text-zinc-700 dark:text-zinc-300">
-              {t.search.nothingFound}
-            </p>
-            <p className="mt-1 text-sm text-zinc-600 dark:text-zinc-400">
-              {t.search.nothingFoundHint}
-            </p>
-          </div>
+          <EmptyState
+            title={t.search.nothingFound}
+            hint={t.search.nothingFoundHint}
+          />
         )}
       </div>
       </main>
