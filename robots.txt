@@ -1,0 +1,5 @@
+User-Agent: *
+Allow: /
+
+Host: https://daliife.github.io/whereis-app/
+Sitemap: https://daliife.github.io/whereis-app/sitemap.xml
