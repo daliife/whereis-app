@@ -77,7 +77,7 @@ export default function SpaceFloorPlan({
         className={
           compact
             ? ""
-            : "rounded-lg border border-zinc-200/80 bg-white p-4 dark:border-zinc-800 dark:bg-zinc-900"
+            : "panel-elevated p-4"
         }
       >
         <div
@@ -88,7 +88,7 @@ export default function SpaceFloorPlan({
           ].join(" ")}
         >
           {topSections.length > 0 && (
-            <div className="rounded-lg border border-dashed border-zinc-200 bg-zinc-50 p-2 dark:border-zinc-700 dark:bg-zinc-950/40">
+            <div className="rounded-lg border border-dashed border-amber-200/50 bg-amber-50/30 p-2 dark:border-amber-500/15 dark:bg-amber-950/15">
               {topSections.map((section) => (
                 <PlanSectionButton
                   key={section.id}
@@ -117,10 +117,10 @@ export default function SpaceFloorPlan({
 
           <div
             className={[
-              "relative overflow-hidden border bg-zinc-50 shadow-inner dark:bg-zinc-950/40",
+              "relative overflow-hidden border bg-amber-50/20 shadow-inner shadow-amber-500/5 dark:bg-zinc-950/40 dark:shadow-amber-500/5",
               isDrawers
-                ? "rounded-lg border-zinc-200 p-2 dark:border-zinc-700"
-                : "rounded-t-lg rounded-b-md border-zinc-300 p-2 dark:border-zinc-700",
+                ? "rounded-lg border-amber-200/40 p-2 dark:border-amber-500/15"
+                : "rounded-t-lg rounded-b-md border-amber-200/50 p-2 dark:border-amber-500/20",
             ].join(" ")}
           >
             <div
@@ -172,8 +172,8 @@ export default function SpaceFloorPlan({
               className="mx-auto grid w-[86%] grid-cols-2 gap-24 px-5"
               aria-hidden="true"
             >
-              <div className="h-3 rounded-b bg-zinc-300 dark:bg-zinc-700" />
-              <div className="h-3 rounded-b bg-zinc-300 dark:bg-zinc-700" />
+              <div className="h-3 rounded-b bg-amber-300/70 dark:bg-amber-700/40" />
+              <div className="h-3 rounded-b bg-amber-300/70 dark:bg-amber-700/40" />
             </div>
           )}
         </div>

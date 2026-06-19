@@ -2,18 +2,40 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --brand: 245 158 11;
+  --brand-soft: 255 251 235;
+  --page-top: 255 251 235;
+  --page-base: 250 250 250;
+}
+
+.dark {
+  --brand-soft: 28 20 8;
+  --page-top: 15 12 8;
+  --page-base: 9 9 11;
+}
+
 * {
   -webkit-tap-highlight-color: transparent;
 }
 
 body {
-  background-color: #fafafa; /* zinc-50 */
-  color: #18181b; /* zinc-900 */
+  color: #18181b;
+  background-color: rgb(var(--page-base));
+  background-image: linear-gradient(
+    180deg,
+    rgb(var(--page-top)) 0%,
+    rgb(var(--page-base)) min(32rem, 45vh)
+  );
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  transition: background-color 0.15s ease;
+  transition: background-color 0.15s ease, color 0.15s ease;
   padding-left: env(safe-area-inset-left);
   padding-right: env(safe-area-inset-right);
+}
+
+.dark body {
+  color: #f4f4f5;
 }
 
 input[type="search"]::-webkit-search-decoration,
@@ -24,9 +46,55 @@ input[type="search"]::-webkit-search-results-decoration {
   appearance: none;
 }
 
-.dark body {
-  background-color: #09090b; /* zinc-950 */
-  color: #f4f4f5; /* zinc-100 */
+@layer components {
+  .btn-toolbar {
+    @apply inline-flex shrink-0 items-center justify-center rounded-lg text-zinc-600 transition-colors hover:bg-amber-50 hover:text-amber-900 focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 dark:text-zinc-400 dark:hover:bg-amber-950/40 dark:hover:text-amber-200;
+  }
+
+  .btn-toolbar-icon {
+    @apply btn-toolbar h-9 w-9;
+  }
+
+  .btn-brand-ghost {
+    @apply inline-flex items-center justify-center rounded-lg text-amber-800 transition-colors hover:bg-amber-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 dark:text-amber-400 dark:hover:bg-amber-950/30;
+  }
+
+  .card-interactive {
+    @apply rounded-lg border border-zinc-200/80 bg-white transition-all group-hover:border-amber-300/60 group-hover:bg-amber-50/50 group-hover:shadow-sm group-hover:shadow-amber-500/10 dark:border-zinc-800 dark:bg-zinc-900 dark:group-hover:border-amber-700/35 dark:group-hover:bg-amber-950/15;
+  }
+
+  .section-label {
+    @apply mb-4 flex items-center gap-2 text-sm font-semibold text-zinc-700 dark:text-zinc-300;
+  }
+
+  .section-label::before {
+    content: "";
+    @apply h-1.5 w-1.5 shrink-0 rounded-full bg-amber-500;
+  }
+
+  .search-dock {
+    @apply sticky top-0 isolate z-20 -mx-4 border-b border-amber-200/40 bg-zinc-50/85 px-4 pb-3 pt-2 backdrop-blur-md dark:border-amber-500/10 dark:bg-zinc-950/85 sm:-mx-6 sm:px-6;
+  }
+
+  .badge-soft {
+    @apply shrink-0 rounded-full bg-amber-100 px-2 py-0.5 text-[11px] font-semibold text-amber-900 dark:bg-amber-950/50 dark:text-amber-300 sm:px-2.5 sm:py-1 sm:text-xs;
+  }
+
+  .panel-elevated {
+    @apply rounded-lg border border-amber-200/30 bg-white shadow-sm shadow-amber-500/5 dark:border-amber-500/10 dark:bg-zinc-900 dark:shadow-amber-500/5;
+  }
+
+  .search-field {
+    @apply w-full rounded-xl border border-amber-200/50 bg-white py-3 pl-12 pr-12 text-base text-zinc-900 shadow-sm shadow-amber-500/5 placeholder:text-zinc-500 focus:border-amber-400 focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400/80 focus-visible:ring-offset-2 focus-visible:ring-offset-amber-50/50 dark:border-amber-500/15 dark:bg-zinc-900 dark:text-zinc-100 dark:placeholder:text-zinc-400 dark:focus:border-amber-500 dark:focus-visible:ring-amber-500/70 dark:focus-visible:ring-offset-zinc-950;
+  }
+
+  .meta-count {
+    @apply text-xs font-medium text-amber-900/70 dark:text-amber-400/80;
+  }
+
+  .divider-toolbar {
+    @apply h-4 w-px bg-amber-200/60 dark:bg-amber-500/20;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {

@@ -247,7 +247,7 @@ export default function SettingsMenu() {
         ref={buttonRef}
         type="button"
         onClick={() => setOpen((current) => !current)}
-        className="inline-flex h-9 w-9 shrink-0 items-center justify-center gap-1.5 rounded-lg text-xs font-semibold text-zinc-500 transition-colors hover:bg-zinc-100 hover:text-zinc-800 focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 dark:text-zinc-400 dark:hover:bg-zinc-800 dark:hover:text-zinc-100 sm:w-auto sm:px-2.5"
+        className="btn-toolbar h-9 w-9 gap-1.5 text-xs font-semibold sm:w-auto sm:px-2.5"
         aria-label={t.settings.open}
         aria-expanded={open}
         aria-controls="settings-panel"

@@ -4,7 +4,7 @@ export const ca = {
     subtitle: "Troba-ho al moment",
     qrLink: "Codis QR",
     searchPlaceholder: "Cerca qualsevol objecte…",
-    searchHint: "Toca un resultat per veure on mirar al moble",
+    searchHint: "Toca un resultat per veure en quin prestatge o calaix està",
     locateFoundIn: "es troba a",
     locateFoundAt: (item: string, place: string) =>
       `«${item}» es troba a ${place}`,
@@ -16,6 +16,23 @@ export const ca = {
     seeAll: (n: number) => `Veure els ${n} resultats`,
     nothingFound: "Res trobat",
     nothingFoundHint: "Prova amb una paraula diferent",
+  },
+  about: {
+    open: "Com funciona Stashly",
+    title: "Com funciona?",
+    intro:
+      "Troba-ho al moment. Consulta on guardes cada cosa a casa — armaris, calaixos i prestatges.",
+    stepLabel: (n: number) => `Pas ${n}`,
+    step1Title: "Cerca",
+    step1Desc:
+      "Escriu qualsevol objecte i descobreix en quin espai i secció el tens guardat.",
+    step2Title: "Localitza",
+    step2Desc:
+      "Toca un resultat per veure el plànol del moble i saber exactament on mirar.",
+    step3Title: "Escaneja",
+    step3Desc:
+      "Enganxa un codi QR a cada espai i obre'l directament des del mòbil.",
+    gotIt: "Entesos",
   },
   common: {
     clearSearch: "Neteja la cerca",

@@ -6,7 +6,7 @@ export const en: typeof ca = {
     subtitle: "Find it in a snap",
     qrLink: "QR codes",
     searchPlaceholder: "Search any item…",
-    searchHint: "Tap a result to see where to look on the unit",
+    searchHint: "Tap a result to see which shelf or drawer it's in",
     locateFoundIn: "is in",
     locateFoundAt: (item: string, place: string) =>
       `«${item}» is in ${place}`,
@@ -18,6 +18,23 @@ export const en: typeof ca = {
     seeAll: (n: number) => `See all ${n} results`,
     nothingFound: "Nothing found",
     nothingFoundHint: "Try a different keyword",
+  },
+  about: {
+    open: "How Stashly works",
+    title: "How it works",
+    intro:
+      "Find it in a snap. See where everything is stored at home — cabinets, drawers, and shelves.",
+    stepLabel: (n: number) => `Step ${n}`,
+    step1Title: "Search",
+    step1Desc:
+      "Type any item and discover which space and section it's stored in.",
+    step2Title: "Locate",
+    step2Desc:
+      "Tap a result to view the unit's floor plan and know exactly where to look.",
+    step3Title: "Scan",
+    step3Desc:
+      "Stick a QR code on each space and open it straight from your phone.",
+    gotIt: "Got it",
   },
   common: {
     clearSearch: "Clear search",

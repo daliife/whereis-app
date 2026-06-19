@@ -41,7 +41,7 @@ export default function QRPage() {
       <header className="pb-4 pt-[max(1.5rem,env(safe-area-inset-top))] sm:pt-8 lg:pt-12">
         <Link
           href="/"
-          className="inline-flex items-center justify-center rounded-lg p-1.5 text-zinc-600 transition-colors hover:bg-zinc-100 hover:text-zinc-800 focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 print:hidden dark:text-zinc-400 dark:hover:bg-zinc-800 dark:hover:text-zinc-200"
+          className="btn-toolbar p-1.5 print:hidden"
           aria-label={t.qr.back}
         >
           <svg
@@ -79,7 +79,7 @@ export default function QRPage() {
               setSelectedSpace(space);
             }}
             disabled={!baseUrl}
-            className="rounded-lg border border-zinc-200/80 bg-white p-4 text-left transition-colors hover:border-zinc-300 hover:bg-zinc-50/80 focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 disabled:cursor-wait print:break-inside-avoid dark:border-zinc-800 dark:bg-zinc-900 dark:hover:border-zinc-700 dark:hover:bg-zinc-800/40 sm:p-5"
+            className="group card-interactive w-full p-4 text-left focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 disabled:cursor-wait print:break-inside-avoid sm:p-5"
             aria-label={t.qr.expandCode(space.name)}
           >
             <div className="flex items-start gap-5">

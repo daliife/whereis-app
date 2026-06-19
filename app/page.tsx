@@ -20,6 +20,10 @@ const LocateItemSheet = dynamic(
   { ssr: false },
 );
 
+const AboutSheet = dynamic(() => import("@/components/AboutSheet"), {
+  ssr: false,
+});
+
 const spaces = getAllSpaces();
 
 function sameResult(a: SearchResult, b: SearchResult) {
@@ -33,6 +37,7 @@ function sameResult(a: SearchResult, b: SearchResult) {
 export default function HomePage() {
   const [query, setQuery] = useState("");
   const [locateResult, setLocateResult] = useState<SearchResult | null>(null);
+  const [aboutOpen, setAboutOpen] = useState(false);
   const debouncedQuery = useDebouncedValue(query, 200);
   const { t } = useI18n();
 
@@ -40,6 +45,8 @@ export default function HomePage() {
   const isSearching = query.trim().length > 0;
 
   const closeLocateSheet = useCallback(() => setLocateResult(null), []);
+
+  const closeAbout = useCallback(() => setAboutOpen(false), []);
 
   useEffect(() => {
     setLocateResult(null);
@@ -51,18 +58,39 @@ export default function HomePage() {
         {/* Header */}
         <header className="relative overflow-visible pb-5 pt-[max(1.5rem,env(safe-area-inset-top))] sm:pb-6 sm:pt-10 lg:pt-12">
           <div className="flex items-center justify-between gap-3">
-            <div className="flex min-w-0 items-center gap-2.5">
-              <AppIcon size={28} />
+            <div className="flex min-w-0 items-center gap-2">
+              <AppIcon size={36} />
               <h1 className="truncate text-xl font-bold tracking-tight text-zinc-900 dark:text-zinc-100 sm:text-2xl lg:text-3xl">
                 {t.home.appName}
               </h1>
+              <button
+                type="button"
+                onClick={() => setAboutOpen(true)}
+                className="btn-brand-ghost h-8 w-8 shrink-0"
+                aria-label={t.about.open}
+              >
+                <svg
+                  className="h-5 w-5"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                  aria-hidden="true"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                  />
+                </svg>
+              </button>
             </div>
             <div className="flex shrink-0 items-center gap-1">
               <SettingsMenu />
-              <div className="h-4 w-px bg-zinc-200 dark:bg-zinc-700" aria-hidden="true" />
+              <div className="divider-toolbar" aria-hidden="true" />
               <Link
                 href="/qr"
-                className="inline-flex h-9 w-9 shrink-0 items-center justify-center gap-1.5 rounded-lg text-xs font-semibold text-zinc-500 transition-colors hover:bg-zinc-100 hover:text-zinc-800 focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 dark:text-zinc-400 dark:hover:bg-zinc-800 dark:hover:text-zinc-100 sm:w-auto sm:px-2.5"
+                className="btn-toolbar h-9 w-9 gap-1.5 text-xs font-semibold sm:w-auto sm:px-2.5"
                 aria-label={t.home.qrLink}
               >
                 <svg
@@ -83,15 +111,12 @@ export default function HomePage() {
               </Link>
             </div>
           </div>
-          <p className="mt-1 pl-[38px] text-sm text-zinc-500 dark:text-zinc-400">
-            {t.home.subtitle}
-          </p>
         </header>
 
         <main id="main-content">
         {/* Primary flow: search */}
         <section aria-label={t.home.searchPlaceholder}>
-          <div className="sticky top-0 isolate z-20 -mx-4 bg-zinc-50 px-4 pb-3 pt-2 backdrop-blur-sm dark:bg-zinc-950 sm:-mx-6 sm:px-6">
+          <div className="search-dock">
             <SearchBar
               value={query}
               onChange={setQuery}
@@ -115,7 +140,7 @@ export default function HomePage() {
             <div className="mt-4">
               {results.length > 0 ? (
                 <>
-                  <p className="mb-3 text-xs font-medium text-zinc-600 dark:text-zinc-400">
+                  <p className="meta-count mb-3">
                     {t.home.results(results.length)}
                   </p>
                   <div className="grid gap-2 sm:grid-cols-2">
@@ -143,9 +168,9 @@ export default function HomePage() {
                 </>
               ) : (
                 <div className="py-10 text-center">
-                  <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-zinc-100 dark:bg-zinc-800">
+                  <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-amber-100 dark:bg-amber-950/40">
                     <svg
-                      className="h-6 w-6 text-zinc-400"
+                      className="h-6 w-6 text-amber-700 dark:text-amber-400"
                       fill="none"
                       stroke="currentColor"
                       viewBox="0 0 24 24"
@@ -173,10 +198,10 @@ export default function HomePage() {
 
         {/* Secondary navigation: browse spaces */}
         <section
-          className={`mt-10 border-t border-zinc-200 pt-8 dark:border-zinc-800 ${isSearching ? "opacity-80" : ""}`}
+          className={`mt-10 border-t border-amber-200/40 pt-8 dark:border-amber-500/10 ${isSearching ? "opacity-80" : ""}`}
           aria-label={t.home.browseHeading}
         >
-          <h2 className="mb-4 text-sm font-medium text-zinc-500 dark:text-zinc-400">
+          <h2 className="section-label">
             {t.home.browseHeading}
           </h2>
           <div className="grid gap-2 sm:grid-cols-2">
@@ -186,7 +211,7 @@ export default function HomePage() {
                 href={`/space/${space.id}`}
                 className="group block rounded-lg focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 focus-visible:ring-offset-2 focus-visible:ring-offset-zinc-50 dark:focus-visible:ring-offset-zinc-950"
               >
-                <div className="flex h-full items-center gap-3 rounded-lg border border-zinc-200/80 bg-white px-3.5 py-3 transition-colors group-hover:border-zinc-300 group-hover:bg-zinc-50/80 active:bg-zinc-50 dark:border-zinc-800 dark:bg-zinc-900 dark:group-hover:border-zinc-700 dark:group-hover:bg-zinc-800/40 dark:active:bg-zinc-800/60">
+                <div className="card-interactive flex h-full items-center gap-3 px-3.5 py-3">
                   <div
                     className={`flex h-7 w-7 flex-shrink-0 items-center justify-center rounded-md ${TYPE_COLOR[space.type] ?? "bg-zinc-100 text-zinc-500"}`}
                   >
@@ -209,7 +234,7 @@ export default function HomePage() {
                     </p>
                   </div>
                 <svg
-                  className="h-3.5 w-3.5 flex-shrink-0 text-zinc-400 dark:text-zinc-500"
+                  className="h-3.5 w-3.5 flex-shrink-0 text-amber-400/70 transition-colors group-hover:text-amber-600 dark:text-amber-500/50 dark:group-hover:text-amber-400"
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"
@@ -229,6 +254,8 @@ export default function HomePage() {
         </section>
         </main>
       </div>
+
+      {aboutOpen && <AboutSheet onClose={closeAbout} />}
 
       {locateResult && (
         <LocateItemSheet

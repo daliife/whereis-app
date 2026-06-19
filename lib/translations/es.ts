@@ -6,7 +6,7 @@ export const es: typeof ca = {
     subtitle: "Encuéntralo al momento",
     qrLink: "Códigos QR",
     searchPlaceholder: "Buscar cualquier objeto…",
-    searchHint: "Toca un resultado para ver dónde mirar en el mueble",
+    searchHint: "Toca un resultado para ver en qué estante o cajón está",
     locateFoundIn: "está en",
     locateFoundAt: (item: string, place: string) =>
       `«${item}» está en ${place}`,
@@ -18,6 +18,23 @@ export const es: typeof ca = {
     seeAll: (n: number) => `Ver los ${n} resultados`,
     nothingFound: "Sin resultados",
     nothingFoundHint: "Prueba con otra palabra",
+  },
+  about: {
+    open: "Cómo funciona Stashly",
+    title: "¿Cómo funciona?",
+    intro:
+      "Encuéntralo al momento. Consulta dónde guardas cada cosa en casa — armarios, cajones y estantes.",
+    stepLabel: (n: number) => `Paso ${n}`,
+    step1Title: "Busca",
+    step1Desc:
+      "Escribe cualquier objeto y descubre en qué espacio y sección lo tienes guardado.",
+    step2Title: "Localiza",
+    step2Desc:
+      "Toca un resultado para ver el plano del mueble y saber exactamente dónde mirar.",
+    step3Title: "Escanea",
+    step3Desc:
+      "Pega un código QR en cada espacio y ábrelo directamente desde el móvil.",
+    gotIt: "Entendido",
   },
   common: {
     clearSearch: "Borrar búsqueda",

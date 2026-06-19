@@ -2,10 +2,11 @@ import type { SpaceType } from "@/lib/inventory";
 
 export const TYPE_COLOR: Record<SpaceType, string> = {
   cabinet:
-    "bg-amber-100 text-amber-700 dark:bg-amber-950/50 dark:text-amber-400",
-  drawers: "bg-zinc-100 text-zinc-600 dark:bg-zinc-800 dark:text-zinc-300",
+    "bg-amber-100 text-amber-800 ring-1 ring-amber-200/60 dark:bg-amber-950/50 dark:text-amber-400 dark:ring-amber-500/20",
+  drawers:
+    "bg-amber-50 text-amber-900 ring-1 ring-amber-200/50 dark:bg-amber-950/35 dark:text-amber-300 dark:ring-amber-500/15",
   shelf:
-    "bg-orange-50 text-orange-600 dark:bg-orange-950/40 dark:text-orange-400",
+    "bg-orange-100 text-orange-800 ring-1 ring-orange-200/60 dark:bg-orange-950/40 dark:text-orange-400 dark:ring-orange-500/20",
 };
 
 interface Props {

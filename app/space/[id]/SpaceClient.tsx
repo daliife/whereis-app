@@ -59,11 +59,11 @@ export default function SpaceClient({ space }: { space: Space }) {
 
   return (
     <div className="mx-auto max-w-3xl pb-[max(3rem,env(safe-area-inset-bottom))] sm:px-6 lg:max-w-4xl lg:px-8">
-      <div className="sticky top-0 isolate z-20 border-b border-zinc-100 bg-zinc-50 backdrop-blur-sm dark:border-zinc-800 dark:bg-zinc-950 sm:top-4 sm:mx-0 sm:mt-4 sm:rounded-lg sm:border sm:bg-white sm:shadow-sm sm:dark:bg-zinc-900 lg:top-6">
+      <div className="sticky top-0 isolate z-20 border-b border-amber-200/40 bg-zinc-50/85 backdrop-blur-md dark:border-amber-500/10 dark:bg-zinc-950/85 sm:top-4 sm:mx-0 sm:mt-4 sm:rounded-xl sm:border sm:border-amber-200/30 sm:bg-white/90 sm:shadow-sm sm:shadow-amber-500/5 sm:dark:border-amber-500/10 sm:dark:bg-zinc-900/90 lg:top-6">
         <div className="flex items-center gap-2 px-4 pb-2 pt-[max(0.75rem,env(safe-area-inset-top))] sm:px-4 sm:pt-3">
           <Link
             href="/"
-            className="flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-lg text-zinc-600 transition-colors hover:bg-zinc-100 hover:text-zinc-800 focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 dark:text-zinc-400 dark:hover:bg-zinc-800 dark:hover:text-zinc-200"
+            className="btn-toolbar-icon flex-shrink-0"
             aria-label={t.space.back}
           >
             <svg
@@ -89,7 +89,7 @@ export default function SpaceClient({ space }: { space: Space }) {
           <h1 className="min-w-0 flex-1 truncate text-base font-bold text-zinc-900 dark:text-zinc-100 sm:text-lg">
             {space.name}
           </h1>
-          <span className="flex-shrink-0 rounded-full bg-zinc-100 px-2 py-0.5 text-[11px] font-semibold text-zinc-500 dark:bg-zinc-800 dark:text-zinc-400 sm:px-2.5 sm:py-1 sm:text-xs">
+          <span className="badge-soft">
             {t.home.items(itemCount)}
           </span>
         </div>
@@ -107,7 +107,7 @@ export default function SpaceClient({ space }: { space: Space }) {
           <div className="px-4 pb-3 text-center">
             <Link
               href={`/search?q=${encodeURIComponent(query)}`}
-              className="inline-flex rounded-lg px-2 py-1 text-sm font-semibold text-amber-800 transition-colors hover:bg-amber-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 dark:text-amber-400 dark:hover:bg-amber-950/30"
+              className="btn-brand-ghost px-2 py-1 text-sm font-semibold"
             >
               {t.space.searchEverywhereBtn}
             </Link>
@@ -142,9 +142,9 @@ export default function SpaceClient({ space }: { space: Space }) {
             </div>
           ) : (
             <div className="py-10 text-center sm:mt-20">
-              <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-zinc-100 dark:bg-zinc-800">
+              <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-amber-100 dark:bg-amber-950/40">
                 <svg
-                  className="h-6 w-6 text-zinc-400"
+                  className="h-6 w-6 text-amber-700 dark:text-amber-400"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"

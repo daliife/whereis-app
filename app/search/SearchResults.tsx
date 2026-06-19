@@ -37,7 +37,7 @@ export default function SearchResults() {
       <header className="pb-4 pt-[max(1.5rem,env(safe-area-inset-top))] sm:pt-8 lg:pt-12">
         <Link
           href="/"
-          className="inline-flex items-center justify-center rounded-lg p-1.5 text-zinc-600 transition-colors hover:bg-zinc-100 hover:text-zinc-800 focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 dark:text-zinc-400 dark:hover:bg-zinc-800 dark:hover:text-zinc-200"
+          className="btn-toolbar p-1.5"
           aria-label={t.search.back}
         >
           <svg
@@ -62,7 +62,7 @@ export default function SearchResults() {
 
       <main id="main-content">
       {/* Sticky search bar */}
-      <div className="sticky top-0 isolate z-20 -mx-4 bg-zinc-50 px-4 pb-3 pt-2 backdrop-blur-sm dark:bg-zinc-950 sm:-mx-6 sm:px-6">
+      <div className="search-dock">
         <SearchBar
           value={query}
           onChange={setQuery}
@@ -86,7 +86,7 @@ export default function SearchResults() {
           </p>
         ) : results.length > 0 ? (
           <>
-            <p className="mb-3 text-xs font-medium text-zinc-600 dark:text-zinc-400">
+            <p className="meta-count mb-3">
               {t.search.results(results.length)}
             </p>
             <div className="grid gap-2 sm:grid-cols-2">
@@ -107,9 +107,9 @@ export default function SearchResults() {
           </>
         ) : (
           <div className="py-10 text-center sm:mt-20">
-            <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-zinc-100 dark:bg-zinc-800">
+            <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-amber-100 dark:bg-amber-950/40">
               <svg
-                className="h-6 w-6 text-zinc-400"
+                className="h-6 w-6 text-amber-700 dark:text-amber-400"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"

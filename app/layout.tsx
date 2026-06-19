@@ -63,8 +63,8 @@ export const viewport: Viewport = {
   initialScale: 1,
   viewportFit: "cover",
   themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#fafafa" },
-    { media: "(prefers-color-scheme: dark)", color: "#09090b" },
+    { media: "(prefers-color-scheme: light)", color: "#fffbeb" },
+    { media: "(prefers-color-scheme: dark)", color: "#0c0a09" },
   ],
 };
 
@@ -82,9 +82,7 @@ export default function RootLayout({
         {/* eslint-disable-next-line @next/next/no-sync-scripts */}
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
       </head>
-      <body
-        className={`${inter.variable} font-sans min-h-screen bg-zinc-50 dark:bg-zinc-950`}
-      >
+      <body className={`${inter.variable} font-sans min-h-screen`}>
         <ThemeProvider>
           <I18nProvider>
             <SkipLink />
