@@ -121,7 +121,7 @@ export default function SpaceClient({ space }: { space: Space }) {
           <div className="px-4 pb-3 text-center">
             <Link
               href={`/search?q=${encodeURIComponent(query)}`}
-              className="btn-brand-ghost px-2 py-1 text-sm font-semibold"
+              className="text-sm font-semibold text-zinc-600 underline-offset-2 hover:text-zinc-900 hover:underline focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 dark:text-zinc-400 dark:hover:text-zinc-200"
             >
               {t.space.searchEverywhereBtn}
             </Link>
@@ -144,7 +144,7 @@ export default function SpaceClient({ space }: { space: Space }) {
                   key={`${r.space.id}-${r.section.id}-${r.item.name}-${i}`}
                   type="button"
                   onClick={() => locateItem(r.item.name)}
-                  className="group block w-full rounded-lg text-left focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 focus-visible:ring-offset-2 focus-visible:ring-offset-zinc-50 dark:focus-visible:ring-offset-zinc-950"
+                  className="group card-focus-wrap"
                 >
                   <ItemCard
                     itemName={r.item.name}
@@ -156,9 +156,9 @@ export default function SpaceClient({ space }: { space: Space }) {
             </div>
           ) : (
             <div className="py-10 text-center sm:mt-20">
-              <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-amber-100 dark:bg-amber-950/40">
+              <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-zinc-100 dark:bg-zinc-800">
                 <svg
-                  className="h-6 w-6 text-amber-700 dark:text-amber-400"
+                  className="h-6 w-6 text-zinc-500 dark:text-zinc-400"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
@@ -179,7 +179,7 @@ export default function SpaceClient({ space }: { space: Space }) {
                 {t.space.nothingFoundHint}{" "}
                 <Link
                   href={`/search?q=${encodeURIComponent(query)}`}
-                  className="font-medium text-amber-800 dark:text-amber-400"
+                  className="font-medium text-zinc-800 underline-offset-2 hover:underline dark:text-zinc-200"
                 >
                   {t.space.searchEverywhereLink}
                 </Link>

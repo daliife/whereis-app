@@ -77,7 +77,7 @@ export default function LocateItemSheet({ result, onClose }: Props) {
               <span className="mx-1.5 text-zinc-400 dark:text-zinc-500">
                 ›
               </span>
-              <span className="font-semibold text-amber-800 dark:text-amber-400">
+              <span className="font-semibold text-zinc-800 dark:text-zinc-200">
                 {section.name}
               </span>
             </p>

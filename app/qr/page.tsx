@@ -133,7 +133,7 @@ export default function QRPage() {
             aria-label={t.common.close}
           />
           <div
-            className="relative w-full max-w-sm rounded-lg border border-zinc-200 bg-white p-4 shadow-2xl dark:border-zinc-800 dark:bg-zinc-900"
+            className="relative w-full max-w-sm card-panel p-4 shadow-2xl sm:p-5"
             role="dialog"
             aria-modal="true"
             aria-labelledby="qr-dialog-title"
@@ -174,7 +174,7 @@ export default function QRPage() {
               </button>
             </div>
 
-            <div className="flex justify-center rounded-lg bg-white p-4">
+            <div className="flex justify-center rounded-xl border border-zinc-200/70 bg-white p-4 dark:border-zinc-800/80 dark:bg-zinc-950/50">
               <QRCode
                 value={selectedUrl}
                 size={320}

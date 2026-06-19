@@ -4,54 +4,35 @@ import { I18nProvider } from "@/lib/i18n";
 import { ThemeProvider } from "@/lib/theme";
 import ServiceWorkerRegistration from "@/components/ServiceWorkerRegistration";
 import SkipLink from "@/components/SkipLink";
+import {
+  createPageMetadata,
+  defaultTitle,
+  getBasePath,
+  getMetadataBaseUrl,
+  SITE_DESCRIPTION,
+  SITE_NAME,
+} from "@/lib/site-metadata";
 import "./globals.css";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 
-const basePath = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
-const siteUrl =
-  process.env.NEXT_PUBLIC_SITE_URL ??
-  (basePath ? `https://example.com${basePath}` : "http://localhost:3000");
-
-const appTitle = "Stashly · Troba-ho al moment";
-const appDescription =
-  "Troba-ho al moment. Cerca on guardes qualsevol objecte de casa — armaris, calaixos i prestatges.";
+const basePath = getBasePath();
 
 export const metadata: Metadata = {
-  metadataBase: new URL(siteUrl),
+  metadataBase: new URL(getMetadataBaseUrl()),
   title: {
-    default: appTitle,
-    template: "%s · Stashly",
+    default: defaultTitle,
+    template: `%s · ${SITE_NAME}`,
   },
-  description: appDescription,
-  applicationName: "Stashly",
-  authors: [{ name: "Stashly" }],
-  creator: "Stashly",
-  formatDetection: {
-    telephone: false,
-    email: false,
-    address: false,
-  },
+  ...createPageMetadata({ path: "/" }),
   appleWebApp: {
     capable: true,
-    title: "Stashly",
+    title: SITE_NAME,
     statusBarStyle: "black-translucent",
   },
   icons: {
     icon: `${basePath}/icon.svg`,
     apple: `${basePath}/icon.svg`,
-  },
-  openGraph: {
-    type: "website",
-    locale: "ca_ES",
-    siteName: "Stashly",
-    title: appTitle,
-    description: appDescription,
-  },
-  twitter: {
-    card: "summary",
-    title: appTitle,
-    description: appDescription,
   },
   other: {
     "mobile-web-app-capable": "yes",
@@ -68,8 +49,21 @@ export const viewport: Viewport = {
   ],
 };
 
-// Inline script that sets dark class before first paint to avoid flicker
 const themeScript = `(function(){try{var t=localStorage.getItem('stashly-theme');var d=t==='dark'||(t!=='light'&&window.matchMedia('(prefers-color-scheme: dark)').matches);document.documentElement.classList.toggle('dark',d)}catch(e){}})()`;
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  name: SITE_NAME,
+  description: SITE_DESCRIPTION,
+  applicationCategory: "UtilitiesApplication",
+  operatingSystem: "Web",
+  offers: {
+    "@type": "Offer",
+    price: "0",
+    priceCurrency: "EUR",
+  },
+};
 
 export default function RootLayout({
   children,
@@ -81,6 +75,10 @@ export default function RootLayout({
       <head>
         {/* eslint-disable-next-line @next/next/no-sync-scripts */}
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
       </head>
       <body className={`${inter.variable} font-sans min-h-screen`}>
         <ThemeProvider>

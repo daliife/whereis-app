@@ -170,7 +170,7 @@ export default function AboutSheet({ onClose }: Props) {
                     aria-hidden="true"
                   />
                 )}
-                <span className="relative z-10 flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-amber-100 text-amber-800 ring-4 ring-white dark:bg-amber-950/60 dark:text-amber-400 dark:ring-zinc-900">
+                <span className="relative z-10 flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-zinc-100 text-zinc-600 ring-4 ring-white dark:bg-zinc-800 dark:text-zinc-300 dark:ring-zinc-900">
                   <StepIcon type={step.icon} />
                 </span>
                 <div className="min-w-0 pt-1">

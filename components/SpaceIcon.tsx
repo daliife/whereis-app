@@ -2,11 +2,11 @@ import type { SpaceType } from "@/lib/inventory";
 
 export const TYPE_COLOR: Record<SpaceType, string> = {
   cabinet:
-    "bg-amber-100 text-amber-800 ring-1 ring-amber-200/60 dark:bg-amber-950/50 dark:text-amber-400 dark:ring-amber-500/20",
+    "bg-zinc-100 text-zinc-700 ring-1 ring-zinc-200/80 dark:bg-zinc-800 dark:text-zinc-300 dark:ring-zinc-700/80",
   drawers:
-    "bg-amber-50 text-amber-900 ring-1 ring-amber-200/50 dark:bg-amber-950/35 dark:text-amber-300 dark:ring-amber-500/15",
+    "bg-stone-100 text-stone-700 ring-1 ring-stone-200/80 dark:bg-stone-900/50 dark:text-stone-300 dark:ring-stone-700/50",
   shelf:
-    "bg-orange-100 text-orange-800 ring-1 ring-orange-200/60 dark:bg-orange-950/40 dark:text-orange-400 dark:ring-orange-500/20",
+    "bg-neutral-100 text-neutral-700 ring-1 ring-neutral-200/80 dark:bg-neutral-800 dark:text-neutral-300 dark:ring-neutral-700/80",
 };
 
 interface Props {
@@ -60,7 +60,6 @@ export default function SpaceIcon({ type, className = "h-5 w-5" }: Props) {
     );
   }
 
-  // cabinet (default)
   return (
     <svg
       className={className}

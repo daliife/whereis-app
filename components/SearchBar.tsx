@@ -8,6 +8,8 @@ interface SearchBarProps {
   placeholder?: string;
   clearLabel?: string;
   autoFocus?: boolean;
+  /** Larger field for the home page primary search */
+  prominent?: boolean;
 }
 
 export default function SearchBar({
@@ -16,6 +18,7 @@ export default function SearchBar({
   placeholder = "",
   clearLabel = "Clear search",
   autoFocus = false,
+  prominent = false,
 }: SearchBarProps) {
   const inputRef = useRef<HTMLInputElement>(null);
   const inputId = useId();
@@ -24,16 +27,17 @@ export default function SearchBar({
     if (autoFocus) inputRef.current?.focus();
   }, [autoFocus]);
 
-  const iconClass = value.trim()
-    ? "text-amber-600 dark:text-amber-400"
-    : "text-zinc-400 group-focus-within/search:text-amber-600 dark:text-zinc-500 dark:group-focus-within/search:text-amber-400";
+  const iconClass =
+    "text-zinc-400 transition-colors group-focus-within/search:text-amber-600 dark:text-zinc-500 dark:group-focus-within/search:text-amber-400";
 
   return (
     <div className="group/search relative w-full" role="search">
       <label htmlFor={inputId} className="sr-only">
         {placeholder}
       </label>
-      <div className="pointer-events-none absolute inset-y-0 left-3.5 flex items-center">
+      <div
+        className={`pointer-events-none absolute inset-y-0 flex items-center left-3.5`}
+      >
         <svg
           className={`h-[18px] w-[18px] transition-colors ${iconClass}`}
           fill="none"
@@ -62,8 +66,8 @@ export default function SearchBar({
         value={value}
         onChange={(e) => onChange(e.target.value)}
         placeholder={placeholder}
-        className="search-field"
-        style={{ minHeight: 44 }}
+        className={prominent ? "search-field-primary" : "search-field"}
+        style={{ minHeight: prominent ? 52 : 44 }}
       />
       {value && (
         <button

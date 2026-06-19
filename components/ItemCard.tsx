@@ -14,14 +14,12 @@ export default function ItemCard({
   return (
     <div
       className={[
-        "px-3.5 py-3 transition-all",
+        "px-4 py-3.5 transition-all",
         highlighted ? "card-highlighted" : "card-interactive",
       ].join(" ")}
     >
-      <p className="text-sm font-medium leading-snug text-zinc-900 dark:text-zinc-100">
-        {itemName}
-      </p>
-      <p className="mt-1 text-xs text-zinc-500 dark:text-zinc-400">
+      <p className="card-title">{itemName}</p>
+      <p className="card-meta">
         {spaceName}
         <span className="mx-1 text-zinc-300 dark:text-zinc-600" aria-hidden="true">
           ›

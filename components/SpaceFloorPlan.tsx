@@ -167,13 +167,13 @@ export default function SpaceFloorPlan({
           >
             <div
               className={[
-                "rounded-b bg-amber-300/70 dark:bg-amber-700/40",
+                "rounded-b bg-zinc-300/80 dark:bg-zinc-600/50",
                 compact ? "h-2" : "h-3",
               ].join(" ")}
             />
             <div
               className={[
-                "rounded-b bg-amber-300/70 dark:bg-amber-700/40",
+                "rounded-b bg-zinc-300/80 dark:bg-zinc-600/50",
                 compact ? "h-2" : "h-3",
               ].join(" ")}
             />
@@ -226,15 +226,13 @@ function SectionItemsList({
               <div
                 ref={ref}
                 className={[
-                  "flex items-center gap-3 px-3 py-2.5",
-                  isHighlighted
-                    ? "card-highlighted pl-[calc(0.75rem-2px)]"
-                    : "card-base",
+                  "flex items-center gap-3 px-3.5 py-3",
+                  isHighlighted ? "card-highlighted" : "card-base",
                 ].join(" ")}
               >
                 <span
                   className={[
-                    "flex h-7 w-7 flex-shrink-0 items-center justify-center rounded-md",
+                    "flex h-7 w-7 flex-shrink-0 items-center justify-center rounded-lg",
                     isHighlighted
                       ? "bg-amber-100 text-amber-700 dark:bg-amber-900/50 dark:text-amber-400"
                       : "bg-zinc-100 text-zinc-600 dark:bg-zinc-800 dark:text-zinc-400",
@@ -313,17 +311,13 @@ function PlanSectionButton({
           : "",
         isDrawer || isFloor ? "min-h-[64px]" : "min-h-[58px]",
         isDrawer
-          ? "rounded-md border px-3 py-3 shadow-sm"
-          : isFloor
-            ? "rounded-md border px-3 py-2.5"
-            : shape === "top"
-              ? "rounded-md border px-3 py-2.5"
-              : "rounded-sm border px-3 py-3",
+          ? "rounded-xl border px-3 py-3 shadow-sm shadow-zinc-950/[0.03]"
+          : "rounded-xl border px-3 py-2.5 shadow-sm shadow-zinc-950/[0.03]",
         active
-          ? "border-amber-300 bg-amber-50 text-amber-900 shadow-sm ring-1 ring-amber-300 dark:border-amber-700 dark:bg-amber-950/30 dark:text-amber-200 dark:ring-amber-700"
+          ? "border-amber-200/60 bg-amber-50/45 text-amber-900 shadow-amber-950/[0.04] dark:border-amber-900/45 dark:bg-amber-950/25 dark:text-amber-200"
           : isStatic
-            ? "border-zinc-200 bg-zinc-100 text-zinc-600 dark:border-zinc-700 dark:bg-zinc-800/80 dark:text-zinc-300"
-            : "border-zinc-200/80 bg-white text-zinc-800 hover:border-zinc-300 hover:bg-zinc-50 dark:border-zinc-800 dark:bg-zinc-900/80 dark:text-zinc-200 dark:hover:border-zinc-700 dark:hover:bg-zinc-800/80",
+            ? "border-zinc-200/70 bg-zinc-100 text-zinc-600 dark:border-zinc-800/80 dark:bg-zinc-800/80 dark:text-zinc-300"
+            : "border-zinc-200/70 bg-white text-zinc-800 hover:border-zinc-300 hover:bg-zinc-50 dark:border-zinc-800/80 dark:bg-zinc-900/80 dark:text-zinc-200 dark:hover:border-zinc-700 dark:hover:bg-zinc-800/80",
       ].join(" ")}
       aria-pressed={onClick ? active : undefined}
     >
@@ -354,7 +348,7 @@ function PlanSectionButton({
               ? "bg-amber-300 dark:bg-amber-700"
               : isStatic
                 ? "bg-zinc-200 dark:bg-zinc-700"
-                : "bg-zinc-200 group-hover:bg-amber-200 dark:bg-zinc-700 dark:group-hover:bg-amber-900",
+                : "bg-zinc-200 group-hover:bg-zinc-300 dark:bg-zinc-700 dark:group-hover:bg-zinc-600",
           ].join(" ")}
           aria-hidden="true"
         />

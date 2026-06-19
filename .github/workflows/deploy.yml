@@ -37,9 +37,8 @@ jobs:
       - name: Build
         run: pnpm build
         env:
-          # Set to your repo name when deploying to username.github.io/repo-name.
-          # Leave empty if you're using a custom domain or username.github.io root.
           NEXT_PUBLIC_BASE_PATH: "/whereis-app"
+          NEXT_PUBLIC_SITE_URL: https://${{ github.repository_owner }}.github.io/whereis-app
 
       - name: Add .nojekyll
         # Prevents GitHub Pages from ignoring _next/ static assets

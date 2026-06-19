@@ -56,13 +56,15 @@ export default function HomePage() {
     <>
       <div className="mx-auto max-w-3xl px-4 pb-[max(3rem,env(safe-area-inset-bottom))] sm:px-6 lg:px-8">
         {/* Header */}
-        <header className="relative overflow-visible pb-4 pt-[max(1rem,env(safe-area-inset-top))] sm:pb-5 sm:pt-8">
+        <header className="relative overflow-visible pb-2 pt-[max(1rem,env(safe-area-inset-top))] sm:pb-3 sm:pt-8">
           <div className="flex items-center justify-between gap-3">
             <div className="flex min-w-0 items-center gap-2">
               <AppIcon size={36} />
-              <h1 className="truncate text-xl font-bold tracking-tight text-zinc-900 dark:text-zinc-100 sm:text-2xl lg:text-3xl">
-                {t.home.appName}
-              </h1>
+              <div className="min-w-0">
+                <h1 className="truncate text-xl font-bold tracking-tight text-zinc-900 dark:text-zinc-100 sm:text-2xl">
+                  {t.home.appName}
+                </h1>
+              </div>
               <button
                 type="button"
                 onClick={() => setAboutOpen(true)}
@@ -112,141 +114,163 @@ export default function HomePage() {
           </div>
         </header>
 
-        <main id="main-content">
-        {/* Primary flow: search */}
-        <section aria-label={t.home.searchPlaceholder}>
-          <SearchBar
-            value={query}
-            onChange={setQuery}
-            placeholder={t.home.searchPlaceholder}
-            clearLabel={t.common.clearSearch}
-          />
-          <SearchStatus
-            query={debouncedQuery}
-            resultCount={results.length}
-            resultsLabel={t.home.results}
-            nothingFoundLabel={t.home.nothingFound}
-          />
-          {!isSearching && (
-            <p className="mt-2 text-sm text-zinc-500 dark:text-zinc-400">
-              {t.home.searchHint}
-            </p>
-          )}
-
-          {isSearching && (
-            <div className="mt-4">
-              {results.length > 0 ? (
-                <>
-                  <p className="meta-count mb-3">
-                    {t.home.results(results.length)}
-                  </p>
-                  <div className="grid gap-2 sm:grid-cols-2">
-                    {results.map((r, i) => {
-                      const isActive =
-                        locateResult !== null && sameResult(locateResult, r);
-
-                      return (
-                        <button
-                          key={`${r.space.id}-${r.section.id}-${r.item.name}-${i}`}
-                          type="button"
-                          onClick={() => setLocateResult(r)}
-                          className="group block w-full rounded-lg text-left focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 focus-visible:ring-offset-2 focus-visible:ring-offset-zinc-50 dark:focus-visible:ring-offset-zinc-950"
-                        >
-                          <ItemCard
-                            itemName={r.item.name}
-                            spaceName={r.space.name}
-                            sectionName={r.section.name}
-                            highlighted={isActive}
-                          />
-                        </button>
-                      );
-                    })}
-                  </div>
-                </>
-              ) : (
-                <div className="py-10 text-center">
-                  <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-amber-100 dark:bg-amber-950/40">
-                    <svg
-                      className="h-6 w-6 text-amber-700 dark:text-amber-400"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                      aria-hidden="true"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={1.5}
-                        d="M21 21l-4.35-4.35M17 11A6 6 0 1 1 5 11a6 6 0 0 1 12 0z"
-                      />
-                    </svg>
-                  </div>
-                  <p className="mt-4 text-base font-semibold text-zinc-700 dark:text-zinc-300">
-                    {t.home.nothingFound}
-                  </p>
-                  <p className="mt-1 text-sm text-zinc-600 dark:text-zinc-400">
-                    {t.home.nothingFoundHint}
-                  </p>
-                </div>
+        <main id="main-content" className="mt-4 sm:mt-6">
+          <section
+            className="home-primary"
+            aria-labelledby="home-search-heading"
+          >
+            <header className="home-primary-header">
+              <h2 id="home-search-heading" className="home-primary-title">
+                {t.home.searchHeading}
+              </h2>
+              {!isSearching && (
+                <p className="home-primary-hint">{t.home.searchHint}</p>
               )}
-            </div>
-          )}
-        </section>
+            </header>
 
-        {/* Secondary navigation: browse spaces */}
-        <section
-          className={`mt-10 ${isSearching ? "opacity-60" : ""}`}
-          aria-label={t.home.browseHeading}
-        >
-          <h2 className="section-label mb-4">{t.home.browseHeading}</h2>
-          <div className="grid gap-2 sm:grid-cols-2">
-            {spaces.map((space) => (
-              <Link
-                key={space.id}
-                href={`/space/${space.id}`}
-                className="group block rounded-lg focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 focus-visible:ring-offset-2 focus-visible:ring-offset-zinc-50 dark:focus-visible:ring-offset-zinc-950"
+            <div className="home-primary-field">
+              <SearchBar
+                value={query}
+                onChange={setQuery}
+                placeholder={t.home.searchPlaceholder}
+                clearLabel={t.common.clearSearch}
+                prominent
+              />
+            </div>
+            <SearchStatus
+              query={debouncedQuery}
+              resultCount={results.length}
+              resultsLabel={t.home.results}
+              nothingFoundLabel={t.home.nothingFound}
+            />
+
+            {isSearching && (
+              <div className="search-results-divider">
+                {results.length > 0 ? (
+                  <>
+                    <p className="meta-count mb-3">
+                      {t.home.results(results.length)}
+                    </p>
+                    <div className="grid gap-2 sm:grid-cols-2">
+                      {results.map((r, i) => {
+                        const isActive =
+                          locateResult !== null && sameResult(locateResult, r);
+
+                        return (
+                          <button
+                            key={`${r.space.id}-${r.section.id}-${r.item.name}-${i}`}
+                            type="button"
+                            onClick={() => setLocateResult(r)}
+                            className="group card-focus-wrap"
+                          >
+                            <ItemCard
+                              itemName={r.item.name}
+                              spaceName={r.space.name}
+                              sectionName={r.section.name}
+                              highlighted={isActive}
+                            />
+                          </button>
+                        );
+                      })}
+                    </div>
+                  </>
+                ) : (
+                  <div className="py-8 text-center">
+                    <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-zinc-100 dark:bg-zinc-800">
+                      <svg
+                        className="h-5 w-5 text-zinc-500 dark:text-zinc-400"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                        aria-hidden="true"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={1.5}
+                          d="M21 21l-4.35-4.35M17 11A6 6 0 1 1 5 11a6 6 0 0 1 12 0z"
+                        />
+                      </svg>
+                    </div>
+                    <p className="mt-3 text-sm font-semibold text-zinc-700 dark:text-zinc-300">
+                      {t.home.nothingFound}
+                    </p>
+                    <p className="mt-1 text-xs text-zinc-500 dark:text-zinc-400">
+                      {t.home.nothingFoundHint}
+                    </p>
+                  </div>
+                )}
+              </div>
+            )}
+          </section>
+
+          {!isSearching && (
+            <>
+              <div className="flow-or" role="separator" aria-label={t.home.flowOr}>
+                <span className="flow-or-line" aria-hidden="true" />
+                <span className="flow-or-label">{t.home.flowOr}</span>
+                <span className="flow-or-line" aria-hidden="true" />
+              </div>
+
+              <section
+                className="home-browse"
+                aria-labelledby="home-browse-heading"
               >
-                <div className="card-interactive flex h-full items-center gap-3 px-3.5 py-3">
-                  <div
-                    className={`flex h-7 w-7 flex-shrink-0 items-center justify-center rounded-md ${TYPE_COLOR[space.type] ?? "bg-zinc-100 text-zinc-500"}`}
-                  >
-                    <SpaceIcon
-                      type={space.type}
-                      className="h-3.5 w-3.5"
-                    />
-                  </div>
-                  <div className="min-w-0 flex-1">
-                    <p className="text-sm font-medium text-zinc-900 dark:text-zinc-100">
-                      {space.name}
-                    </p>
-                    <p className="mt-0.5 text-xs text-zinc-600 dark:text-zinc-400">
-                      {t.home.items(
-                        space.sections.reduce(
-                          (acc, s) => acc + s.items.length,
-                          0,
-                        ),
-                      )}
-                    </p>
-                  </div>
-                <svg
-                  className="h-3.5 w-3.5 flex-shrink-0 text-amber-400/70 transition-colors group-hover:text-amber-600 dark:text-amber-500/50 dark:group-hover:text-amber-400"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                    aria-hidden="true"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M9 5l7 7-7 7"
-                    />
-                  </svg>
+                <header className="home-browse-header">
+                  <h2 id="home-browse-heading" className="home-browse-title">
+                    {t.home.browseHeading}
+                  </h2>
+                  <p className="home-browse-hint">{t.home.browseSubheading}</p>
+                </header>
+
+                <div className="home-browse-grid">
+                  {spaces.map((space) => {
+                    const itemCount = space.sections.reduce(
+                      (acc, s) => acc + s.items.length,
+                      0,
+                    );
+
+                    return (
+                      <Link
+                        key={space.id}
+                        href={`/space/${space.id}`}
+                        className="group card-focus-wrap"
+                      >
+                        <div className="card-space">
+                          <div
+                            className={`card-space-icon ${TYPE_COLOR[space.type] ?? "bg-zinc-100 text-zinc-500"}`}
+                          >
+                            <SpaceIcon type={space.type} className="h-5 w-5" />
+                          </div>
+                          <div className="min-w-0 flex-1">
+                            <p className="card-kicker">
+                              {t.space.types[space.type]}
+                            </p>
+                            <p className="card-title mt-0.5">{space.name}</p>
+                            <p className="card-meta">{t.home.items(itemCount)}</p>
+                          </div>
+                          <svg
+                            className="h-4 w-4 flex-shrink-0 text-zinc-300 transition-colors group-hover:text-zinc-500 dark:text-zinc-600 dark:group-hover:text-zinc-400"
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24"
+                            aria-hidden="true"
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              strokeWidth={2}
+                              d="M9 5l7 7-7 7"
+                            />
+                          </svg>
+                        </div>
+                      </Link>
+                    );
+                  })}
                 </div>
-              </Link>
-            ))}
-          </div>
-        </section>
+              </section>
+            </>
+          )}
         </main>
       </div>
 

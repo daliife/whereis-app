@@ -1,10 +1,40 @@
+import type { Metadata } from "next";
 import { Suspense } from "react";
 import { getAllSpaces, getSpace } from "@/lib/inventory";
+import { createPageMetadata } from "@/lib/site-metadata";
 import { ca } from "@/lib/translations/ca";
 import SpaceClient from "./SpaceClient";
 
 export function generateStaticParams() {
   return getAllSpaces().map((s) => ({ id: s.id }));
+}
+
+export function generateMetadata({
+  params,
+}: {
+  params: { id: string };
+}): Metadata {
+  const space = getSpace(params.id);
+
+  if (!space) {
+    return createPageMetadata({
+      title: ca.space.notFound,
+      description: ca.space.notFound,
+      path: `/space/${params.id}/`,
+      noIndex: true,
+    });
+  }
+
+  const itemCount = space.sections.reduce(
+    (acc, section) => acc + section.items.length,
+    0,
+  );
+
+  return createPageMetadata({
+    title: space.name,
+    description: `${space.name} — ${itemCount} objectes. Cerca i localitza on està cada cosa.`,
+    path: `/space/${space.id}/`,
+  });
 }
 
 export default function SpacePage({ params }: { params: { id: string } }) {
