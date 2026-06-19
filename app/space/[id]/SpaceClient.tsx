@@ -207,7 +207,7 @@ export default function SpaceClient({ space }: { space: Space }) {
           </div>
         ) : (
           // List view
-          <div className="grid gap-x-6 gap-y-8 lg:grid-cols-2">
+          <div className="grid gap-y-8 lg:max-w-2xl">
             {space.sections.map((section) => (
               <div key={section.id}>
                 <h2 className="mb-2 text-xs font-semibold uppercase tracking-widest text-zinc-400">
