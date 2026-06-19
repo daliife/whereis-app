@@ -247,7 +247,7 @@ export default function SettingsMenu() {
         ref={buttonRef}
         type="button"
         onClick={() => setOpen((current) => !current)}
-        className="btn-toolbar h-9 w-9 gap-1.5 text-xs font-semibold sm:w-auto sm:px-2.5"
+        className="btn-header-action h-9 w-9 gap-1.5 text-xs font-semibold sm:w-auto sm:px-2.5"
         aria-label={t.settings.open}
         aria-expanded={open}
         aria-controls="settings-panel"

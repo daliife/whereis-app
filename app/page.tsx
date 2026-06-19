@@ -66,7 +66,7 @@ export default function HomePage() {
               <button
                 type="button"
                 onClick={() => setAboutOpen(true)}
-                className="btn-brand-ghost h-8 w-8 shrink-0"
+                className="btn-header-action h-9 w-9"
                 aria-label={t.about.open}
               >
                 <svg
@@ -89,7 +89,7 @@ export default function HomePage() {
               <SettingsMenu />
               <Link
                 href="/qr"
-                className="btn-toolbar h-9 w-9 gap-1.5 text-xs font-semibold sm:w-auto sm:px-2.5"
+                className="btn-header-action h-9 w-9 gap-1.5 text-xs font-semibold sm:w-auto sm:px-2.5"
                 aria-label={t.home.qrLink}
               >
                 <svg
@@ -198,10 +198,7 @@ export default function HomePage() {
           className={`mt-10 ${isSearching ? "opacity-60" : ""}`}
           aria-label={t.home.browseHeading}
         >
-          <h2 className="section-label">{t.home.browseHeading}</h2>
-          <p className="mb-4 mt-1 text-sm text-zinc-600 dark:text-zinc-400">
-            {t.home.browseHint}
-          </p>
+          <h2 className="section-label mb-4">{t.home.browseHeading}</h2>
           <div className="grid gap-2 sm:grid-cols-2">
             {spaces.map((space) => (
               <Link
