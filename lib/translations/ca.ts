@@ -1,9 +1,14 @@
 export const ca = {
   home: {
-    subtitle: "Troba on estan les coses guardades",
+    appName: "Stashly",
+    subtitle: "Troba-ho al moment",
     qrLink: "Codis QR",
     searchPlaceholder: "Cerca qualsevol objecte…",
-    spacesHeading: "Espais d'emmagatzematge",
+    searchHint: "Toca un resultat per veure on mirar al moble",
+    locateFoundIn: "es troba a",
+    locateFoundAt: (item: string, place: string) =>
+      `«${item}» es troba a ${place}`,
+    browseHeading: "Els teus espais",
     statsSpaces: "Espais",
     statsItems: "Elements",
     items: (n: number) => (n === 1 ? "1 element" : `${n} elements`),
@@ -14,7 +19,9 @@ export const ca = {
   },
   common: {
     clearSearch: "Neteja la cerca",
+    close: "Tanca",
     loading: "Carregant...",
+    skipToContent: "Salta al contingut principal",
     switchToLocale: (label: string) => `Canvia a ${label}`,
     switchToLight: "Canvia a mode clar",
     switchToDark: "Canvia a mode fosc",
@@ -37,6 +44,11 @@ export const ca = {
     searchEverywhereLink: "cerca a tot arreu",
     listView: "Llista",
     planView: "Plànol",
+    showPlan: "Mostra el plànol",
+    hidePlan: "Amaga el plànol",
+    locateBanner: (item: string) => `Busques «${item}»?`,
+    showOnPlan: "On és al plànol",
+    goToSpaceList: (name: string) => `Ves a ${name}…`,
     types: {
       cabinet: "Armari",
       drawers: "Calaixos",

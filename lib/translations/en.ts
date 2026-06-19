@@ -2,10 +2,15 @@ import type { ca } from "./ca";
 
 export const en: typeof ca = {
   home: {
-    subtitle: "Find where things are stored",
+    appName: "Stashly",
+    subtitle: "Find it in a snap",
     qrLink: "QR codes",
     searchPlaceholder: "Search any item…",
-    spacesHeading: "Storage spaces",
+    searchHint: "Tap a result to see where to look on the unit",
+    locateFoundIn: "is in",
+    locateFoundAt: (item: string, place: string) =>
+      `«${item}» is in ${place}`,
+    browseHeading: "Your spaces",
     statsSpaces: "Spaces",
     statsItems: "Items",
     items: (n: number) => (n === 1 ? "1 item" : `${n} items`),
@@ -16,7 +21,9 @@ export const en: typeof ca = {
   },
   common: {
     clearSearch: "Clear search",
+    close: "Close",
     loading: "Loading...",
+    skipToContent: "Skip to main content",
     switchToLocale: (label: string) => `Switch to ${label}`,
     switchToLight: "Switch to light mode",
     switchToDark: "Switch to dark mode",
@@ -39,6 +46,11 @@ export const en: typeof ca = {
     searchEverywhereLink: "search everywhere",
     listView: "List",
     planView: "Plan",
+    showPlan: "Show floor plan",
+    hidePlan: "Hide floor plan",
+    locateBanner: (item: string) => `Looking for «${item}»?`,
+    showOnPlan: "Show on floor plan",
+    goToSpaceList: (name: string) => `Go to ${name}…`,
     types: {
       cabinet: "Cabinet",
       drawers: "Drawers",

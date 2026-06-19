@@ -2,8 +2,10 @@
 
 import {
   createContext,
+  useCallback,
   useContext,
   useEffect,
+  useMemo,
   useState,
   type ReactNode,
 } from "react";
@@ -49,14 +51,19 @@ export function I18nProvider({ children }: { children: ReactNode }) {
     }
   }, []);
 
-  function setLocale(l: Locale) {
+  const setLocale = useCallback((l: Locale) => {
     setLocaleState(l);
     localStorage.setItem(STORAGE_KEY, l);
     document.documentElement.lang = l;
-  }
+  }, []);
+
+  const value = useMemo(
+    () => ({ locale, setLocale, t: dict[locale] }),
+    [locale, setLocale],
+  );
 
   return (
-    <I18nContext.Provider value={{ locale, setLocale, t: dict[locale] }}>
+    <I18nContext.Provider value={value}>
       {children}
     </I18nContext.Provider>
   );

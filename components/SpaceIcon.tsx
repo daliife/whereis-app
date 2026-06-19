@@ -1,4 +1,4 @@
-import type { SpaceType } from "@/lib/search";
+import type { SpaceType } from "@/lib/inventory";
 
 export const TYPE_COLOR: Record<SpaceType, string> = {
   cabinet:

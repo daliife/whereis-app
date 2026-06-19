@@ -4,8 +4,10 @@ import { useState, useEffect } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
 import Link from "next/link";
 import SearchBar from "@/components/SearchBar";
+import SearchStatus from "@/components/SearchStatus";
 import ItemCard from "@/components/ItemCard";
-import { searchAll } from "@/lib/search";
+import { searchAll } from "@/lib/fuse-search";
+import { useDebouncedValue } from "@/lib/useDebouncedValue";
 import { useI18n } from "@/lib/i18n";
 
 export default function SearchResults() {
@@ -13,10 +15,10 @@ export default function SearchResults() {
   const router = useRouter();
   const initialQuery = searchParams.get("q") ?? "";
   const [query, setQuery] = useState(initialQuery);
+  const debouncedQuery = useDebouncedValue(query, 200);
 
-  // Keep URL in sync as the user types
   useEffect(() => {
-    const trimmed = query.trim();
+    const trimmed = debouncedQuery.trim();
     if (trimmed) {
       router.replace(`/search?q=${encodeURIComponent(trimmed)}`, {
         scroll: false,
@@ -24,18 +26,18 @@ export default function SearchResults() {
     } else {
       router.replace("/search", { scroll: false });
     }
-  }, [query, router]);
+  }, [debouncedQuery, router]);
 
-  const results = query.trim() ? searchAll(query) : [];
+  const results = debouncedQuery.trim() ? searchAll(debouncedQuery) : [];
   const { t } = useI18n();
 
   return (
-    <div className="mx-auto max-w-5xl px-4 pb-12 sm:px-6 lg:px-8">
+    <div className="mx-auto max-w-3xl px-4 pb-[max(3rem,env(safe-area-inset-bottom))] sm:px-6 lg:px-8">
       {/* Header */}
-      <header className="pt-8 pb-4 lg:pt-12">
+      <header className="pb-4 pt-[max(1.5rem,env(safe-area-inset-top))] sm:pt-8 lg:pt-12">
         <Link
           href="/"
-          className="inline-flex items-center justify-center rounded-lg p-1.5 text-zinc-400 transition-colors hover:bg-zinc-100 hover:text-zinc-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 dark:text-zinc-600 dark:hover:bg-zinc-800 dark:hover:text-zinc-300"
+          className="inline-flex items-center justify-center rounded-lg p-1.5 text-zinc-600 transition-colors hover:bg-zinc-100 hover:text-zinc-800 focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 dark:text-zinc-400 dark:hover:bg-zinc-800 dark:hover:text-zinc-200"
           aria-label={t.search.back}
         >
           <svg
@@ -58,8 +60,9 @@ export default function SearchResults() {
         </h1>
       </header>
 
+      <main id="main-content">
       {/* Sticky search bar */}
-      <div className="sticky top-0 z-10 -mx-4 bg-zinc-50/90 px-4 pb-3 pt-2 backdrop-blur-sm dark:bg-zinc-950/90 sm:-mx-6 sm:px-6 lg:mx-0 lg:rounded-lg lg:border lg:border-zinc-100 lg:bg-white lg:p-4 lg:shadow-sm lg:backdrop-blur-none lg:dark:border-zinc-800 lg:dark:bg-zinc-900">
+      <div className="sticky top-0 isolate z-20 -mx-4 bg-zinc-50 px-4 pb-3 pt-2 backdrop-blur-sm dark:bg-zinc-950 sm:-mx-6 sm:px-6">
         <SearchBar
           value={query}
           onChange={setQuery}
@@ -67,20 +70,26 @@ export default function SearchResults() {
           clearLabel={t.common.clearSearch}
           autoFocus
         />
+        <SearchStatus
+          query={debouncedQuery}
+          resultCount={results.length}
+          resultsLabel={t.search.results}
+          nothingFoundLabel={t.search.nothingFound}
+        />
       </div>
 
       {/* Results */}
       <div className="mt-4 lg:mt-6">
         {!query.trim() ? (
-          <p className="mt-10 text-center text-slate-400">
+          <p className="mt-10 text-center text-zinc-600 dark:text-zinc-400">
             {t.search.typeToSearch}
           </p>
         ) : results.length > 0 ? (
           <>
-            <p className="mb-3 text-xs font-medium text-zinc-400">
+            <p className="mb-3 text-xs font-medium text-zinc-600 dark:text-zinc-400">
               {t.search.results(results.length)}
             </p>
-            <div className="grid gap-2 md:grid-cols-2">
+            <div className="grid gap-2 sm:grid-cols-2">
               {results.map((r, i) => (
                 <Link
                   key={`${r.space.id}-${r.section.id}-${r.item.name}-${i}`}
@@ -97,10 +106,10 @@ export default function SearchResults() {
             </div>
           </>
         ) : (
-          <div className="mt-20 text-center">
-            <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-slate-100 dark:bg-slate-800">
+          <div className="py-10 text-center sm:mt-20">
+            <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-zinc-100 dark:bg-zinc-800">
               <svg
-                className="h-6 w-6 text-slate-400"
+                className="h-6 w-6 text-zinc-400"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
@@ -117,12 +126,13 @@ export default function SearchResults() {
             <p className="mt-4 text-base font-semibold text-zinc-700 dark:text-zinc-300">
               {t.search.nothingFound}
             </p>
-            <p className="mt-1 text-sm text-slate-400">
+            <p className="mt-1 text-sm text-zinc-600 dark:text-zinc-400">
               {t.search.nothingFoundHint}
             </p>
           </div>
         )}
       </div>
+      </main>
     </div>
   );
 }
