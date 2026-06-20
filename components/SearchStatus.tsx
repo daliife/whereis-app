@@ -17,7 +17,12 @@ export default function SearchStatus({
     resultCount > 0 ? resultsLabel(resultCount) : nothingFoundLabel;
 
   return (
-    <p role="status" aria-live="polite" aria-atomic="true" className="sr-only">
+    <p
+      role="status"
+      aria-live="polite"
+      aria-atomic="true"
+      className="meta-count mt-3"
+    >
       {message}
     </p>
   );

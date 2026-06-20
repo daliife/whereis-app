@@ -19,6 +19,7 @@ export const ca = {
     nothingFoundHint: "Prova amb una paraula diferent",
     orBrowseSpaces: "Navega pels espais",
     locate: "Localitza",
+    moreLinks: "Més opcions",
   },
   about: {
     open: "Com funciona Stashly",
@@ -70,6 +71,7 @@ export const ca = {
     hidePlan: "Amaga el plànol",
     locateBanner: (item: string) => `Busques «${item}»?`,
     showOnPlan: "On és al plànol",
+    goToSpace: "Anar-hi",
     goToSpaceList: (name: string) => `Ves a ${name}…`,
     types: {
       cabinet: "Armari",

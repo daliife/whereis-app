@@ -19,6 +19,15 @@ interface SettingsMenuProps {
   onOpenAbout?: () => void;
 }
 
+function segmentButtonClass(active: boolean) {
+  return [
+    "settings-segment-btn",
+    active
+      ? "bg-white text-zinc-900 shadow-sm dark:bg-zinc-700 dark:text-zinc-100"
+      : "text-zinc-700 hover:text-zinc-900 dark:text-zinc-300 dark:hover:text-zinc-100",
+  ].join(" ");
+}
+
 export default function SettingsMenu({ onOpenAbout }: SettingsMenuProps) {
   const [open, setOpen] = useState(false);
   const [mounted, setMounted] = useState(false);
@@ -133,7 +142,7 @@ export default function SettingsMenu({ onOpenAbout }: SettingsMenuProps) {
               role="dialog"
               aria-modal={isMobileViewport ? "true" : "false"}
               aria-labelledby="settings-title"
-              className="pointer-events-auto fixed z-50 w-[calc(100%-2rem)] max-w-sm rounded-2xl border border-zinc-200 bg-white p-4 text-sm shadow-2xl dark:border-zinc-800 dark:bg-zinc-900 dark:shadow-black/40 inset-x-4 bottom-[max(1rem,env(safe-area-inset-bottom))] sm:inset-x-auto sm:bottom-auto sm:w-64 sm:max-w-none sm:rounded-lg sm:p-3 sm:shadow-lg sm:shadow-zinc-200/70 sm:dark:shadow-black/30"
+              className="pointer-events-auto fixed z-50 w-[calc(100%-2rem)] max-w-sm rounded-2xl border border-zinc-200 bg-white p-4 shadow-2xl dark:border-zinc-800 dark:bg-zinc-900 dark:shadow-black/40 inset-x-4 bottom-[max(1rem,env(safe-area-inset-bottom))] sm:inset-x-auto sm:bottom-auto sm:w-64 sm:max-w-none sm:rounded-lg sm:p-3 sm:shadow-lg sm:shadow-zinc-200/70 sm:dark:shadow-black/30"
               style={
                 desktopPos
                   ? {
@@ -144,33 +153,26 @@ export default function SettingsMenu({ onOpenAbout }: SettingsMenuProps) {
                   : undefined
               }
             >
-              <div className="mb-3">
-                <p
-                  id="settings-title"
-                  className="text-base font-semibold text-zinc-900 dark:text-zinc-100 sm:text-sm"
-                >
+              <div className="mb-3 sm:mb-2">
+                <p id="settings-title" className="settings-panel-title">
                   {t.settings.title}
                 </p>
               </div>
 
-              <div className="space-y-4">
+              <div className="space-y-4 sm:space-y-3">
                 <div>
-                  <p className="mb-2 text-xs font-medium uppercase tracking-widest text-zinc-600 dark:text-zinc-400">
+                  <p className="settings-section-label">
                     {t.settings.appearance}
                   </p>
                   <div className="grid grid-cols-2 gap-1 rounded-lg bg-zinc-100 p-1 dark:bg-zinc-800">
                     <button
                       type="button"
                       onClick={() => setTheme("light")}
-                      className={`inline-flex items-center justify-center gap-1.5 rounded-md px-2.5 py-2 text-xs font-semibold transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 sm:py-1.5 ${
-                        theme === "light"
-                          ? "bg-white text-zinc-900 shadow-sm dark:bg-zinc-700 dark:text-zinc-100"
-                          : "text-zinc-700 hover:text-zinc-900 dark:text-zinc-300 dark:hover:text-zinc-100"
-                      }`}
+                      className={segmentButtonClass(theme === "light")}
                       aria-pressed={theme === "light"}
                     >
                       <svg
-                        className="h-3.5 w-3.5"
+                        className="settings-segment-icon"
                         fill="none"
                         stroke="currentColor"
                         viewBox="0 0 24 24"
@@ -188,15 +190,11 @@ export default function SettingsMenu({ onOpenAbout }: SettingsMenuProps) {
                     <button
                       type="button"
                       onClick={() => setTheme("dark")}
-                      className={`inline-flex items-center justify-center gap-1.5 rounded-md px-2.5 py-2 text-xs font-semibold transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 sm:py-1.5 ${
-                        theme === "dark"
-                          ? "bg-white text-zinc-900 shadow-sm dark:bg-zinc-700 dark:text-zinc-100"
-                          : "text-zinc-700 hover:text-zinc-900 dark:text-zinc-300 dark:hover:text-zinc-100"
-                      }`}
+                      className={segmentButtonClass(theme === "dark")}
                       aria-pressed={theme === "dark"}
                     >
                       <svg
-                        className="h-3.5 w-3.5"
+                        className="settings-segment-icon"
                         fill="none"
                         stroke="currentColor"
                         viewBox="0 0 24 24"
@@ -215,7 +213,7 @@ export default function SettingsMenu({ onOpenAbout }: SettingsMenuProps) {
                 </div>
 
                 <div>
-                  <p className="mb-2 text-xs font-medium uppercase tracking-widest text-zinc-600 dark:text-zinc-400">
+                  <p className="settings-section-label">
                     {t.settings.language}
                   </p>
                   <div className="grid grid-cols-3 gap-1 rounded-lg bg-zinc-100 p-1 dark:bg-zinc-800">
@@ -224,11 +222,12 @@ export default function SettingsMenu({ onOpenAbout }: SettingsMenuProps) {
                         key={code}
                         type="button"
                         onClick={() => setLocale(code)}
-                        className={`rounded-md px-2 py-2 text-xs font-semibold transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 sm:py-1.5 ${
+                        className={[
+                          "settings-segment-btn",
                           locale === code
                             ? "bg-amber-400 text-zinc-950 shadow-sm dark:bg-amber-500"
-                            : "text-zinc-700 hover:text-zinc-900 dark:text-zinc-300 dark:hover:text-zinc-100"
-                        }`}
+                            : "text-zinc-700 hover:text-zinc-900 dark:text-zinc-300 dark:hover:text-zinc-100",
+                        ].join(" ")}
                         aria-label={t.common.switchToLocale(
                           LOCALE_LABELS[code],
                         )}
@@ -241,10 +240,8 @@ export default function SettingsMenu({ onOpenAbout }: SettingsMenuProps) {
                 </div>
 
                 <div>
-                  <p className="mb-2 text-xs font-medium uppercase tracking-widest text-zinc-600 dark:text-zinc-400">
-                    {t.settings.more}
-                  </p>
-                  <div className="flex flex-col gap-1">
+                  <p className="settings-section-label">{t.settings.more}</p>
+                  <div className="flex flex-col gap-0.5">
                     {onOpenAbout && (
                       <button
                         type="button"
@@ -252,10 +249,10 @@ export default function SettingsMenu({ onOpenAbout }: SettingsMenuProps) {
                           closeMenu();
                           onOpenAbout();
                         }}
-                        className="flex w-full items-center gap-2.5 rounded-lg px-2.5 py-2.5 text-left text-sm font-medium text-zinc-700 transition-colors hover:bg-zinc-100 dark:text-zinc-300 dark:hover:bg-zinc-800"
+                        className="settings-menu-link"
                       >
                         <svg
-                          className="h-4 w-4 shrink-0 text-amber-700 dark:text-amber-500"
+                          className="settings-menu-link-icon"
                           fill="none"
                           stroke="currentColor"
                           viewBox="0 0 24 24"
@@ -274,10 +271,10 @@ export default function SettingsMenu({ onOpenAbout }: SettingsMenuProps) {
                     <Link
                       href="/qr"
                       onClick={closeMenu}
-                      className="flex w-full items-center gap-2.5 rounded-lg px-2.5 py-2.5 text-left text-sm font-medium text-zinc-700 transition-colors hover:bg-zinc-100 dark:text-zinc-300 dark:hover:bg-zinc-800"
+                      className="settings-menu-link"
                     >
                       <svg
-                        className="h-4 w-4 shrink-0 text-amber-700 dark:text-amber-500"
+                        className="settings-menu-link-icon"
                         fill="none"
                         stroke="currentColor"
                         viewBox="0 0 24 24"
@@ -307,14 +304,13 @@ export default function SettingsMenu({ onOpenAbout }: SettingsMenuProps) {
         ref={buttonRef}
         type="button"
         onClick={() => setOpen((current) => !current)}
-        className="btn-header-action h-9 w-9 sm:w-auto sm:gap-1.5 sm:px-2.5"
+        className="btn-header-action h-9 w-9 sm:w-auto sm:px-2.5"
         aria-label={t.settings.open}
         aria-expanded={open}
         aria-controls="settings-panel"
         aria-haspopup="dialog"
       >
         <svg
-          className="h-4 w-4 shrink-0"
           fill="none"
           stroke="currentColor"
           viewBox="0 0 24 24"

@@ -1,22 +1,30 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useCallback, useEffect, useState } from "react";
+import dynamic from "next/dynamic";
 import { useSearchParams, useRouter } from "next/navigation";
-import Link from "next/link";
 import SearchBar from "@/components/SearchBar";
 import SearchStatus from "@/components/SearchStatus";
-import ItemCard from "@/components/ItemCard";
-import EmptyState from "@/components/EmptyState";
+import SearchResultsList from "@/components/SearchResultsList";
+import PageHeader from "@/components/PageHeader";
 import { searchAll } from "@/lib/fuse-search";
+import type { SearchResult } from "@/lib/inventory";
 import { useDebouncedValue } from "@/lib/useDebouncedValue";
 import { useI18n } from "@/lib/i18n";
+
+const LocateItemSheet = dynamic(
+  () => import("@/components/LocateItemSheet"),
+  { ssr: false },
+);
 
 export default function SearchResults() {
   const searchParams = useSearchParams();
   const router = useRouter();
   const initialQuery = searchParams.get("q") ?? "";
   const [query, setQuery] = useState(initialQuery);
+  const [locateResult, setLocateResult] = useState<SearchResult | null>(null);
   const debouncedQuery = useDebouncedValue(query, 200);
+  const { t } = useI18n();
 
   useEffect(() => {
     const trimmed = debouncedQuery.trim();
@@ -29,90 +37,55 @@ export default function SearchResults() {
     }
   }, [debouncedQuery, router]);
 
+  useEffect(() => {
+    setLocateResult(null);
+  }, [query]);
+
   const results = debouncedQuery.trim() ? searchAll(debouncedQuery) : [];
-  const { t } = useI18n();
+  const closeLocateSheet = useCallback(() => setLocateResult(null), []);
 
   return (
-    <div className="mx-auto max-w-3xl px-4 pb-[max(3rem,env(safe-area-inset-bottom))] sm:px-6 lg:px-8">
-      {/* Header */}
-      <header className="pb-3 pt-[max(1rem,env(safe-area-inset-top))] sm:pt-6">
-        <Link
-          href="/"
-          className="btn-toolbar p-1.5"
-          aria-label={t.search.back}
-        >
-          <svg
-            className="h-5 w-5"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-            aria-hidden="true"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M15 19l-7-7 7-7"
-            />
-          </svg>
-        </Link>
-        <h1 className="mt-2 text-xl font-bold text-zinc-900 dark:text-zinc-100">
-          {t.search.title}
-        </h1>
-      </header>
+    <>
+      <div className="mx-auto max-w-3xl px-4 pb-[max(3rem,env(safe-area-inset-bottom))] sm:px-6 lg:px-8">
+        <PageHeader title={t.search.title} backLabel={t.search.back} />
 
-      <main id="main-content">
-      <SearchBar
-        value={query}
-        onChange={setQuery}
-        placeholder={t.home.searchPlaceholder}
-        clearLabel={t.common.clearSearch}
-        autoFocus
-      />
-      <SearchStatus
-        query={debouncedQuery}
-        resultCount={results.length}
-        resultsLabel={t.search.results}
-        nothingFoundLabel={t.search.nothingFound}
-      />
-
-      {/* Results */}
-      <div className="mt-4">
-        {!query.trim() ? (
-          <p className="mt-10 text-center text-zinc-600 dark:text-zinc-400">
-            {t.search.typeToSearch}
-          </p>
-        ) : results.length > 0 ? (
-          <>
-            <p className="meta-count mb-3">
-              {t.search.results(results.length)}
-            </p>
-            <div className="grid gap-2 sm:grid-cols-2">
-              {results.map((r, i) => (
-                <Link
-                  key={`${r.space.id}-${r.section.id}-${r.item.name}-${i}`}
-                  href={`/space/${r.space.id}?highlight=${encodeURIComponent(r.item.name)}`}
-                  className="group card-focus-wrap"
-                >
-                  <ItemCard
-                    itemName={r.item.name}
-                    spaceName={r.space.name}
-                    sectionName={r.section.name}
-                    embedded
-                    showAction
-                  />
-                </Link>
-              ))}
-            </div>
-          </>
-        ) : (
-          <EmptyState
-            title={t.search.nothingFound}
-            hint={t.search.nothingFoundHint}
+        <main id="main-content" className="mt-4">
+          <SearchBar
+            value={query}
+            onChange={setQuery}
+            placeholder={t.home.searchPlaceholder}
+            clearLabel={t.common.clearSearch}
+            autoFocus
           />
-        )}
+          <SearchStatus
+            query={debouncedQuery}
+            resultCount={results.length}
+            resultsLabel={t.search.results}
+            nothingFoundLabel={t.search.nothingFound}
+          />
+
+          <div className="mt-4">
+            {!query.trim() ? (
+              <p className="mt-10 text-center text-sm text-zinc-500 dark:text-zinc-400">
+                {t.search.typeToSearch}
+              </p>
+            ) : (
+              <SearchResultsList
+                results={results}
+                selectedResult={locateResult}
+                onSelect={setLocateResult}
+                locateLabel={t.home.locate}
+                nothingFoundTitle={t.search.nothingFound}
+                nothingFoundHint={t.search.nothingFoundHint}
+              />
+            )}
+          </div>
+        </main>
       </div>
-      </main>
-    </div>
+
+      {locateResult && (
+        <LocateItemSheet result={locateResult} onClose={closeLocateSheet} />
+      )}
+    </>
   );
 }

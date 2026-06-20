@@ -5,11 +5,10 @@ import dynamic from "next/dynamic";
 import Link from "next/link";
 import SearchBar from "@/components/SearchBar";
 import SearchStatus from "@/components/SearchStatus";
-import ItemCard from "@/components/ItemCard";
-import EmptyState from "@/components/EmptyState";
+import SearchResultsList from "@/components/SearchResultsList";
 import SettingsMenu from "@/components/SettingsMenu";
 import AppBrandLink from "@/components/AppBrandLink";
-import SpaceIcon, { TYPE_COLOR } from "@/components/SpaceIcon";
+import SpaceIcon, { TYPE_COLOR_HOME } from "@/components/SpaceIcon";
 import { getAllSpaces } from "@/lib/inventory";
 import { searchAll } from "@/lib/fuse-search";
 import type { SearchResult } from "@/lib/inventory";
@@ -27,14 +26,6 @@ const AboutSheet = dynamic(() => import("@/components/AboutSheet"), {
 
 const spaces = getAllSpaces();
 
-function sameResult(a: SearchResult, b: SearchResult) {
-  return (
-    a.space.id === b.space.id &&
-    a.section.id === b.section.id &&
-    a.item.name === b.item.name
-  );
-}
-
 export default function HomePage() {
   const [query, setQuery] = useState("");
   const [locateResult, setLocateResult] = useState<SearchResult | null>(null);
@@ -46,7 +37,6 @@ export default function HomePage() {
   const isSearching = query.trim().length > 0;
 
   const closeLocateSheet = useCallback(() => setLocateResult(null), []);
-
   const closeAbout = useCallback(() => setAboutOpen(false), []);
 
   const goHome = useCallback(() => {
@@ -62,7 +52,6 @@ export default function HomePage() {
   return (
     <>
       <div className="mx-auto max-w-3xl px-4 pb-[max(3rem,env(safe-area-inset-bottom))] sm:px-6 lg:px-8">
-        {/* Header */}
         <header className="relative overflow-visible pb-2 pt-[max(1rem,env(safe-area-inset-top))] sm:pb-3 sm:pt-8">
           <div className="flex items-center justify-between gap-3">
             <AppBrandLink onNavigate={goHome} />
@@ -88,6 +77,7 @@ export default function HomePage() {
                 placeholder={t.home.searchPlaceholder}
                 clearLabel={t.common.clearSearch}
                 prominent
+                autoFocusDesktop
               />
             </div>
             <SearchStatus
@@ -99,59 +89,23 @@ export default function HomePage() {
 
             {isSearching && (
               <div className="search-results-divider">
-                {results.length > 0 ? (
-                  <>
-                    <p className="meta-count mb-3">
-                      {t.home.results(results.length)}
-                    </p>
-                    <div className="grid gap-2 sm:grid-cols-2">
-                      {results.map((r, i) => {
-                        const isActive =
-                          locateResult !== null && sameResult(locateResult, r);
-
-                        return (
-                          <button
-                            key={`${r.space.id}-${r.section.id}-${r.item.name}-${i}`}
-                            type="button"
-                            onClick={() => setLocateResult(r)}
-                            className="group card-focus-wrap"
-                          >
-                            <ItemCard
-                              itemName={r.item.name}
-                              spaceName={r.space.name}
-                              sectionName={r.section.name}
-                              highlighted={isActive}
-                              embedded
-                              showAction
-                              locateLabel={t.home.locate}
-                            />
-                          </button>
-                        );
-                      })}
-                    </div>
+                <SearchResultsList
+                  results={results}
+                  selectedResult={locateResult}
+                  onSelect={setLocateResult}
+                  locateLabel={t.home.locate}
+                  nothingFoundTitle={t.home.nothingFound}
+                  nothingFoundHint={t.home.nothingFoundHint}
+                  footer={
                     <button
                       type="button"
                       onClick={() => setQuery("")}
-                      className="home-browse-link"
+                      className={`home-browse-link ${results.length === 0 ? "-mt-2" : ""}`}
                     >
                       {t.home.orBrowseSpaces}
                     </button>
-                  </>
-                ) : (
-                  <>
-                    <EmptyState
-                      title={t.home.nothingFound}
-                      hint={t.home.nothingFoundHint}
-                    />
-                    <button
-                      type="button"
-                      onClick={() => setQuery("")}
-                      className="home-browse-link -mt-2"
-                    >
-                      {t.home.orBrowseSpaces}
-                    </button>
-                  </>
-                )}
+                  }
+                />
               </div>
             )}
           </section>
@@ -182,7 +136,7 @@ export default function HomePage() {
                     >
                       <div className="card-space">
                         <div
-                          className={`card-space-icon ${TYPE_COLOR[space.type] ?? "bg-zinc-100 text-zinc-500"}`}
+                          className={`card-space-icon ${TYPE_COLOR_HOME[space.type] ?? "bg-zinc-100 text-zinc-500"}`}
                         >
                           <SpaceIcon type={space.type} className="h-5 w-5" />
                         </div>
@@ -214,6 +168,50 @@ export default function HomePage() {
               </div>
             </section>
           )}
+
+          <nav
+            className="home-more-links"
+            aria-label={t.home.moreLinks}
+          >
+            <button
+              type="button"
+              onClick={() => setAboutOpen(true)}
+              className="home-more-link"
+            >
+              <svg
+                className="home-more-link-icon"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+                aria-hidden="true"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                />
+              </svg>
+              {t.about.open}
+            </button>
+            <Link href="/qr" className="home-more-link">
+              <svg
+                className="home-more-link-icon"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+                aria-hidden="true"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M4 4h6v6H4zM14 4h6v6h-6zM4 14h6v6H4zM14 14h2v2h-2zM18 14h2v6h-6v-2h4zM14 18h2v2h-2z"
+                />
+              </svg>
+              {t.home.qrLink}
+            </Link>
+          </nav>
         </main>
       </div>
 

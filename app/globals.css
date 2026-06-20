@@ -75,11 +75,35 @@ input[type="search"]::-webkit-search-results-decoration {
   }
 
   .btn-header-action {
-    @apply inline-flex shrink-0 items-center justify-center gap-1.5 rounded-lg text-zinc-600 transition-colors hover:bg-zinc-100 hover:text-zinc-800 focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 dark:text-zinc-400 dark:hover:bg-zinc-800 dark:hover:text-zinc-200;
+    @apply inline-flex shrink-0 items-center justify-center gap-1.5 rounded-lg text-sm font-medium text-zinc-600 transition-colors hover:bg-zinc-100 hover:text-zinc-800 focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 dark:text-zinc-400 dark:hover:bg-zinc-800 dark:hover:text-zinc-200;
   }
 
   .btn-header-action svg {
-    @apply text-amber-700 dark:text-amber-500;
+    @apply h-4 w-4 shrink-0 text-amber-700 dark:text-amber-500;
+  }
+
+  .settings-panel-title {
+    @apply text-sm font-semibold text-zinc-900 dark:text-zinc-100;
+  }
+
+  .settings-section-label {
+    @apply mb-1.5 text-[11px] font-semibold uppercase tracking-wide text-zinc-500 dark:text-zinc-400;
+  }
+
+  .settings-segment-btn {
+    @apply inline-flex items-center justify-center gap-1.5 rounded-md px-2.5 py-2.5 text-sm font-semibold transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 sm:py-1.5 sm:text-xs;
+  }
+
+  .settings-segment-icon {
+    @apply h-4 w-4 shrink-0 sm:h-3.5 sm:w-3.5;
+  }
+
+  .settings-menu-link {
+    @apply flex w-full items-center gap-2 rounded-lg px-2.5 py-2.5 text-left text-sm font-medium text-zinc-700 transition-colors hover:bg-zinc-100 dark:text-zinc-300 dark:hover:bg-zinc-800 sm:py-2 sm:text-xs;
+  }
+
+  .settings-menu-link-icon {
+    @apply h-4 w-4 shrink-0 text-amber-700 sm:h-3.5 sm:w-3.5 dark:text-amber-500;
   }
 
   .btn-primary {
@@ -214,12 +238,56 @@ input[type="search"]::-webkit-search-results-decoration {
     @apply mb-3 flex w-full items-center justify-between rounded-xl border border-[rgb(var(--border))] bg-[rgb(var(--surface-raised))] px-3.5 py-2.5 text-left text-sm font-semibold text-zinc-700 transition-colors hover:bg-zinc-50 dark:text-zinc-300 dark:hover:bg-zinc-800/80 sm:hidden;
   }
 
+  .plan-stack {
+    @apply overflow-hidden rounded-xl border border-zinc-200/70 bg-[rgb(var(--surface-raised))] shadow-sm shadow-zinc-950/[0.03] dark:border-zinc-800/80 dark:shadow-none;
+  }
+
+  .plan-stack-item {
+    @apply w-full rounded-none border-0 border-b border-zinc-200/70 px-3 py-2.5 shadow-none dark:border-zinc-800/80;
+  }
+
+  .plan-stack-item:last-child {
+    @apply border-b-0;
+  }
+
+  .plan-stack-item--drawer {
+    @apply min-h-[64px] py-3;
+  }
+
+  .plan-stack-item--shelf {
+    @apply min-h-[58px];
+  }
+
+  .plan-stack-item--active {
+    @apply relative z-[1] bg-amber-50/45 text-amber-900 dark:bg-amber-950/25 dark:text-amber-200;
+  }
+
   .home-browse-link {
     @apply mt-4 block w-full rounded-xl border border-[rgb(var(--brand-border)/0.45)] bg-[rgb(var(--surface-raised))] px-4 py-3 text-center text-sm font-semibold text-zinc-700 transition-colors hover:border-[rgb(var(--brand-border)/0.65)] hover:bg-[rgb(var(--brand-soft)/0.25)] dark:text-zinc-300 dark:hover:border-[rgb(var(--brand-border)/0.4)] dark:hover:bg-[rgb(var(--brand-soft)/0.15)];
   }
 
   .card-space-icon {
     @apply flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-xl;
+  }
+
+  .page-header {
+    @apply pb-2 pt-[max(1rem,env(safe-area-inset-top))] sm:pt-6;
+  }
+
+  .page-header-title {
+    @apply text-base font-bold text-zinc-900 dark:text-zinc-100 sm:text-lg;
+  }
+
+  .home-more-links {
+    @apply mt-8 flex flex-wrap items-center justify-center gap-x-4 gap-y-2 border-t border-[rgb(var(--border))] pt-6 sm:mt-10;
+  }
+
+  .home-more-link {
+    @apply inline-flex items-center gap-1.5 text-sm font-semibold text-zinc-600 underline-offset-2 transition-colors hover:text-amber-800 focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 dark:text-zinc-400 dark:hover:text-amber-400;
+  }
+
+  .home-more-link-icon {
+    @apply h-4 w-4 shrink-0 text-amber-700 dark:text-amber-500;
   }
 
   .empty-state-icon {

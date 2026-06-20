@@ -8,6 +8,8 @@ interface SearchBarProps {
   placeholder?: string;
   clearLabel?: string;
   autoFocus?: boolean;
+  /** Focus on desktop only — avoids opening the mobile keyboard on home load */
+  autoFocusDesktop?: boolean;
   /** Larger field for the home page primary search */
   prominent?: boolean;
 }
@@ -18,14 +20,25 @@ export default function SearchBar({
   placeholder = "",
   clearLabel = "Clear search",
   autoFocus = false,
+  autoFocusDesktop = false,
   prominent = false,
 }: SearchBarProps) {
   const inputRef = useRef<HTMLInputElement>(null);
   const inputId = useId();
 
   useEffect(() => {
-    if (autoFocus) inputRef.current?.focus();
-  }, [autoFocus]);
+    if (autoFocus) {
+      inputRef.current?.focus();
+      return;
+    }
+
+    if (!autoFocusDesktop) return;
+
+    const desktop = window.matchMedia("(min-width: 640px)");
+    if (desktop.matches) {
+      inputRef.current?.focus();
+    }
+  }, [autoFocus, autoFocusDesktop]);
 
   const iconClass = prominent
     ? "text-amber-700 dark:text-amber-400"

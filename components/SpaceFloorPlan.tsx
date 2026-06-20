@@ -186,10 +186,7 @@ export default function SpaceFloorPlan({
 
         <div
           className={[
-            "relative flex flex-col gap-1.5",
-            isDrawers && compact && !interactive
-              ? "rounded-lg border border-zinc-200/80 bg-zinc-50/40 p-2 dark:border-zinc-800 dark:bg-zinc-900/50"
-              : "",
+            "plan-stack relative flex flex-col",
             isDrawers
               ? compact
                 ? "min-h-[220px]"
@@ -210,6 +207,7 @@ export default function SpaceFloorPlan({
                     key={section.id}
                     section={section}
                     active={activeSectionId === section.id}
+                    stacked
                     shape={
                       isDrawers
                         ? "drawer"
@@ -354,6 +352,7 @@ function PlanSectionButton({
   section,
   active,
   shape,
+  stacked = false,
   onClick,
   refProp,
   itemsLabel,
@@ -361,6 +360,7 @@ function PlanSectionButton({
   section: Section;
   active: boolean;
   shape: "drawer" | "floor" | "shelf" | "top";
+  stacked?: boolean;
   onClick?: () => void;
   refProp?: RefObject<HTMLButtonElement | HTMLDivElement>;
   itemsLabel: string;
@@ -369,6 +369,18 @@ function PlanSectionButton({
   const isFloor = shape === "floor";
   const Tag = onClick ? "button" : "div";
   const isStatic = !onClick;
+
+  const surfaceClass = active
+    ? stacked
+      ? "plan-stack-item--active"
+      : "border-amber-200/60 bg-amber-50/45 text-amber-900 shadow-amber-950/[0.04] dark:border-amber-900/45 dark:bg-amber-950/25 dark:text-amber-200"
+    : isStatic
+      ? stacked
+        ? "bg-zinc-100 text-zinc-600 dark:bg-zinc-800/80 dark:text-zinc-300"
+        : "border-zinc-200/70 bg-zinc-100 text-zinc-600 dark:border-zinc-800/80 dark:bg-zinc-800/80 dark:text-zinc-300"
+      : stacked
+        ? "bg-[rgb(var(--surface-raised))] text-zinc-800 hover:bg-zinc-50 dark:text-zinc-200 dark:hover:bg-zinc-800/80"
+        : "border-zinc-200/70 bg-white text-zinc-800 hover:border-zinc-300 hover:bg-zinc-50 dark:border-zinc-800/80 dark:bg-zinc-900/80 dark:text-zinc-200 dark:hover:border-zinc-700 dark:hover:bg-zinc-800/80";
 
   return (
     <Tag
@@ -380,17 +392,23 @@ function PlanSectionButton({
           ? "flex w-full items-center gap-3 text-left"
           : "group flex w-full items-center gap-3 text-left transition-colors",
         onClick
-          ? "focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400"
+          ? "focus:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-amber-400"
           : "",
-        isDrawer || isFloor ? "min-h-[64px]" : "min-h-[58px]",
-        isDrawer
-          ? "rounded-xl border px-3 py-3 shadow-sm shadow-zinc-950/[0.03]"
-          : "rounded-xl border px-3 py-2.5 shadow-sm shadow-zinc-950/[0.03]",
-        active
-          ? "border-amber-200/60 bg-amber-50/45 text-amber-900 shadow-amber-950/[0.04] dark:border-amber-900/45 dark:bg-amber-950/25 dark:text-amber-200"
-          : isStatic
-            ? "border-zinc-200/70 bg-zinc-100 text-zinc-600 dark:border-zinc-800/80 dark:bg-zinc-800/80 dark:text-zinc-300"
-            : "border-zinc-200/70 bg-white text-zinc-800 hover:border-zinc-300 hover:bg-zinc-50 dark:border-zinc-800/80 dark:bg-zinc-900/80 dark:text-zinc-200 dark:hover:border-zinc-700 dark:hover:bg-zinc-800/80",
+        stacked
+          ? [
+              "plan-stack-item",
+              isDrawer || isFloor
+                ? "plan-stack-item--drawer"
+                : "plan-stack-item--shelf",
+              surfaceClass,
+            ].join(" ")
+          : [
+              isDrawer || isFloor ? "min-h-[64px]" : "min-h-[58px]",
+              isDrawer
+                ? "rounded-xl border px-3 py-3 shadow-sm shadow-zinc-950/[0.03]"
+                : "rounded-xl border px-3 py-2.5 shadow-sm shadow-zinc-950/[0.03]",
+              surfaceClass,
+            ].join(" "),
       ].join(" ")}
       aria-pressed={onClick ? active : undefined}
     >

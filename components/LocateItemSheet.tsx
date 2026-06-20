@@ -121,23 +121,12 @@ export default function LocateItemSheet({ result, onClose }: Props) {
         <div className="border-t border-zinc-100 p-4 pb-[max(1rem,env(safe-area-inset-bottom))] dark:border-zinc-800">
           <Link
             href={listUrl}
-            className="flex w-full items-center justify-center gap-2 rounded-lg bg-amber-500 px-4 py-3.5 text-base font-semibold text-zinc-950 transition-colors hover:bg-amber-400 focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-zinc-900"
+            className="flex w-full flex-col items-center justify-center gap-0.5 rounded-lg bg-amber-500 px-4 py-3.5 text-base font-semibold text-zinc-950 transition-colors hover:bg-amber-400 focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-zinc-900"
           >
-            {t.space.goToSpaceList(space.name)}
-            <svg
-              className="h-4 w-4"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-              aria-hidden="true"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M9 5l7 7-7 7"
-              />
-            </svg>
+            <span>{t.space.goToSpace}</span>
+            <span className="max-w-full truncate text-sm font-medium text-zinc-950/75">
+              {space.name}
+            </span>
           </Link>
         </div>
       </div>

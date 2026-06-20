@@ -21,6 +21,7 @@ export const es: typeof ca = {
     nothingFoundHint: "Prueba con otra palabra",
     orBrowseSpaces: "Navega por los espacios",
     locate: "Localizar",
+    moreLinks: "Más opciones",
   },
   about: {
     open: "Cómo funciona Stashly",
@@ -72,6 +73,7 @@ export const es: typeof ca = {
     hidePlan: "Ocultar el plano",
     locateBanner: (item: string) => `¿Buscas «${item}»?`,
     showOnPlan: "Dónde está en el plano",
+    goToSpace: "Ir",
     goToSpaceList: (name: string) => `Ir a ${name}…`,
     types: {
       cabinet: "Armario",

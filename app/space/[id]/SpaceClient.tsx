@@ -101,7 +101,7 @@ export default function SpaceClient({ space }: { space: Space }) {
           >
             <SpaceIcon type={space.type} className="h-5 w-5" />
           </div>
-          <h1 className="min-w-0 flex-1 truncate text-base font-bold text-zinc-900 dark:text-zinc-100 sm:text-lg">
+          <h1 className="page-header-title min-w-0 flex-1 truncate">
             {space.name}
           </h1>
           <span className="badge-neutral">

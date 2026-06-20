@@ -9,6 +9,16 @@ export const TYPE_COLOR: Record<SpaceType, string> = {
     "bg-zinc-100 text-zinc-600 ring-1 ring-zinc-200/80 dark:bg-zinc-800/90 dark:text-zinc-400 dark:ring-zinc-700/60",
 };
 
+/** Softer tints for the home browse grid — readable without overpowering search */
+export const TYPE_COLOR_HOME: Record<SpaceType, string> = {
+  cabinet:
+    "bg-amber-50/90 text-amber-800 ring-1 ring-amber-200/50 dark:bg-amber-950/35 dark:text-amber-400 dark:ring-amber-800/30",
+  drawers:
+    "bg-stone-100 text-stone-700 ring-1 ring-stone-200/70 dark:bg-stone-900/45 dark:text-stone-300 dark:ring-stone-700/45",
+  shelf:
+    "bg-zinc-100 text-zinc-600 ring-1 ring-zinc-200/70 dark:bg-zinc-800/80 dark:text-zinc-400 dark:ring-zinc-700/50",
+};
+
 interface Props {
   type: SpaceType;
   className?: string;

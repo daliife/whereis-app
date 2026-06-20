@@ -1,7 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useRef, useState } from "react";
-import Link from "next/link";
+import PageHeader from "@/components/PageHeader";
 import QRCode from "@/components/QRCode";
 import { getAllSpaces, type Space } from "@/lib/inventory";
 import { useI18n } from "@/lib/i18n";
@@ -37,35 +37,10 @@ export default function QRPage() {
 
   return (
     <div className="mx-auto max-w-3xl px-4 pb-[max(3rem,env(safe-area-inset-bottom))] sm:px-6 lg:px-8">
-      {/* Header */}
-      <header className="pb-4 pt-[max(1.5rem,env(safe-area-inset-top))] sm:pt-8 lg:pt-12">
-        <Link
-          href="/"
-          className="btn-toolbar p-1.5 print:hidden"
-          aria-label={t.qr.back}
-        >
-          <svg
-            className="h-5 w-5"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-            aria-hidden="true"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M15 19l-7-7 7-7"
-            />
-          </svg>
-        </Link>
-        <h1 className="mt-2 text-xl font-bold text-zinc-900 dark:text-zinc-100">
-          {t.qr.title}
-        </h1>
-        <p className="text-sm text-zinc-600 dark:text-zinc-400">
-          {t.qr.subtitle}
-        </p>
-      </header>
+      <PageHeader title={t.qr.title} backLabel={t.qr.back} />
+      <p className="-mt-1 mb-4 text-sm text-zinc-500 dark:text-zinc-400 print:hidden">
+        {t.qr.subtitle}
+      </p>
 
       <main id="main-content">
       {/* QR cards */}
