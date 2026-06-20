@@ -24,8 +24,14 @@ describe("fuse-search", () => {
   it("searchWithinSpace limits results to one space", () => {
     const results = searchWithinSpace("armari-2", "Borrassa");
 
-    expect(results.length).toBeGreaterThan(0);
+    expect(results.length).toBe(2);
     expect(results.every((result) => result.space.id === "armari-2")).toBe(true);
+    expect(results.map((result) => result.item.name)).toEqual(
+      expect.arrayContaining([
+        "Borrassa (damunt)",
+        "Borrassa (2n prestatge)",
+      ]),
+    );
   });
 
   it("searchWithinSpace excludes matches from other spaces", () => {

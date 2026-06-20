@@ -32,7 +32,13 @@ describe("translations", () => {
   it("includes recently added home navigation strings", () => {
     expect(ca.home.orBrowseSpaces).toBe("Navega pels espais");
     expect(ca.common.goHome).toBeTruthy();
+    expect(ca.home.itemTags).toBe("Etiquetes");
+    expect(ca.search.recentSearches).toBe("Cerques recents");
     expect(es.home.orBrowseSpaces).not.toMatch(/^O /);
     expect(en.home.orBrowseSpaces).not.toMatch(/^Or /i);
+  });
+
+  it("does not expose removed settings.more key", () => {
+    expect(collectKeys(ca)).not.toContain("settings.more");
   });
 });

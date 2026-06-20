@@ -56,6 +56,35 @@ describe("validateInventory", () => {
       true,
     );
   });
+
+  it("warns about duplicate item names within the same space", () => {
+    const result = validateInventory({
+      spaces: [
+        {
+          id: "space",
+          name: "Space",
+          type: "cabinet",
+          sections: [
+            {
+              id: "a",
+              name: "A",
+              items: [{ name: "Martell", tags: ["eines"] }],
+            },
+            {
+              id: "b",
+              name: "B",
+              items: [{ name: "martell", tags: ["eines"] }],
+            },
+          ],
+        },
+      ],
+    });
+
+    expect(result.errors).toEqual([]);
+    expect(result.warnings.some((warning) => warning.includes("duplicate item name"))).toBe(
+      true,
+    );
+  });
 });
 
 describe("validate-inventory script data", () => {
