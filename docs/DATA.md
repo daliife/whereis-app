@@ -11,12 +11,12 @@ Tot el contingut de casa viu a **`data/inventory.json`**. No hi ha base de dades
   "spaces": [
     {
       "id": "armari-1",              // URL: /space/armari-1/
-      "name": "Armari sòtan esquerra", // Visible a la UI (català)
+      "name": "Armari soterrani esquerra", // Visible a la UI (català)
       "type": "cabinet",             // "cabinet" | "drawers" | "shelf"
       "sections": [
         {
           "id": "prestatge-1",       // Únic dins l'espai
-          "name": "Prestatge 4t pis (dalt)",
+          "name": "4t prestatge (dalt)",
           "items": [
             {
               "name": "Barbacoa",
@@ -46,10 +46,10 @@ El plànol (`SpaceFloorPlan`) adapta formes i silueta segons `type`.
 
 ## Convencions de noms (seccions)
 
-Ordre **de baix a dalt** (com pisos):
+Ordre **de baix a dalt**:
 
-- `Prestatge 1r pis (baix)` — el més baix
-- `Prestatge 2n pis`, `3r pis`, `4t pis (dalt)` — cap amunt
+- `1r prestatge (baix)` — el més baix
+- `2n prestatge`, `3r prestatge`, `4t prestatge (dalt)` — cap amunt
 - `Terra` — sol al fons de l'armari
 - `Damunt l'armari` — secció superior separada (si existeix)
 
@@ -115,6 +115,6 @@ No demanis a la IA que tradueixi `inventory.json` quan canviïs idioma de la UI.
 ## Exemple de prompt per a la IA
 
 ```
-Afegeix l'objecte «Clau allen 6mm» a «Prestatge 2n pis» de l'espai armari-1,
+Afegeix l'objecte «Clau allen 6mm» a «2n prestatge» de l'espai armari-1,
 amb tags ["clau", "allen", "eines"]. Segueix docs/DATA.md i valida amb pnpm validate:data.
 ```

@@ -99,9 +99,9 @@ export default function QRPage() {
               <div className="min-w-0">
                 <div className="flex items-center gap-2">
                   <div
-                    className={`flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-md ${TYPE_COLOR[space.type] ?? "bg-zinc-100 text-zinc-500"}`}
+                    className={`flex h-7 w-7 flex-shrink-0 items-center justify-center rounded-md ${TYPE_COLOR[space.type] ?? "bg-zinc-100 text-zinc-500"}`}
                   >
-                    <SpaceIcon type={space.type} className="h-3.5 w-3.5" />
+                    <SpaceIcon type={space.type} className="h-4 w-4" />
                   </div>
                   <p className="font-semibold text-zinc-900 dark:text-zinc-100">
                     {space.name}

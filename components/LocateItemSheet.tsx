@@ -53,10 +53,10 @@ export default function LocateItemSheet({ result, onClose }: Props) {
 
         <div className="flex items-start gap-3 border-b border-zinc-100 px-4 pb-4 pt-3 dark:border-zinc-800 sm:pt-4">
           <div
-            className={`mt-0.5 flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-lg ${TYPE_COLOR[space.type] ?? "bg-zinc-100 text-zinc-500"}`}
+            className={`mt-0.5 flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-lg ${TYPE_COLOR[space.type] ?? "bg-zinc-100 text-zinc-500"}`}
             aria-hidden="true"
           >
-            <SpaceIcon type={space.type} className="h-4 w-4" />
+            <SpaceIcon type={space.type} className="h-5 w-5" />
           </div>
 
           <div className="min-w-0 flex-1">
@@ -111,9 +111,10 @@ export default function LocateItemSheet({ result, onClose }: Props) {
           <SpaceFloorPlan
             space={space}
             highlightItemName={item.name}
+            highlightSectionId={section.id}
             planOnly
             compact
-            interactive={true}
+            interactive={false}
           />
         </div>
 

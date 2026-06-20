@@ -14,6 +14,8 @@ interface Props {
   compact?: boolean;
   /** Allow tapping sections on the diagram */
   interactive?: boolean;
+  /** Lock highlighted section in read-only plan (e.g. locate sheet) */
+  highlightSectionId?: string;
   highlightItemRef?: RefObject<HTMLDivElement>;
   /** Called when the user picks a section (e.g. to clear URL highlight) */
   onSectionSelect?: (sectionId: string) => void;
@@ -25,6 +27,7 @@ export default function SpaceFloorPlan({
   planOnly = false,
   compact = false,
   interactive = true,
+  highlightSectionId,
   highlightItemRef,
   onSectionSelect,
 }: Props) {
@@ -90,6 +93,11 @@ export default function SpaceFloorPlan({
     return () => media.removeEventListener("change", update);
   }, [compact, planOnly]);
 
+  const activeSectionId =
+    !interactive && highlightSectionId
+      ? highlightSectionId
+      : selectedSectionId;
+
   function selectSection(sectionId: string) {
     setSelectedSectionId(sectionId);
     onSectionSelect?.(sectionId);
@@ -108,7 +116,7 @@ export default function SpaceFloorPlan({
                 key={section.id}
                 type="button"
                 role="tab"
-                aria-selected={selectedSectionId === section.id}
+                aria-selected={activeSectionId === section.id}
                 onClick={() => selectSection(section.id)}
                 className={[
                   "section-tab",
@@ -158,7 +166,7 @@ export default function SpaceFloorPlan({
                 <PlanSectionButton
                   key={section.id}
                   section={section}
-                  active={selectedSectionId === section.id}
+                  active={activeSectionId === section.id}
                   shape="top"
                   onClick={
                     interactive
@@ -201,7 +209,7 @@ export default function SpaceFloorPlan({
                   <PlanSectionButton
                     key={section.id}
                     section={section}
-                    active={selectedSectionId === section.id}
+                    active={activeSectionId === section.id}
                     shape={
                       isDrawers
                         ? "drawer"

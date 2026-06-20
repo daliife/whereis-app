@@ -8,7 +8,7 @@ import SearchStatus from "@/components/SearchStatus";
 import ItemCard from "@/components/ItemCard";
 import EmptyState from "@/components/EmptyState";
 import SettingsMenu from "@/components/SettingsMenu";
-import AppIcon from "@/components/AppIcon";
+import AppBrandLink from "@/components/AppBrandLink";
 import SpaceIcon, { TYPE_COLOR } from "@/components/SpaceIcon";
 import { getAllSpaces } from "@/lib/inventory";
 import { searchAll } from "@/lib/fuse-search";
@@ -49,6 +49,12 @@ export default function HomePage() {
 
   const closeAbout = useCallback(() => setAboutOpen(false), []);
 
+  const goHome = useCallback(() => {
+    setQuery("");
+    setLocateResult(null);
+    setAboutOpen(false);
+  }, []);
+
   useEffect(() => {
     setLocateResult(null);
   }, [query]);
@@ -59,14 +65,7 @@ export default function HomePage() {
         {/* Header */}
         <header className="relative overflow-visible pb-2 pt-[max(1rem,env(safe-area-inset-top))] sm:pb-3 sm:pt-8">
           <div className="flex items-center justify-between gap-3">
-            <div className="flex min-w-0 items-center gap-2">
-              <AppIcon size={36} />
-              <div className="min-w-0">
-                <h1 className="truncate text-xl font-bold tracking-tight text-zinc-900 dark:text-zinc-100 sm:text-2xl">
-                  {t.home.appName}
-                </h1>
-              </div>
-            </div>
+            <AppBrandLink onNavigate={goHome} />
             <SettingsMenu onOpenAbout={() => setAboutOpen(true)} />
           </div>
         </header>
@@ -80,9 +79,6 @@ export default function HomePage() {
               <h2 id="home-search-heading" className="home-primary-title">
                 {t.home.searchHeading}
               </h2>
-              {!isSearching && (
-                <p className="home-primary-hint">{t.home.searchHint}</p>
-              )}
             </header>
 
             <div className="home-primary-field">
@@ -161,71 +157,62 @@ export default function HomePage() {
           </section>
 
           {!isSearching && (
-            <>
-              <div className="flow-or" role="separator" aria-label={t.home.flowOr}>
-                <span className="flow-or-line" aria-hidden="true" />
-                <span className="flow-or-label">{t.home.flowOr}</span>
-                <span className="flow-or-line" aria-hidden="true" />
-              </div>
+            <section
+              className="home-browse"
+              aria-labelledby="home-browse-heading"
+            >
+              <header className="home-browse-header">
+                <h2 id="home-browse-heading" className="home-browse-title">
+                  {t.home.browseHeading}
+                </h2>
+              </header>
 
-              <section
-                className="home-browse"
-                aria-labelledby="home-browse-heading"
-              >
-                <header className="home-browse-header">
-                  <h2 id="home-browse-heading" className="home-browse-title">
-                    {t.home.browseHeading}
-                  </h2>
-                  <p className="home-browse-hint">{t.home.browseSubheading}</p>
-                </header>
+              <div className="home-browse-grid">
+                {spaces.map((space) => {
+                  const itemCount = space.sections.reduce(
+                    (acc, s) => acc + s.items.length,
+                    0,
+                  );
 
-                <div className="home-browse-grid">
-                  {spaces.map((space) => {
-                    const itemCount = space.sections.reduce(
-                      (acc, s) => acc + s.items.length,
-                      0,
-                    );
-
-                    return (
-                      <Link
-                        key={space.id}
-                        href={`/space/${space.id}`}
-                        className="group card-focus-wrap"
-                      >
-                        <div className="card-space">
-                          <div
-                            className={`card-space-icon ${TYPE_COLOR[space.type] ?? "bg-zinc-100 text-zinc-500"}`}
-                          >
-                            <SpaceIcon type={space.type} className="h-5 w-5" />
-                          </div>
-                          <div className="min-w-0 flex-1">
-                            <p className="card-kicker">
-                              {t.space.types[space.type]}
-                            </p>
-                            <p className="card-title mt-0.5">{space.name}</p>
-                            <p className="card-meta">{t.home.items(itemCount)}</p>
-                          </div>
-                          <svg
-                            className="h-4 w-4 flex-shrink-0 text-zinc-300 transition-colors group-hover:text-amber-600 dark:text-zinc-600 dark:group-hover:text-amber-500"
-                            fill="none"
-                            stroke="currentColor"
-                            viewBox="0 0 24 24"
-                            aria-hidden="true"
-                          >
-                            <path
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                              strokeWidth={2}
-                              d="M9 5l7 7-7 7"
-                            />
-                          </svg>
+                  return (
+                    <Link
+                      key={space.id}
+                      href={`/space/${space.id}`}
+                      className="group card-focus-wrap"
+                    >
+                      <div className="card-space">
+                        <div
+                          className={`card-space-icon ${TYPE_COLOR[space.type] ?? "bg-zinc-100 text-zinc-500"}`}
+                        >
+                          <SpaceIcon type={space.type} className="h-5 w-5" />
                         </div>
-                      </Link>
-                    );
-                  })}
-                </div>
-              </section>
-            </>
+                        <div className="min-w-0 flex-1">
+                          <p className="card-kicker">
+                            {t.space.types[space.type]}
+                          </p>
+                          <p className="card-title mt-0.5">{space.name}</p>
+                          <p className="card-meta">{t.home.items(itemCount)}</p>
+                        </div>
+                        <svg
+                          className="h-4 w-4 flex-shrink-0 text-zinc-300 transition-colors group-hover:text-amber-600 dark:text-zinc-600 dark:group-hover:text-amber-500"
+                          fill="none"
+                          stroke="currentColor"
+                          viewBox="0 0 24 24"
+                          aria-hidden="true"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M9 5l7 7-7 7"
+                          />
+                        </svg>
+                      </div>
+                    </Link>
+                  );
+                })}
+              </div>
+            </section>
           )}
         </main>
       </div>

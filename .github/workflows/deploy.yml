@@ -31,6 +31,9 @@ jobs:
       - name: Validate inventory
         run: pnpm validate:data
 
+      - name: Test
+        run: pnpm test
+
       - name: Lint
         run: pnpm lint
 

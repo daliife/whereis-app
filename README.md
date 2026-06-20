@@ -16,6 +16,7 @@ Comprovacions abans de desplegar:
 
 ```bash
 pnpm exec tsc --noEmit   # tipus
+pnpm test                # tests unitaris (Vitest)
 pnpm build               # export estàtic → carpeta /out
 pnpm validate:data       # valida data/inventory.json
 ```
@@ -70,7 +71,7 @@ data/
 docs/                   # Documentació per humans i IA → docs/README.md
 AGENTS.md               # Context curt per assistents d'IA (Cursor, Copilot…)
 scripts/
-  validate-inventory.mjs
+  validate-data.ts      # CLI: valida data/inventory.json
 ```
 
 ---

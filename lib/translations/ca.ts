@@ -5,13 +5,11 @@ export const ca = {
     qrLink: "Codis QR",
     searchPlaceholder: "Cerca qualsevol objecte…",
     searchHeading: "Cerca un objecte",
-    searchHint: "Escriu una paraula i toca un resultat",
     flowOr: "o",
     locateFoundIn: "es troba a",
     locateFoundAt: (item: string, place: string) =>
       `«${item}» es troba a ${place}`,
     browseHeading: "Navega pels espais",
-    browseSubheading: "Toca un armari o calaixera",
     statsSpaces: "Espais",
     statsItems: "Elements",
     items: (n: number) => (n === 1 ? "1 element" : `${n} elements`),
@@ -19,7 +17,7 @@ export const ca = {
     seeAll: (n: number) => `Veure els ${n} resultats`,
     nothingFound: "Res trobat",
     nothingFoundHint: "Prova amb una paraula diferent",
-    orBrowseSpaces: "O navega pels espais",
+    orBrowseSpaces: "Navega pels espais",
     locate: "Localitza",
   },
   about: {
@@ -42,6 +40,7 @@ export const ca = {
   common: {
     clearSearch: "Neteja la cerca",
     close: "Tanca",
+    goHome: "Ves a la pàgina principal",
     loading: "Carregant...",
     skipToContent: "Salta al contingut principal",
     switchToLocale: (label: string) => `Canvia a ${label}`,

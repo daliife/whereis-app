@@ -16,7 +16,7 @@ Stashly is a **static mobile-first web app** to find household items. Primary fl
 
 ### Package manager — pnpm only
 
-- `pnpm install`, `pnpm dev`, `pnpm build`, `pnpm validate:data`
+- `pnpm install`, `pnpm dev`, `pnpm build`, `pnpm test`, `pnpm validate:data`
 - Never `npm` or `yarn` — blocked by `.npmrc` `engine-strict=true`
 
 ### Static export

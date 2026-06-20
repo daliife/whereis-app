@@ -4,7 +4,7 @@ export type SpaceType = "cabinet" | "drawers" | "shelf";
 
 export interface Item {
   name: string;
-  tags: string[];
+  tags?: string[];
 }
 
 export interface Section {

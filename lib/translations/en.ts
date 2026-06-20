@@ -7,13 +7,11 @@ export const en: typeof ca = {
     qrLink: "QR codes",
     searchPlaceholder: "Search any item…",
     searchHeading: "Search for an item",
-    searchHint: "Type a keyword and tap a result",
     flowOr: "or",
     locateFoundIn: "is in",
     locateFoundAt: (item: string, place: string) =>
       `«${item}» is in ${place}`,
     browseHeading: "Browse your spaces",
-    browseSubheading: "Tap a cabinet or drawer unit",
     statsSpaces: "Spaces",
     statsItems: "Items",
     items: (n: number) => (n === 1 ? "1 item" : `${n} items`),
@@ -21,7 +19,7 @@ export const en: typeof ca = {
     seeAll: (n: number) => `See all ${n} results`,
     nothingFound: "Nothing found",
     nothingFoundHint: "Try a different keyword",
-    orBrowseSpaces: "Or browse your spaces",
+    orBrowseSpaces: "Browse your spaces",
     locate: "Locate",
   },
   about: {
@@ -44,6 +42,7 @@ export const en: typeof ca = {
   common: {
     clearSearch: "Clear search",
     close: "Close",
+    goHome: "Go to home",
     loading: "Loading...",
     skipToContent: "Skip to main content",
     switchToLocale: (label: string) => `Switch to ${label}`,

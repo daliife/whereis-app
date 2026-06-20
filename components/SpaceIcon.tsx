@@ -14,43 +14,32 @@ interface Props {
   className?: string;
 }
 
-export default function SpaceIcon({ type, className = "h-5 w-5" }: Props) {
+const svgProps = {
+  fill: "none" as const,
+  stroke: "currentColor",
+  strokeWidth: 1.75,
+  strokeLinecap: "round" as const,
+  strokeLinejoin: "round" as const,
+  "aria-hidden": true as const,
+};
+
+export default function SpaceIcon({ type, className = "h-6 w-6" }: Props) {
   if (type === "drawers") {
     return (
-      <svg
-        className={className}
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth={1.5}
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        aria-hidden="true"
-      >
-        <path d="M5 3.5h14a2 2 0 012 2v14a1 1 0 01-1 1H4a1 1 0 01-1-1v-14a2 2 0 012-2z" />
-        <line x1="3" y1="8.5" x2="21" y2="8.5" />
-        <line x1="3" y1="14.5" x2="21" y2="14.5" />
-        <line x1="9.5" y1="6" x2="14.5" y2="6" strokeWidth={2} />
-        <line x1="9.5" y1="11.5" x2="14.5" y2="11.5" strokeWidth={2} />
-        <line x1="9.5" y1="17.5" x2="14.5" y2="17.5" strokeWidth={2} />
-        <line x1="6" y1="20.5" x2="6" y2="22" />
-        <line x1="18" y1="20.5" x2="18" y2="22" />
+      <svg className={className} viewBox="0 0 24 24" {...svgProps}>
+        <path d="M4.5 2.5h15A1.5 1.5 0 0121 4v16a1.5 1.5 0 01-1.5 1.5h-15A1.5 1.5 0 013 20V4a1.5 1.5 0 011.5-1.5z" />
+        <line x1="3" y1="9" x2="21" y2="9" />
+        <line x1="3" y1="15" x2="21" y2="15" />
+        <line x1="8.5" y1="5.75" x2="15.5" y2="5.75" strokeWidth={2.25} />
+        <line x1="8.5" y1="11.75" x2="15.5" y2="11.75" strokeWidth={2.25} />
+        <line x1="8.5" y1="17.75" x2="15.5" y2="17.75" strokeWidth={2.25} />
       </svg>
     );
   }
 
   if (type === "shelf") {
     return (
-      <svg
-        className={className}
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth={1.5}
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        aria-hidden="true"
-      >
+      <svg className={className} viewBox="0 0 24 24" {...svgProps}>
         <line x1="4" y1="3" x2="4" y2="21" />
         <line x1="20" y1="3" x2="20" y2="21" />
         <line x1="3" y1="8" x2="21" y2="8" />
@@ -61,23 +50,13 @@ export default function SpaceIcon({ type, className = "h-5 w-5" }: Props) {
   }
 
   return (
-    <svg
-      className={className}
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth={1.5}
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      aria-hidden="true"
-    >
-      <path d="M6 2.5h12a2 2 0 012 2v17H4v-17a2 2 0 012-2z" />
-      <line x1="12" y1="2.5" x2="12" y2="21.5" />
-      <line x1="4" y1="19" x2="20" y2="19" />
-      <circle cx="10" cy="11.5" r="0.75" fill="currentColor" stroke="none" />
-      <circle cx="14" cy="11.5" r="0.75" fill="currentColor" stroke="none" />
-      <path d="M8 5.5h2.5" />
-      <path d="M13.5 5.5H16" />
+    <svg className={className} viewBox="0 0 24 24" {...svgProps}>
+      <path d="M4.5 2h15A1.5 1.5 0 0121 3.5v16H3V3.5A1.5 1.5 0 014.5 2z" />
+      <line x1="12" y1="2" x2="12" y2="19.5" />
+      <line x1="3" y1="19.5" x2="21" y2="19.5" />
+      <line x1="7" y1="10.5" x2="10" y2="10.5" strokeWidth={2.25} />
+      <line x1="14" y1="10.5" x2="17" y2="10.5" strokeWidth={2.25} />
+      <line x1="5" y1="21.5" x2="19" y2="21.5" strokeWidth={2} />
     </svg>
   );
 }

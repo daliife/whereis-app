@@ -7,13 +7,11 @@ export const es: typeof ca = {
     qrLink: "Códigos QR",
     searchPlaceholder: "Buscar cualquier objeto…",
     searchHeading: "Buscar un objeto",
-    searchHint: "Escribe una palabra y toca un resultado",
     flowOr: "o",
     locateFoundIn: "está en",
     locateFoundAt: (item: string, place: string) =>
       `«${item}» está en ${place}`,
     browseHeading: "Navega por los espacios",
-    browseSubheading: "Toca un armario o cajonera",
     statsSpaces: "Espacios",
     statsItems: "Elementos",
     items: (n: number) => (n === 1 ? "1 elemento" : `${n} elementos`),
@@ -21,7 +19,7 @@ export const es: typeof ca = {
     seeAll: (n: number) => `Ver los ${n} resultados`,
     nothingFound: "Sin resultados",
     nothingFoundHint: "Prueba con otra palabra",
-    orBrowseSpaces: "O navega por los espacios",
+    orBrowseSpaces: "Navega por los espacios",
     locate: "Localizar",
   },
   about: {
@@ -44,6 +42,7 @@ export const es: typeof ca = {
   common: {
     clearSearch: "Borrar búsqueda",
     close: "Cerrar",
+    goHome: "Ir a la página principal",
     loading: "Cargando...",
     skipToContent: "Saltar al contenido principal",
     switchToLocale: (label: string) => `Cambiar a ${label}`,

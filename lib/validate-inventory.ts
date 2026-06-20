@@ -1,26 +1,41 @@
-import { readFileSync } from "node:fs";
-
-const inventory = JSON.parse(readFileSync("data/inventory.json", "utf8"));
+export interface InventoryValidationResult {
+  errors: string[];
+  warnings: string[];
+  spaceCount: number;
+}
 
 const allowedTypes = new Set(["cabinet", "drawers", "shelf"]);
-const errors = [];
-const warnings = [];
 
-function isNonEmptyString(value) {
+function isNonEmptyString(value: unknown): value is string {
   return typeof value === "string" && value.trim().length > 0;
 }
 
-function path(parts) {
+function path(parts: Array<string | number>): string {
   return parts.join(".");
 }
 
-if (!Array.isArray(inventory.spaces)) {
-  errors.push("inventory.spaces must be an array");
-} else {
-  const spaceIds = new Set();
+export function validateInventory(inventory: unknown): InventoryValidationResult {
+  const errors: string[] = [];
+  const warnings: string[] = [];
 
-  for (const [spaceIndex, space] of inventory.spaces.entries()) {
+  if (
+    typeof inventory !== "object" ||
+    inventory === null ||
+    !Array.isArray((inventory as { spaces?: unknown }).spaces)
+  ) {
+    errors.push("inventory.spaces must be an array");
+    return { errors, warnings, spaceCount: 0 };
+  }
+
+  const spaces = (inventory as { spaces: unknown[] }).spaces;
+  const spaceIds = new Set<string>();
+
+  for (const [spaceIndex, spaceValue] of spaces.entries()) {
     const spacePath = path(["spaces", spaceIndex]);
+    const space =
+      typeof spaceValue === "object" && spaceValue !== null
+        ? (spaceValue as Record<string, unknown>)
+        : {};
 
     if (!isNonEmptyString(space.id)) {
       errors.push(`${spacePath}.id must be a non-empty string`);
@@ -34,7 +49,7 @@ if (!Array.isArray(inventory.spaces)) {
       errors.push(`${spacePath}.name must be a non-empty string`);
     }
 
-    if (!allowedTypes.has(space.type)) {
+    if (!allowedTypes.has(String(space.type))) {
       errors.push(
         `${spacePath}.type must be one of: ${[...allowedTypes].join(", ")}`,
       );
@@ -45,11 +60,15 @@ if (!Array.isArray(inventory.spaces)) {
       continue;
     }
 
-    const sectionIds = new Set();
-    const itemNames = new Map();
+    const sectionIds = new Set<string>();
+    const itemNames = new Map<string, string>();
 
-    for (const [sectionIndex, section] of space.sections.entries()) {
+    for (const [sectionIndex, sectionValue] of space.sections.entries()) {
       const sectionPath = path([spacePath, "sections", sectionIndex]);
+      const section =
+        typeof sectionValue === "object" && sectionValue !== null
+          ? (sectionValue as Record<string, unknown>)
+          : {};
 
       if (!isNonEmptyString(section.id)) {
         errors.push(`${sectionPath}.id must be a non-empty string`);
@@ -68,8 +87,12 @@ if (!Array.isArray(inventory.spaces)) {
         continue;
       }
 
-      for (const [itemIndex, item] of section.items.entries()) {
+      for (const [itemIndex, itemValue] of section.items.entries()) {
         const itemPath = path([sectionPath, "items", itemIndex]);
+        const item =
+          typeof itemValue === "object" && itemValue !== null
+            ? (itemValue as Record<string, unknown>)
+            : {};
 
         if (!isNonEmptyString(item.name)) {
           errors.push(`${itemPath}.name must be a non-empty string`);
@@ -81,7 +104,10 @@ if (!Array.isArray(inventory.spaces)) {
               `duplicate item name in ${space.id}: "${item.name}" also appears in ${previous}`,
             );
           } else {
-            itemNames.set(normalizedName, section.name || section.id);
+            itemNames.set(
+              normalizedName,
+              String(section.name || section.id || sectionIndex),
+            );
           }
         }
 
@@ -97,19 +123,6 @@ if (!Array.isArray(inventory.spaces)) {
       }
     }
   }
-}
 
-for (const warning of warnings) {
-  console.warn(`Warning: ${warning}`);
+  return { errors, warnings, spaceCount: spaces.length };
 }
-
-if (errors.length > 0) {
-  for (const error of errors) {
-    console.error(`Error: ${error}`);
-  }
-  process.exit(1);
-}
-
-console.log(
-  `Inventory OK: ${inventory.spaces.length} spaces, ${warnings.length} warning(s)`,
-);

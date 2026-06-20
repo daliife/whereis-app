@@ -91,7 +91,7 @@ Tots usen `useDialogA11y` on cal focus trap.
 
 Claus habituals:
 
-- `home.searchPlaceholder`, `home.searchHint`, `home.browseHeading`
+- `home.searchPlaceholder`, `home.searchHeading`, `home.browseHeading`
 - `space.goToSpaceList`, `about.*`
 - `settings.*`
 

@@ -97,9 +97,9 @@ export default function SpaceClient({ space }: { space: Space }) {
             </svg>
           </Link>
           <div
-            className={`flex h-7 w-7 flex-shrink-0 items-center justify-center rounded-md ${TYPE_COLOR[space.type] ?? "bg-zinc-100 text-zinc-500"}`}
+            className={`flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-lg ${TYPE_COLOR[space.type] ?? "bg-zinc-100 text-zinc-500"}`}
           >
-            <SpaceIcon type={space.type} className="h-3.5 w-3.5" />
+            <SpaceIcon type={space.type} className="h-5 w-5" />
           </div>
           <h1 className="min-w-0 flex-1 truncate text-base font-bold text-zinc-900 dark:text-zinc-100 sm:text-lg">
             {space.name}

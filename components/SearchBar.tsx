@@ -27,17 +27,16 @@ export default function SearchBar({
     if (autoFocus) inputRef.current?.focus();
   }, [autoFocus]);
 
-  const iconClass =
-    "text-zinc-400 transition-colors group-focus-within/search:text-amber-600 dark:text-zinc-500 dark:group-focus-within/search:text-amber-400";
+  const iconClass = prominent
+    ? "text-amber-700 dark:text-amber-400"
+    : "text-zinc-400 transition-colors group-focus-within/search:text-amber-600 dark:text-zinc-500 dark:group-focus-within/search:text-amber-400";
 
   return (
     <div className="group/search relative w-full" role="search">
       <label htmlFor={inputId} className="sr-only">
         {placeholder}
       </label>
-      <div
-        className={`pointer-events-none absolute inset-y-0 flex items-center left-3.5`}
-      >
+      <div className="pointer-events-none absolute inset-y-0 left-3.5 flex items-center">
         <svg
           className={`h-[18px] w-[18px] transition-colors ${iconClass}`}
           fill="none"
@@ -67,7 +66,7 @@ export default function SearchBar({
         onChange={(e) => onChange(e.target.value)}
         placeholder={placeholder}
         className={prominent ? "search-field-primary" : "search-field"}
-        style={{ minHeight: prominent ? 52 : 44 }}
+        style={{ minHeight: 44 }}
       />
       {value && (
         <button

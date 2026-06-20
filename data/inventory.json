@@ -2,12 +2,12 @@
   "spaces": [
     {
       "id": "armari-1",
-      "name": "Armari sòtan esquerra",
+      "name": "Armari soterrani esquerra",
       "type": "cabinet",
       "sections": [
         {
           "id": "prestatge-1",
-          "name": "Prestatge 4t pis (dalt)",
+          "name": "4t prestatge (dalt)",
           "items": [
             { "name": "2 bosses bandolera grans" },
             { "name": "Barbacoa" },
@@ -16,7 +16,7 @@
         },
         {
           "id": "prestatge-2",
-          "name": "Prestatge 3r pis",
+          "name": "3r prestatge",
           "items": [
             { "name": "2 caixetes buides" },
             { "name": "Maletí buit" },
@@ -26,7 +26,7 @@
         },
         {
           "id": "prestatge-3",
-          "name": "Prestatge 2n pis",
+          "name": "2n prestatge",
           "items": [
             { "name": "Caixetes: cargols i estris petits diversos" },
             { "name": "Caixa: cordills i fils" },
@@ -37,7 +37,7 @@
         },
         {
           "id": "prestatge-4",
-          "name": "Prestatge 1r pis (baix)",
+          "name": "1r prestatge (baix)",
           "items": [
             { "name": "Caixa: telèfon dutxa / cables bateria cotxe" },
             { "name": "Caixa: peus de rei / mini enclusa / similars" },
@@ -61,7 +61,7 @@
     },
     {
       "id": "armari-2",
-      "name": "Armari sòtan dret",
+      "name": "Armari soterrani dret",
       "type": "cabinet",
       "sections": [
         {
@@ -75,12 +75,12 @@
         },
         {
           "id": "prestatge-1",
-          "name": "Prestatge 4t pis (dalt)",
+          "name": "4t prestatge (dalt)",
           "items": [{ "name": "Estris pintura i pintures" }]
         },
         {
           "id": "prestatge-2",
-          "name": "Prestatge 3r pis",
+          "name": "3r prestatge",
           "items": [
             { "name": "Taladro gran" },
             { "name": "Tapa WC" },
@@ -91,7 +91,7 @@
         },
         {
           "id": "prestatge-3",
-          "name": "Prestatge 2n pis",
+          "name": "2n prestatge",
           "items": [
             { "name": "Caixa: bombetes i focus" },
             { "name": "Caixa: endolls, interruptors, etc" },
@@ -102,7 +102,7 @@
         },
         {
           "id": "prestatge-4",
-          "name": "Prestatge 1r pis (baix)",
+          "name": "1r prestatge (baix)",
           "items": [
             { "name": "Caixa eines" },
             { "name": "Caixa amb taladro i altres eines" },
@@ -121,7 +121,7 @@
     },
     {
       "id": "calaixera",
-      "name": "Calaixera sòtan",
+      "name": "Calaixera soterrani",
       "type": "drawers",
       "sections": [
         {
