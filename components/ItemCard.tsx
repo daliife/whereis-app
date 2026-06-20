@@ -2,6 +2,7 @@ interface ItemCardProps {
   itemName: string;
   spaceName: string;
   sectionName: string;
+  tags?: string[];
   highlighted?: boolean;
   /** Inside card-focus-wrap — no outer border */
   embedded?: boolean;
@@ -13,7 +14,7 @@ interface ItemCardProps {
 function CardChevron() {
   return (
     <svg
-      className="h-4 w-4 flex-shrink-0 text-zinc-300 transition-colors group-hover:text-amber-600 dark:text-zinc-600 dark:group-hover:text-amber-500"
+      className="card-action-chevron"
       fill="none"
       stroke="currentColor"
       viewBox="0 0 24 24"
@@ -33,6 +34,7 @@ export default function ItemCard({
   itemName,
   spaceName,
   sectionName,
+  tags = [],
   highlighted = false,
   embedded = false,
   showAction = false,
@@ -56,6 +58,18 @@ export default function ItemCard({
     >
       <div className={showAction ? "min-w-0 flex-1" : undefined}>
         <p className="card-title">{itemName}</p>
+        {tags.length > 0 && (
+          <ul className="item-tags" aria-label="Tags">
+            {tags.slice(0, 4).map((tag) => (
+              <li key={tag} className="item-tag">
+                {tag}
+              </li>
+            ))}
+            {tags.length > 4 && (
+              <li className="item-tag item-tag--more">+{tags.length - 4}</li>
+            )}
+          </ul>
+        )}
         <p className="card-meta">
           {showAction && locateLabel ? (
             <>

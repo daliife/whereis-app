@@ -32,7 +32,7 @@ export const metadata: Metadata = {
   },
   icons: {
     icon: `${basePath}/icon.svg`,
-    apple: `${basePath}/icon.svg`,
+    apple: `${basePath}/apple-touch-icon.png`,
   },
   other: {
     "mobile-web-app-capable": "yes",

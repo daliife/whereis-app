@@ -46,7 +46,7 @@ export default function SearchResults() {
 
   return (
     <>
-      <div className="mx-auto max-w-3xl px-4 pb-[max(3rem,env(safe-area-inset-bottom))] sm:px-6 lg:px-8">
+      <div className="page-shell">
         <PageHeader title={t.search.title} backLabel={t.search.back} />
 
         <main id="main-content" className="mt-4">

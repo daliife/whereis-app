@@ -36,7 +36,7 @@ export default function QRPage() {
   const selectedUrl = selectedSpace ? getSpaceUrl(selectedSpace.id) : "";
 
   return (
-    <div className="mx-auto max-w-3xl px-4 pb-[max(3rem,env(safe-area-inset-bottom))] sm:px-6 lg:px-8">
+    <div className="page-shell">
       <PageHeader title={t.qr.title} backLabel={t.qr.back} />
       <p className="-mt-1 mb-4 text-sm text-zinc-500 dark:text-zinc-400 print:hidden">
         {t.qr.subtitle}
@@ -99,11 +99,11 @@ export default function QRPage() {
       {selectedSpace && selectedUrl && (
         <div
           ref={modalRef}
-          className="fixed inset-0 z-50 flex items-center justify-center px-4 py-6 print:hidden"
+          className="sheet-overlay items-center px-4 py-6 print:hidden"
         >
           <button
             type="button"
-            className="absolute inset-0 bg-zinc-950/70 backdrop-blur-sm motion-reduce:backdrop-blur-none"
+            className="sheet-backdrop bg-zinc-950/70"
             onClick={closeModal}
             aria-label={t.common.close}
           />
@@ -129,7 +129,7 @@ export default function QRPage() {
                 ref={closeRef}
                 type="button"
                 onClick={closeModal}
-                className="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-lg text-zinc-600 transition-colors hover:bg-zinc-100 hover:text-zinc-800 focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 dark:text-zinc-400 dark:hover:bg-zinc-800 dark:hover:text-zinc-200"
+                className="btn-sheet-close"
                 aria-label={t.qr.closeExpanded}
               >
                 <svg
@@ -169,7 +169,7 @@ export default function QRPage() {
       <button
         type="button"
         onClick={() => window.print()}
-        className="mt-6 inline-flex w-full items-center justify-center gap-2 rounded-lg bg-amber-500 py-3.5 text-base font-semibold text-zinc-950 transition-colors hover:bg-amber-400 active:bg-amber-600 focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 focus-visible:ring-offset-2 focus-visible:ring-offset-zinc-50 print:hidden dark:focus-visible:ring-offset-zinc-950 sm:max-w-xs"
+        className="btn-primary mt-6 print:hidden sm:max-w-xs"
       >
         <svg
           className="h-5 w-5 shrink-0"

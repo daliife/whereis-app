@@ -73,7 +73,7 @@ export default function SpaceClient({ space }: { space: Space }) {
   }
 
   return (
-    <div className="mx-auto max-w-3xl pb-[max(3rem,env(safe-area-inset-bottom))] sm:px-6 lg:max-w-4xl lg:px-8">
+    <div className="page-shell page-shell--wide page-shell--flush-x">
       <div className="page-toolbar">
         <div className="flex items-center gap-2 px-4 pb-2 pt-[max(0.75rem,env(safe-area-inset-top))]">
           <Link
@@ -122,7 +122,7 @@ export default function SpaceClient({ space }: { space: Space }) {
           <div className="px-4 pb-3 text-center">
             <Link
               href={`/search?q=${encodeURIComponent(query)}`}
-              className="text-sm font-semibold text-zinc-600 underline-offset-2 hover:text-zinc-900 hover:underline focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 dark:text-zinc-400 dark:hover:text-zinc-200"
+              className="btn-text-link-underline"
             >
               {t.space.searchEverywhereBtn}
             </Link>
@@ -145,10 +145,11 @@ export default function SpaceClient({ space }: { space: Space }) {
                   key={`${r.space.id}-${r.section.id}-${r.item.name}-${i}`}
                   type="button"
                   onClick={() => locateItem(r.item.name)}
-                  className="group card-focus-wrap"
+                  className="card-focus-wrap list-item-optimized"
                 >
                   <ItemCard
                     itemName={r.item.name}
+                    tags={r.item.tags}
                     spaceName={r.space.name}
                     sectionName={r.section.name}
                     embedded
@@ -166,7 +167,7 @@ export default function SpaceClient({ space }: { space: Space }) {
                   {t.space.nothingFoundHint}{" "}
                   <Link
                     href={`/search?q=${encodeURIComponent(query)}`}
-                    className="font-medium text-zinc-800 underline-offset-2 hover:underline dark:text-zinc-200"
+                    className="btn-text-link-underline"
                   >
                     {t.space.searchEverywhereLink}
                   </Link>

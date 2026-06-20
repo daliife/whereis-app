@@ -95,13 +95,10 @@ export default function AboutSheet({ onClose }: Props) {
   ];
 
   return (
-    <div
-      ref={containerRef}
-      className="fixed inset-0 z-50 flex items-end justify-center sm:items-center sm:p-4"
-    >
+    <div ref={containerRef} className="sheet-overlay">
       <button
         type="button"
-        className="absolute inset-0 bg-zinc-950/60 backdrop-blur-sm motion-reduce:backdrop-blur-none"
+        className="sheet-backdrop"
         onClick={handleClose}
         aria-label={t.common.close}
       />
@@ -111,13 +108,10 @@ export default function AboutSheet({ onClose }: Props) {
         aria-modal="true"
         aria-labelledby="about-sheet-title"
         aria-describedby="about-sheet-intro"
-        className="relative flex max-h-[min(92dvh,640px)] w-full flex-col overflow-hidden rounded-t-2xl border border-zinc-200 bg-white shadow-2xl dark:border-zinc-800 dark:bg-zinc-900 sm:max-w-md sm:rounded-2xl"
+        className="sheet-panel sheet-panel--medium"
       >
-        <div className="flex justify-center pt-2.5 sm:hidden">
-          <div
-            className="h-1 w-10 rounded-full bg-zinc-300 dark:bg-zinc-600"
-            aria-hidden="true"
-          />
+        <div className="sheet-handle">
+          <div className="sheet-handle-bar" aria-hidden="true" />
         </div>
 
         <div className="flex items-start gap-3 border-b border-zinc-100 px-4 pb-4 pt-3 dark:border-zinc-800 sm:pt-4">
@@ -140,7 +134,7 @@ export default function AboutSheet({ onClose }: Props) {
             ref={closeRef}
             type="button"
             onClick={handleClose}
-            className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg text-zinc-600 transition-colors hover:bg-zinc-100 hover:text-zinc-800 focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 dark:text-zinc-400 dark:hover:bg-zinc-800 dark:hover:text-zinc-200"
+            className="btn-sheet-close shrink-0"
             aria-label={t.common.close}
           >
             <svg
@@ -189,11 +183,11 @@ export default function AboutSheet({ onClose }: Props) {
           </ol>
         </div>
 
-        <div className="border-t border-zinc-100 p-4 pb-[max(1rem,env(safe-area-inset-bottom))] dark:border-zinc-800">
+        <div className="sheet-footer">
           <button
             type="button"
             onClick={handleClose}
-            className="flex w-full items-center justify-center rounded-lg bg-amber-500 px-4 py-3.5 text-base font-semibold text-zinc-950 transition-colors hover:bg-amber-400 focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-zinc-900"
+            className="btn-primary"
           >
             {t.about.gotIt}
           </button>
