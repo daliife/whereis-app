@@ -15,58 +15,81 @@ Guia del sistema visual actual — minimal, mobile-first, amber com a accent.
 
 ## Classes CSS compartides (`app/globals.css`)
 
+### Layout
+
 | Classe | Ús |
 | ------ | ---- |
-| `search-field` | Input de cerca (SearchBar) |
-| `btn-toolbar` | Navegació neutra (enrere, esborrar cerca) |
-| `btn-header-action` | Header: text zinc, **icones amber** |
-| `btn-brand-ghost` | Accions secundàries taronja (poc usada al header) |
-| `card-interactive` | Cards clicables (resultats, espais) |
-| `card-base` | Files d'objectes al plànol |
-| `card-highlighted` | Objecte/secció destacada (vora esquerra amber) |
+| `page-shell` | Contenidor de pàgina (padding, max-width) |
+| `page-shell--wide` | Variant més ample (pàgina d'espai) |
+| `page-shell--flush-x` | Sense padding horitzontal mobile (toolbar sticky) |
 | `page-toolbar` | Capçalera sticky de la pàgina d'espai |
-| `section-label` | Títols de secció («Navega pels espais») |
-| `badge-soft` | Comptador d'objectes |
-| `meta-count` | Text secundari de resultats |
+| `page-header` / `page-header-title` | Capçalera secundària (search, QR) |
+
+### Botons
+
+| Classe | Ús |
+| ------ | ---- |
+| `btn-primary` | CTA amber (modals, imprimir) |
+| `btn-secondary` | Acció secundària amb vora brand |
+| `btn-toolbar` / `btn-toolbar-icon` | Navegació neutra |
+| `btn-sheet-close` | Tancar modals |
+| `btn-text-link` / `btn-text-link-underline` | Enllaços de text |
+| `btn-header-action` | Header: text zinc, icones amber |
+
+### Cards i resultats
+
+| Classe | Ús |
+| ------ | ---- |
+| `card-interactive` | Hover/focus de tota la card |
+| `card-focus-wrap` | Wrapper clicable (resultats, espais) |
+| `card-action-chevron` | Chevron secundari al hover |
+| `item-tag` / `item-tags` | Chips de tags als resultats |
+| `list-item-optimized` | `content-visibility: auto` per llistes llargues |
+
+### Modals (bottom sheets)
+
+| Classe | Ús |
+| ------ | ---- |
+| `sheet-overlay` | Backdrop + contenidor fix |
+| `sheet-backdrop` | Fons fosc amb blur |
+| `sheet-panel` | Panell (tall / medium variants) |
+| `sheet-handle` / `sheet-handle-bar` | Drag handle mobile |
+| `sheet-footer` | Peu amb CTA |
 
 Preferir reutilitzar aquestes classes abans d'afegir Tailwind inline repetit.
 
 ---
 
-## Pàgines
+## Components clau
 
-### Home (`app/page.tsx`)
-
-- Header: logo + títol + ⓘ + Configuració + QR
-- Cerca directa (sense dock/card extra)
-- Resultats en grid; tap → `LocateItemSheet`
-- «Navega pels espais» + grid d'espais (sense hint extra)
-
-### Espai (`SpaceClient.tsx`)
-
-- `page-toolbar`: enrere, nom, badge, SearchBar
-- Plànol + llista de la secció seleccionada
-- Cerca local substitueix plànol mentre hi ha query
-
-### Modal localització (`LocateItemSheet.tsx`)
-
-- `SpaceFloorPlan` amb `planOnly compact interactive={false}`
-- Silueta: peus (armari) o marc (calaixera) com al plànol principal
+| Component | Rol |
+| --------- | --- |
+| `SearchField` | SearchBar + cerques recents + drecera `/` |
+| `SearchResultsList` | Grid de resultats amb windowing >100 items |
+| `UiIcon` | SVG compartits (`search`, `close`, `back`, `qr`, …) |
+| `LazyQRCode` | QR renderitzat només quan entra al viewport |
+| `HomePageClient` | Shell client de la home (cerca + browse + footer) |
 
 ---
 
-## SpaceFloorPlan
+## Pàgines
 
-| Prop | Efecte |
-| ---- | ------ |
-| `interactive={true}` | Seccions són `<button>`; hover zinc |
-| `interactive={false}` | Preview estàtic (modal) |
-| `compact` | Alçades reduïdes; marc de calaixera al modal |
-| `planOnly` | Amaga llista d'objectes sota el plànol |
-| `highlightItemName` | Selecciona secció + scroll; destaca item a la llista |
-| `onSectionSelect` | Neteja `?highlight=` si l'usuari canvia secció |
+### Home (`app/page.tsx` → Server)
 
-**Un sol prestatge actiu** al plànol (`active={selectedSectionId === section.id}`).
+- Server: passa `spaces` des de `getAllSpaces()`
+- Client: `HomeSearchSection`, `HomeBrowseSection`, `HomeFooterNav`
+- Cerca amb tags visibles, cerques recents i `/` per focus
+
+### Espai (`SpaceClient.tsx`)
+
+- `page-toolbar`: enrere, nom, badge, `SearchField`
+- Plànol + llista de la secció seleccionada
+- Cerca local substitueix plànol mentre hi ha query
+
+### QR (`app/qr/page.tsx`)
+
+- QR de la graella: `LazyQRCode` (off-screen lazy)
+- Modal ampliat: `QRCode` immediat
 
 ---
 
@@ -74,28 +97,17 @@ Preferir reutilitzar aquestes classes abans d'afegir Tailwind inline repetit.
 
 - `AppIcon` — logo header / favicon (`app/icon.svg`)
 - `SpaceIcon` + `TYPE_COLOR` — tipus d'espai (cabinet, drawers, shelf)
+- `UiIcon` — icones UI reutilitzables (`components/icons/UiIcon.tsx`)
 
 ---
 
-## Modals
+## i18n
 
-- `AboutSheet` — com funciona (3 passos)
-- `LocateItemSheet` — on està l'objecte
-- `SettingsMenu` — tema + idioma (portal, bottom sheet mobile)
+- Català carregat al bundle inicial
+- Castellà i anglès: **lazy load** via `lib/load-locale.ts`
+- Nous strings: `ca.ts` + `es.ts` + `en.ts`
 
-Tots usen `useDialogA11y` on cal focus trap.
-
----
-
-## i18n visible
-
-Claus habituals:
-
-- `home.searchPlaceholder`, `home.searchHeading`, `home.browseHeading`
-- `space.goToSpaceList`, `about.*`
-- `settings.*`
-
-Font: `lib/translations/ca.ts`.
+Claus habituals: `home.*`, `search.recentSearches`, `about.*`, `settings.*`
 
 ---
 
@@ -107,3 +119,5 @@ Font: `lib/translations/ca.ts`.
 - [ ] No nested card al plànol
 - [ ] Header: icones amber, text neutre (`btn-header-action`)
 - [ ] Nous strings a ca + es + en
+- [ ] Icones via `UiIcon` quan sigui possible
+- [ ] Cerca via `SearchField` (no `SearchBar` directe a pàgines)

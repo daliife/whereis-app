@@ -22,6 +22,7 @@ export const es: typeof ca = {
     orBrowseSpaces: "Navega por los espacios",
     locate: "Localizar",
     moreLinks: "Más opciones",
+    itemTags: "Etiquetas",
   },
   about: {
     open: "Cómo funciona Stashly",
@@ -57,7 +58,6 @@ export const es: typeof ca = {
     light: "Claro",
     dark: "Oscuro",
     language: "Idioma",
-    more: "Más",
   },
   space: {
     back: "← Inicio",
@@ -88,6 +88,7 @@ export const es: typeof ca = {
     results: (n: number) => (n === 1 ? "1 resultado" : `${n} resultados`),
     nothingFound: "Sin resultados",
     nothingFoundHint: "Prueba con otra palabra",
+    recentSearches: "Búsquedas recientes",
   },
   qr: {
     back: "← Inicio",

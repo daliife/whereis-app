@@ -20,6 +20,7 @@ export const ca = {
     orBrowseSpaces: "Navega pels espais",
     locate: "Localitza",
     moreLinks: "Més opcions",
+    itemTags: "Etiquetes",
   },
   about: {
     open: "Com funciona Stashly",
@@ -55,7 +56,6 @@ export const ca = {
     light: "Clar",
     dark: "Fosc",
     language: "Idioma",
-    more: "Més",
   },
   space: {
     back: "← Inici",
@@ -86,6 +86,7 @@ export const ca = {
     results: (n: number) => (n === 1 ? "1 resultat" : `${n} resultats`),
     nothingFound: "Res trobat",
     nothingFoundHint: "Prova amb una paraula diferent",
+    recentSearches: "Cerques recents",
   },
   qr: {
     back: "← Inici",

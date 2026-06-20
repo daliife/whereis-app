@@ -11,6 +11,7 @@ interface Props {
   selectedResult: SearchResult | null;
   onSelect: (result: SearchResult) => void;
   locateLabel: string;
+  itemTagsLabel?: string;
   nothingFoundTitle: string;
   nothingFoundHint: string;
   footer?: React.ReactNode;
@@ -22,12 +23,14 @@ function ResultButton({
   isActive,
   onSelect,
   locateLabel,
+  itemTagsLabel,
 }: {
   result: SearchResult;
   index: number;
   isActive: boolean;
   onSelect: (result: SearchResult) => void;
   locateLabel: string;
+  itemTagsLabel?: string;
 }) {
   return (
     <button
@@ -45,6 +48,7 @@ function ResultButton({
         embedded
         showAction
         locateLabel={locateLabel}
+        itemTagsLabel={itemTagsLabel}
       />
     </button>
   );
@@ -55,6 +59,7 @@ export default function SearchResultsList({
   selectedResult,
   onSelect,
   locateLabel,
+  itemTagsLabel,
   nothingFoundTitle,
   nothingFoundHint,
   footer,
@@ -97,6 +102,7 @@ export default function SearchResultsList({
               isActive={isActive}
               onSelect={onSelect}
               locateLabel={locateLabel}
+              itemTagsLabel={itemTagsLabel}
             />
           );
         })}

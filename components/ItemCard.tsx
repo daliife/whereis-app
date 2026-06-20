@@ -1,8 +1,11 @@
+import UiIcon from "@/components/icons/UiIcon";
+
 interface ItemCardProps {
   itemName: string;
   spaceName: string;
   sectionName: string;
   tags?: string[];
+  itemTagsLabel?: string;
   highlighted?: boolean;
   /** Inside card-focus-wrap — no outer border */
   embedded?: boolean;
@@ -11,30 +14,12 @@ interface ItemCardProps {
   locateLabel?: string;
 }
 
-function CardChevron() {
-  return (
-    <svg
-      className="card-action-chevron"
-      fill="none"
-      stroke="currentColor"
-      viewBox="0 0 24 24"
-      aria-hidden="true"
-    >
-      <path
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        strokeWidth={2}
-        d="M9 5l7 7-7 7"
-      />
-    </svg>
-  );
-}
-
 export default function ItemCard({
   itemName,
   spaceName,
   sectionName,
   tags = [],
+  itemTagsLabel = "Tags",
   highlighted = false,
   embedded = false,
   showAction = false,
@@ -59,7 +44,7 @@ export default function ItemCard({
       <div className={showAction ? "min-w-0 flex-1" : undefined}>
         <p className="card-title">{itemName}</p>
         {tags.length > 0 && (
-          <ul className="item-tags" aria-label="Tags">
+          <ul className="item-tags" aria-label={itemTagsLabel}>
             {tags.slice(0, 4).map((tag) => (
               <li key={tag} className="item-tag">
                 {tag}
@@ -86,7 +71,7 @@ export default function ItemCard({
           {sectionName}
         </p>
       </div>
-      {showAction && <CardChevron />}
+      {showAction && <UiIcon name="chevron-right" className="card-action-chevron" />}
     </div>
   );
 }

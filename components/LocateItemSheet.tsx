@@ -4,6 +4,7 @@ import { useCallback, useRef } from "react";
 import Link from "next/link";
 import SpaceFloorPlan from "@/components/SpaceFloorPlan";
 import SpaceIcon, { TYPE_COLOR } from "@/components/SpaceIcon";
+import UiIcon from "@/components/icons/UiIcon";
 import type { SearchResult } from "@/lib/inventory";
 import { useDialogA11y } from "@/lib/useDialogA11y";
 import { useI18n } from "@/lib/i18n";
@@ -84,20 +85,7 @@ export default function LocateItemSheet({ result, onClose }: Props) {
             className="btn-sheet-close"
             aria-label={t.common.close}
           >
-            <svg
-              className="h-5 w-5"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-              aria-hidden="true"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M6 18L18 6M6 6l12 12"
-              />
-            </svg>
+            <UiIcon name="close" className="h-5 w-5" />
           </button>
         </div>
 

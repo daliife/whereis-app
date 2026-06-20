@@ -2,7 +2,7 @@
 
 import { useEffect } from "react";
 import dynamic from "next/dynamic";
-import SearchBar from "@/components/SearchBar";
+import SearchField from "@/components/SearchField";
 import SearchStatus from "@/components/SearchStatus";
 import SearchResultsList from "@/components/SearchResultsList";
 import { searchAll } from "@/lib/fuse-search";
@@ -51,7 +51,7 @@ export default function HomeSearchSection() {
         </header>
 
         <div className="home-primary-field">
-          <SearchBar
+          <SearchField
             value={query}
             onChange={setQuery}
             placeholder={t.home.searchPlaceholder}
@@ -74,6 +74,7 @@ export default function HomeSearchSection() {
               selectedResult={locateResult}
               onSelect={setLocateResult}
               locateLabel={t.home.locate}
+              itemTagsLabel={t.home.itemTags}
               nothingFoundTitle={t.home.nothingFound}
               nothingFoundHint={t.home.nothingFoundHint}
               footer={

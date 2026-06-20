@@ -2,6 +2,7 @@
 
 import { useCallback, useRef } from "react";
 import AppIcon from "@/components/AppIcon";
+import UiIcon from "@/components/icons/UiIcon";
 import { useDialogA11y } from "@/lib/useDialogA11y";
 import { useI18n } from "@/lib/i18n";
 
@@ -10,60 +11,7 @@ interface Props {
 }
 
 function StepIcon({ type }: { type: "search" | "locate" | "qr" }) {
-  if (type === "search") {
-    return (
-      <svg
-        className="h-5 w-5"
-        fill="none"
-        stroke="currentColor"
-        viewBox="0 0 24 24"
-        aria-hidden="true"
-      >
-        <path
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          strokeWidth={2}
-          d="M21 21l-4.35-4.35M17 11A6 6 0 1 1 5 11a6 6 0 0 1 12 0z"
-        />
-      </svg>
-    );
-  }
-
-  if (type === "locate") {
-    return (
-      <svg
-        className="h-5 w-5"
-        fill="none"
-        stroke="currentColor"
-        viewBox="0 0 24 24"
-        aria-hidden="true"
-      >
-        <path
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          strokeWidth={2}
-          d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7"
-        />
-      </svg>
-    );
-  }
-
-  return (
-    <svg
-      className="h-5 w-5"
-      fill="none"
-      stroke="currentColor"
-      viewBox="0 0 24 24"
-      aria-hidden="true"
-    >
-      <path
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        strokeWidth={2}
-        d="M4 4h6v6H4zM14 4h6v6h-6zM4 14h6v6H4zM14 14h2v2h-2zM18 14h2v6h-6v-2h4zM14 18h2v2h-2z"
-      />
-    </svg>
-  );
+  return <UiIcon name={type} className="h-5 w-5" />;
 }
 
 export default function AboutSheet({ onClose }: Props) {
@@ -137,20 +85,7 @@ export default function AboutSheet({ onClose }: Props) {
             className="btn-sheet-close shrink-0"
             aria-label={t.common.close}
           >
-            <svg
-              className="h-5 w-5"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-              aria-hidden="true"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M6 18L18 6M6 6l12 12"
-              />
-            </svg>
+            <UiIcon name="close" className="h-5 w-5" />
           </button>
         </div>
 

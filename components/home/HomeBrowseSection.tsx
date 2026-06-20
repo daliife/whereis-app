@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import UiIcon from "@/components/icons/UiIcon";
 import SpaceIcon, { TYPE_COLOR_HOME } from "@/components/SpaceIcon";
 import type { Space } from "@/lib/inventory";
 import { useI18n } from "@/lib/i18n";
@@ -51,20 +52,7 @@ export default function HomeBrowseSection({ spaces }: Props) {
                   <p className="card-title mt-0.5">{space.name}</p>
                   <p className="card-meta">{t.home.items(itemCount)}</p>
                 </div>
-                <svg
-                  className="card-action-chevron"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                  aria-hidden="true"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M9 5l7 7-7 7"
-                  />
-                </svg>
+                <UiIcon name="chevron-right" className="card-action-chevron" />
               </div>
             </Link>
           );

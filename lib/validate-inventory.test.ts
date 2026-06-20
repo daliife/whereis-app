@@ -9,7 +9,7 @@ describe("validateInventory", () => {
 
     expect(result.errors).toEqual([]);
     expect(result.spaceCount).toBe(3);
-    expect(result.warnings.length).toBeGreaterThan(0);
+    expect(result.warnings).toEqual([]);
   });
 
   it("reports duplicate space ids", () => {

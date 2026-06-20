@@ -3,7 +3,7 @@
 import { useCallback, useEffect, useState } from "react";
 import dynamic from "next/dynamic";
 import { useSearchParams, useRouter } from "next/navigation";
-import SearchBar from "@/components/SearchBar";
+import SearchField from "@/components/SearchField";
 import SearchStatus from "@/components/SearchStatus";
 import SearchResultsList from "@/components/SearchResultsList";
 import PageHeader from "@/components/PageHeader";
@@ -50,7 +50,7 @@ export default function SearchResults() {
         <PageHeader title={t.search.title} backLabel={t.search.back} />
 
         <main id="main-content" className="mt-4">
-          <SearchBar
+          <SearchField
             value={query}
             onChange={setQuery}
             placeholder={t.home.searchPlaceholder}
@@ -75,6 +75,7 @@ export default function SearchResults() {
                 selectedResult={locateResult}
                 onSelect={setLocateResult}
                 locateLabel={t.home.locate}
+                itemTagsLabel={t.home.itemTags}
                 nothingFoundTitle={t.search.nothingFound}
                 nothingFoundHint={t.search.nothingFoundHint}
               />

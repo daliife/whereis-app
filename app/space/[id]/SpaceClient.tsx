@@ -3,7 +3,8 @@
 import { useEffect, useRef, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import Link from "next/link";
-import SearchBar from "@/components/SearchBar";
+import SearchField from "@/components/SearchField";
+import UiIcon from "@/components/icons/UiIcon";
 import SearchStatus from "@/components/SearchStatus";
 import ItemCard from "@/components/ItemCard";
 import EmptyState from "@/components/EmptyState";
@@ -81,20 +82,7 @@ export default function SpaceClient({ space }: { space: Space }) {
             className="btn-toolbar-icon flex-shrink-0"
             aria-label={t.space.back}
           >
-            <svg
-              className="h-5 w-5"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-              aria-hidden="true"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M15 19l-7-7 7-7"
-              />
-            </svg>
+            <UiIcon name="back" className="h-5 w-5" />
           </Link>
           <div
             className={`flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-lg ${TYPE_COLOR[space.type] ?? "bg-zinc-100 text-zinc-500"}`}
@@ -110,7 +98,7 @@ export default function SpaceClient({ space }: { space: Space }) {
         </div>
 
         <div className="px-4 pb-3">
-          <SearchBar
+          <SearchField
             value={query}
             onChange={setQuery}
             placeholder={t.space.searchPlaceholder(space.name)}
@@ -155,6 +143,7 @@ export default function SpaceClient({ space }: { space: Space }) {
                     embedded
                     showAction
                     locateLabel={t.home.locate}
+                    itemTagsLabel={t.home.itemTags}
                   />
                 </button>
               ))}

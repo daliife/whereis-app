@@ -2,7 +2,9 @@
 
 import { useCallback, useEffect, useRef, useState } from "react";
 import PageHeader from "@/components/PageHeader";
+import LazyQRCode from "@/components/LazyQRCode";
 import QRCode from "@/components/QRCode";
+import UiIcon from "@/components/icons/UiIcon";
 import { getAllSpaces, type Space } from "@/lib/inventory";
 import { useI18n } from "@/lib/i18n";
 import { useDialogA11y } from "@/lib/useDialogA11y";
@@ -60,7 +62,7 @@ export default function QRPage() {
             <div className="flex items-start gap-5">
               <div className="flex-shrink-0">
                 {baseUrl ? (
-                  <QRCode
+                  <LazyQRCode
                     value={getSpaceUrl(space.id)}
                     size={100}
                     level="M"
@@ -132,20 +134,7 @@ export default function QRPage() {
                 className="btn-sheet-close"
                 aria-label={t.qr.closeExpanded}
               >
-                <svg
-                  className="h-5 w-5"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                  aria-hidden="true"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M6 18L18 6M6 6l12 12"
-                  />
-                </svg>
+                <UiIcon name="close" className="h-5 w-5" />
               </button>
             </div>
 
@@ -171,20 +160,7 @@ export default function QRPage() {
         onClick={() => window.print()}
         className="btn-primary mt-6 print:hidden sm:max-w-xs"
       >
-        <svg
-          className="h-5 w-5 shrink-0"
-          fill="none"
-          stroke="currentColor"
-          viewBox="0 0 24 24"
-          aria-hidden="true"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth={2}
-            d="M6 9V4h12v5M6 18H4a2 2 0 01-2-2v-5a2 2 0 012-2h16a2 2 0 012 2v5a2 2 0 01-2 2h-2M6 14h12v7H6v-7z"
-          />
-        </svg>
+        <UiIcon name="print" className="h-5 w-5 shrink-0" />
         {t.qr.printButton}
       </button>
       </main>

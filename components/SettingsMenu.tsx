@@ -1,7 +1,6 @@
 "use client";
 
 import { createPortal } from "react-dom";
-import Link from "next/link";
 import {
   useCallback,
   useEffect,
@@ -15,10 +14,6 @@ import { useDialogA11y } from "@/lib/useDialogA11y";
 
 const PANEL_WIDTH = 256;
 
-interface SettingsMenuProps {
-  onOpenAbout?: () => void;
-}
-
 function segmentButtonClass(active: boolean) {
   return [
     "settings-segment-btn",
@@ -28,7 +23,7 @@ function segmentButtonClass(active: boolean) {
   ].join(" ");
 }
 
-export default function SettingsMenu({ onOpenAbout }: SettingsMenuProps) {
+export default function SettingsMenu() {
   const [open, setOpen] = useState(false);
   const [mounted, setMounted] = useState(false);
   const [desktopPos, setDesktopPos] = useState<{
@@ -236,59 +231,6 @@ export default function SettingsMenu({ onOpenAbout }: SettingsMenuProps) {
                         {LOCALE_LABELS[code]}
                       </button>
                     ))}
-                  </div>
-                </div>
-
-                <div>
-                  <p className="settings-section-label">{t.settings.more}</p>
-                  <div className="flex flex-col gap-0.5">
-                    {onOpenAbout && (
-                      <button
-                        type="button"
-                        onClick={() => {
-                          closeMenu();
-                          onOpenAbout();
-                        }}
-                        className="settings-menu-link"
-                      >
-                        <svg
-                          className="settings-menu-link-icon"
-                          fill="none"
-                          stroke="currentColor"
-                          viewBox="0 0 24 24"
-                          aria-hidden="true"
-                        >
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth={2}
-                            d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-                          />
-                        </svg>
-                        {t.about.open}
-                      </button>
-                    )}
-                    <Link
-                      href="/qr"
-                      onClick={closeMenu}
-                      className="settings-menu-link"
-                    >
-                      <svg
-                        className="settings-menu-link-icon"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                        aria-hidden="true"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth={2}
-                          d="M4 4h6v6H4zM14 4h6v6h-6zM4 14h6v6H4zM14 14h2v2h-2zM18 14h2v6h-6v-2h4zM14 18h2v2h-2z"
-                        />
-                      </svg>
-                      {t.home.qrLink}
-                    </Link>
                   </div>
                 </div>
               </div>
