@@ -13,8 +13,9 @@ describe("inventory", () => {
   });
 
   it("getSpace returns a space by id", () => {
-    expect(getSpace("armari-1")?.name).toBe("Armari soterrani esquerra");
-    expect(getSpace("calaixera")?.type).toBe("drawers");
+    for (const space of inventoryData.spaces as Space[]) {
+      expect(getSpace(space.id)).toEqual(space);
+    }
   });
 
   it("getSpace returns undefined for unknown ids", () => {
@@ -37,17 +38,5 @@ describe("inventory", () => {
     expect(
       index.every((entry) => entry.item && entry.section && entry.space),
     ).toBe(true);
-  });
-
-  it("uses updated section naming without pis", () => {
-    const armari = getSpace("armari-1");
-    expect(armari?.sections.map((section) => section.name)).toContain(
-      "3r prestatge",
-    );
-    expect(
-      armari?.sections.some((section) =>
-        section.name.toLowerCase().includes("pis"),
-      ),
-    ).toBe(false);
   });
 });

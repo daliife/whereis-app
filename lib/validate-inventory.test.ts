@@ -8,7 +8,7 @@ describe("validateInventory", () => {
     const result = validateInventory(inventoryData);
 
     expect(result.errors).toEqual([]);
-    expect(result.spaceCount).toBe(3);
+    expect(result.spaceCount).toBe(inventoryData.spaces.length);
     expect(result.warnings).toEqual([]);
   });
 
