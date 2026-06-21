@@ -40,6 +40,7 @@ export const ca = {
     gotIt: "Entesos",
   },
   common: {
+    searchLabel: "Cerca objectes",
     clearSearch: "Neteja la cerca",
     close: "Tanca",
     goHome: "Ves a la pàgina principal",

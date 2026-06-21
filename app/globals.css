@@ -2,6 +2,11 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Hide UI until async locale bundle loads (see app/layout.tsx bootstrap script). */
+html.i18n-pending body {
+  visibility: hidden;
+}
+
 /*
  * Palette (4 roles — light & dark):
  * - brand (amber): CTAs, focus, highlights, primary panel tint

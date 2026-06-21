@@ -1,5 +1,6 @@
 "use client";
 
+import type { ReactNode } from "react";
 import ItemCard from "@/components/ItemCard";
 import EmptyState from "@/components/EmptyState";
 import type { SearchResult } from "@/lib/inventory";
@@ -13,7 +14,7 @@ interface Props {
   locateLabel: string;
   itemTagsLabel?: string;
   nothingFoundTitle: string;
-  nothingFoundHint: string;
+  nothingFoundHint: ReactNode;
   footer?: React.ReactNode;
 }
 

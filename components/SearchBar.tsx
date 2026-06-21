@@ -12,6 +12,7 @@ import UiIcon from "@/components/icons/UiIcon";
 interface SearchBarProps {
   value: string;
   onChange: (value: string) => void;
+  label: string;
   placeholder?: string;
   clearLabel?: string;
   autoFocus?: boolean;
@@ -26,6 +27,7 @@ const SearchBar = forwardRef<HTMLInputElement, SearchBarProps>(
     {
       value,
       onChange,
+      label,
       placeholder = "",
       clearLabel = "Clear search",
       autoFocus = false,
@@ -60,7 +62,7 @@ const SearchBar = forwardRef<HTMLInputElement, SearchBarProps>(
     return (
       <div className="group/search relative w-full" role="search">
         <label htmlFor={inputId} className="sr-only">
-          {placeholder}
+          {label}
         </label>
         <div className="pointer-events-none absolute inset-y-0 left-3.5 flex items-center">
           <UiIcon name="search" className={`h-[18px] w-[18px] ${iconClass}`} />
@@ -70,6 +72,7 @@ const SearchBar = forwardRef<HTMLInputElement, SearchBarProps>(
           id={inputId}
           type="text"
           role="searchbox"
+          aria-label={label}
           inputMode="search"
           enterKeyHint="search"
           autoComplete="off"

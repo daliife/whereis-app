@@ -10,6 +10,7 @@ import { useSearchShortcut } from "@/lib/useSearchShortcut";
 interface Props {
   value: string;
   onChange: (value: string) => void;
+  label: string;
   placeholder?: string;
   clearLabel?: string;
   autoFocus?: boolean;
@@ -20,6 +21,7 @@ interface Props {
 export default function SearchField({
   value,
   onChange,
+  label,
   ...searchBarProps
 }: Props) {
   const inputRef = useRef<HTMLInputElement>(null);
@@ -40,6 +42,7 @@ export default function SearchField({
         ref={inputRef}
         value={value}
         onChange={onChange}
+        label={label}
         {...searchBarProps}
       />
       <RecentSearches onSelect={onChange} hidden={value.trim().length > 0} />

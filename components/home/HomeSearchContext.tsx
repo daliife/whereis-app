@@ -7,7 +7,7 @@ import {
   useMemo,
   useState,
 } from "react";
-import type { SearchResult, Space } from "@/lib/inventory";
+import type { SearchResult } from "@/lib/inventory";
 
 interface HomeSearchContextValue {
   query: string;
@@ -65,5 +65,3 @@ export function useHomeSearch() {
   }
   return context;
 }
-
-export type { Space };

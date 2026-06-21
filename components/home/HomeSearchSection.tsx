@@ -50,6 +50,7 @@ export default function HomeSearchSection() {
           <SearchField
             value={query}
             onChange={setQuery}
+            label={t.common.searchLabel}
             placeholder={t.home.searchPlaceholder}
             clearLabel={t.common.clearSearch}
             prominent

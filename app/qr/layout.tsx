@@ -7,6 +7,7 @@ export const metadata: Metadata = createPageMetadata({
   description:
     "Genera i imprimeix codis QR per obrir cada espai d'emmagatzematge directament des del mòbil.",
   path: "/qr/",
+  noIndex: true,
 });
 
 export default function QRLayout({ children }: { children: React.ReactNode }) {

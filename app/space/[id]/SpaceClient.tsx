@@ -6,8 +6,7 @@ import Link from "next/link";
 import SearchField from "@/components/SearchField";
 import UiIcon from "@/components/icons/UiIcon";
 import SearchStatus from "@/components/SearchStatus";
-import ItemCard from "@/components/ItemCard";
-import EmptyState from "@/components/EmptyState";
+import SearchResultsList from "@/components/SearchResultsList";
 import SpaceFloorPlan from "@/components/SpaceFloorPlan";
 import SpaceIcon, { TYPE_COLOR } from "@/components/SpaceIcon";
 import type { Space } from "@/lib/inventory";
@@ -99,6 +98,7 @@ export default function SpaceClient({ space }: { space: Space }) {
           <SearchField
             value={query}
             onChange={setQuery}
+            label={t.common.searchLabel}
             placeholder={t.space.searchPlaceholder(space.name)}
             clearLabel={t.common.clearSearch}
           />
@@ -124,44 +124,25 @@ export default function SpaceClient({ space }: { space: Space }) {
           nothingFoundLabel={t.space.nothingFoundHere}
         />
         {localResults ? (
-          localResults.length > 0 ? (
-            <div className="grid gap-2 sm:grid-cols-2">
-              {localResults.map((r, i) => (
-                <button
-                  key={`${r.space.id}-${r.section.id}-${r.item.name}-${i}`}
-                  type="button"
-                  onClick={() => locateItem(r.item.name)}
-                  className="card-focus-wrap list-item-optimized"
+          <SearchResultsList
+            results={localResults}
+            selectedResult={null}
+            onSelect={(result) => locateItem(result.item.name)}
+            locateLabel={t.home.locate}
+            itemTagsLabel={t.home.itemTags}
+            nothingFoundTitle={t.space.nothingFoundHere}
+            nothingFoundHint={
+              <>
+                {t.space.nothingFoundHint}{" "}
+                <Link
+                  href={`/search?q=${encodeURIComponent(query)}`}
+                  className="btn-text-link-underline"
                 >
-                  <ItemCard
-                    itemName={r.item.name}
-                    tags={r.item.tags}
-                    spaceName={r.space.name}
-                    sectionName={r.section.name}
-                    embedded
-                    showAction
-                    locateLabel={t.home.locate}
-                    itemTagsLabel={t.home.itemTags}
-                  />
-                </button>
-              ))}
-            </div>
-          ) : (
-            <EmptyState
-              title={t.space.nothingFoundHere}
-              hint={
-                <>
-                  {t.space.nothingFoundHint}{" "}
-                  <Link
-                    href={`/search?q=${encodeURIComponent(query)}`}
-                    className="btn-text-link-underline"
-                  >
-                    {t.space.searchEverywhereLink}
-                  </Link>
-                </>
-              }
-            />
-          )
+                  {t.space.searchEverywhereLink}
+                </Link>
+              </>
+            }
+          />
         ) : (
           <SpaceFloorPlan
             space={space}

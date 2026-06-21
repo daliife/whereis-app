@@ -42,6 +42,7 @@ export const es: typeof ca = {
     gotIt: "Entendido",
   },
   common: {
+    searchLabel: "Buscar objetos",
     clearSearch: "Borrar búsqueda",
     close: "Cerrar",
     goHome: "Ir a la página principal",

@@ -41,6 +41,7 @@ export const en: typeof ca = {
     gotIt: "Got it",
   },
   common: {
+    searchLabel: "Search items",
     clearSearch: "Clear search",
     close: "Close",
     goHome: "Go to home",

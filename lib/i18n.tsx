@@ -14,7 +14,7 @@ import { loadLocale, type Locale, type Translations } from "./load-locale";
 
 export type { Locale, Translations };
 
-const STORAGE_KEY = "stashly-locale";
+export const STORAGE_KEY = "stashly-locale";
 
 export const LOCALE_LABELS: Record<Locale, string> = {
   ca: "CA",
@@ -28,6 +28,16 @@ function isLocale(value: string | null): value is Locale {
   return value === "ca" || value === "es" || value === "en";
 }
 
+function getStoredLocale(): Locale {
+  if (typeof window === "undefined") return "ca";
+  const stored = localStorage.getItem(STORAGE_KEY);
+  return isLocale(stored) ? stored : "ca";
+}
+
+function clearLocalePending() {
+  document.documentElement.classList.remove("i18n-pending");
+}
+
 interface I18nContextValue {
   locale: Locale;
   setLocale: (l: Locale) => void;
@@ -39,7 +49,7 @@ const I18nContext = createContext<I18nContextValue>({
   locale: "ca",
   setLocale: () => {},
   t: ca,
-  ready: true,
+  ready: false,
 });
 
 export function I18nProvider({ children }: { children: ReactNode }) {
@@ -49,15 +59,15 @@ export function I18nProvider({ children }: { children: ReactNode }) {
 
   useEffect(() => {
     let cancelled = false;
-    const stored = localStorage.getItem(STORAGE_KEY);
-    const initial = isLocale(stored) ? stored : "ca";
+    const initial = getStoredLocale();
 
     loadLocale(initial).then((dict) => {
       if (cancelled) return;
       setLocaleState(initial);
       setT(dict);
-      setReady(true);
       document.documentElement.lang = initial;
+      clearLocalePending();
+      setReady(true);
     });
 
     return () => {
@@ -72,6 +82,8 @@ export function I18nProvider({ children }: { children: ReactNode }) {
 
     loadLocale(next).then((dict) => {
       setT(dict);
+      clearLocalePending();
+      setReady(true);
     });
   }, []);
 
