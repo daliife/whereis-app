@@ -1,0 +1,38 @@
+name: Build and publish to GitHub Pages
+description: Install, run pnpm check, and push out/ to the gh-pages branch.
+
+inputs:
+  github-token:
+    description: GitHub token with contents write (for gh-pages push)
+    required: true
+  site-url:
+    description: Public site URL (NEXT_PUBLIC_SITE_URL)
+    required: true
+  base-path:
+    description: App base path (NEXT_PUBLIC_BASE_PATH)
+    required: false
+    default: /whereis-app
+
+runs:
+  using: composite
+  steps:
+    - name: Install dependencies
+      run: pnpm install --frozen-lockfile
+      shell: bash
+
+    - name: Check
+      run: pnpm check
+      shell: bash
+      env:
+        NEXT_PUBLIC_BASE_PATH: ${{ inputs.base-path }}
+        NEXT_PUBLIC_SITE_URL: ${{ inputs.site-url }}
+
+    - name: Add .nojekyll
+      run: touch out/.nojekyll
+      shell: bash
+
+    - name: Deploy to gh-pages branch
+      uses: peaceiris/actions-gh-pages@v4
+      with:
+        github_token: ${{ inputs.github-token }}
+        publish_dir: ./out
