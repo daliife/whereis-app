@@ -46,15 +46,15 @@ Contingut de l'inventari en **català** (noms d'objectes). La UI suporta **ca / 
 
 ## Stack
 
-| Capa         | Tecnologia                            |
-| ------------ | ------------------------------------- |
-| Framework    | Next.js 14 · App Router · TypeScript  |
-| Estils       | Tailwind CSS (`darkMode: "class"`)    |
-| Cerca        | fuse.js · client-side · sense backend |
-| QR           | qrcode.react (import dinàmic)         |
-| Desplegament | `output: 'export'` → GitHub Pages     |
+| Capa         | Tecnologia                                       |
+| ------------ | ------------------------------------------------ |
+| Framework    | Next.js 14 · App Router · TypeScript             |
+| Estils       | Tailwind CSS (`darkMode: "class"`)               |
+| Cerca        | fuse.js · client-side · sense backend            |
+| QR           | qrcode.react (import dinàmic)                    |
+| Desplegament | `output: 'export'` → GitHub Pages                |
 | PWA          | Service worker (`out/sw.js`, generated at build) |
-| Qualitat     | ESLint (Next + TS + Vitest), Prettier |
+| Qualitat     | ESLint (Next + TS + Vitest), Prettier            |
 
 ---
 

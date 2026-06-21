@@ -59,20 +59,20 @@ Preferir canvis petits; no reescriure mòduls sencers.
 
 ## Mapa ràpid: «on ho toco?»
 
-| Vols canviar…         | Fitxers                                                    |
-| --------------------- | ---------------------------------------------------------- |
-| Inventari             | `data/inventory.json`                                      |
-| Cerca fuzzy           | `lib/fuse-search.ts`                                       |
-| Resultats home        | `app/page.tsx`, `components/ItemCard.tsx`                  |
-| Plànol armari/calaix  | `components/SpaceFloorPlan.tsx`                            |
-| Modal «on està»       | `components/LocateItemSheet.tsx`                           |
-| Cerca dins espai      | `app/space/[id]/SpaceClient.tsx`                           |
-| Cerca global          | `app/search/SearchResults.tsx`                             |
-| QR                    | `app/qr/page.tsx`, `components/QRCode.tsx`                 |
-| Idioma                | `lib/translations/*.ts`, `lib/i18n.tsx`                    |
-| Tema clar/fosc        | `lib/theme.tsx`, `app/globals.css`                         |
-| Configuració (header) | `components/SettingsMenu.tsx`                              |
-| Estils compartits     | `app/globals.css`                                          |
+| Vols canviar…         | Fitxers                                                                             |
+| --------------------- | ----------------------------------------------------------------------------------- |
+| Inventari             | `data/inventory.json`                                                               |
+| Cerca fuzzy           | `lib/fuse-search.ts`                                                                |
+| Resultats home        | `app/page.tsx`, `components/ItemCard.tsx`                                           |
+| Plànol armari/calaix  | `components/SpaceFloorPlan.tsx`                                                     |
+| Modal «on està»       | `components/LocateItemSheet.tsx`                                                    |
+| Cerca dins espai      | `app/space/[id]/SpaceClient.tsx`                                                    |
+| Cerca global          | `app/search/SearchResults.tsx`                                                      |
+| QR                    | `app/qr/page.tsx`, `components/QRCode.tsx`                                          |
+| Idioma                | `lib/translations/*.ts`, `lib/i18n.tsx`                                             |
+| Tema clar/fosc        | `lib/theme.tsx`, `app/globals.css`                                                  |
+| Configuració (header) | `components/SettingsMenu.tsx`                                                       |
+| Estils compartits     | `app/globals.css`                                                                   |
 | PWA / offline         | `scripts/generate-sw.mjs` → `out/sw.js`, `components/ServiceWorkerRegistration.tsx` |
 
 ---
