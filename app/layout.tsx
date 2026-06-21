@@ -80,7 +80,7 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
       </head>
-      <body className={`${inter.variable} font-sans min-h-screen`}>
+      <body className={`${inter.variable} min-h-screen font-sans`}>
         <ThemeProvider>
           <I18nProvider>
             <SkipLink />

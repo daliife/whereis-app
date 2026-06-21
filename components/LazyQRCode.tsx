@@ -38,7 +38,10 @@ export default function LazyQRCode({
   }, []);
 
   return (
-    <div ref={containerRef} className={props.className ?? "h-[100px] w-[100px]"}>
+    <div
+      ref={containerRef}
+      className={props.className ?? "h-[100px] w-[100px]"}
+    >
       {visible ? (
         <QRCode {...props} />
       ) : (

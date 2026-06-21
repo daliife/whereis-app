@@ -48,7 +48,9 @@ body {
   background-color: rgb(var(--surface-page));
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  transition: background-color 0.15s ease, color 0.15s ease;
+  transition:
+    background-color 0.15s ease,
+    color 0.15s ease;
   padding-left: env(safe-area-inset-left);
   padding-right: env(safe-area-inset-right);
 }
@@ -107,11 +109,11 @@ input[type="search"]::-webkit-search-results-decoration {
   }
 
   .settings-menu-link-icon {
-    @apply h-4 w-4 shrink-0 text-amber-700 sm:h-3.5 sm:w-3.5 dark:text-amber-500;
+    @apply h-4 w-4 shrink-0 text-amber-700 dark:text-amber-500 sm:h-3.5 sm:w-3.5;
   }
 
   .btn-primary {
-    @apply inline-flex w-full items-center justify-center gap-2 rounded-lg bg-amber-500 px-4 py-3.5 text-base font-semibold text-zinc-950 transition-colors hover:bg-amber-400 active:bg-amber-600 focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 focus-visible:ring-offset-2 focus-visible:ring-offset-[rgb(var(--surface-page))];
+    @apply inline-flex w-full items-center justify-center gap-2 rounded-lg bg-amber-500 px-4 py-3.5 text-base font-semibold text-zinc-950 transition-colors hover:bg-amber-400 focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 focus-visible:ring-offset-2 focus-visible:ring-offset-[rgb(var(--surface-page))] active:bg-amber-600;
   }
 
   .btn-secondary {
@@ -143,7 +145,7 @@ input[type="search"]::-webkit-search-results-decoration {
   }
 
   .card-focus-wrap {
-    @apply block w-full rounded-2xl text-left card-interactive focus:outline-none focus-visible:border-[rgb(var(--brand-border)/0.55)] focus-visible:bg-[rgb(var(--brand-soft)/0.35)] focus-visible:ring-2 focus-visible:ring-amber-400 focus-visible:ring-offset-2 focus-visible:ring-offset-[rgb(var(--surface-page))] dark:focus-visible:border-[rgb(var(--brand-border)/0.45)] dark:focus-visible:bg-[rgb(var(--brand-soft)/0.22)];
+    @apply card-interactive block w-full rounded-2xl text-left focus:outline-none focus-visible:border-[rgb(var(--brand-border)/0.55)] focus-visible:bg-[rgb(var(--brand-soft)/0.35)] focus-visible:ring-2 focus-visible:ring-amber-400 focus-visible:ring-offset-2 focus-visible:ring-offset-[rgb(var(--surface-page))] dark:focus-visible:border-[rgb(var(--brand-border)/0.45)] dark:focus-visible:bg-[rgb(var(--brand-soft)/0.22)];
   }
 
   .card-action-chevron {

@@ -1,6 +1,12 @@
 "use client";
 
-import { createContext, useCallback, useContext, useMemo, useState } from "react";
+import {
+  createContext,
+  useCallback,
+  useContext,
+  useMemo,
+  useState,
+} from "react";
 import type { SearchResult, Space } from "@/lib/inventory";
 
 interface HomeSearchContextValue {
@@ -16,7 +22,11 @@ interface HomeSearchContextValue {
 
 const HomeSearchContext = createContext<HomeSearchContextValue | null>(null);
 
-export function HomeSearchProvider({ children }: { children: React.ReactNode }) {
+export function HomeSearchProvider({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   const [query, setQuery] = useState("");
   const [locateResult, setLocateResult] = useState<SearchResult | null>(null);
   const [aboutOpen, setAboutOpen] = useState(false);

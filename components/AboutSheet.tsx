@@ -92,7 +92,10 @@ export default function AboutSheet({ onClose }: Props) {
         <div className="min-h-0 flex-1 overflow-y-auto px-4 py-5">
           <ol className="space-y-0">
             {steps.map((step, index) => (
-              <li key={step.icon} className="relative flex gap-4 pb-8 last:pb-0">
+              <li
+                key={step.icon}
+                className="relative flex gap-4 pb-8 last:pb-0"
+              >
                 {index < steps.length - 1 && (
                   <span
                     className="absolute left-5 top-10 h-[calc(100%-1.25rem)] w-px bg-zinc-200 dark:bg-zinc-700"
@@ -119,11 +122,7 @@ export default function AboutSheet({ onClose }: Props) {
         </div>
 
         <div className="sheet-footer">
-          <button
-            type="button"
-            onClick={handleClose}
-            className="btn-primary"
-          >
+          <button type="button" onClick={handleClose} className="btn-primary">
             {t.about.gotIt}
           </button>
         </div>

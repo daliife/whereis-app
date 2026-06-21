@@ -17,44 +17,44 @@ Guia del sistema visual actual — minimal, mobile-first, amber com a accent.
 
 ### Layout
 
-| Classe | Ús |
-| ------ | ---- |
-| `page-shell` | Contenidor de pàgina (padding, max-width) |
-| `page-shell--wide` | Variant més ample (pàgina d'espai) |
-| `page-shell--flush-x` | Sense padding horitzontal mobile (toolbar sticky) |
-| `page-toolbar` | Capçalera sticky de la pàgina d'espai |
-| `page-header` / `page-header-title` | Capçalera secundària (search, QR) |
+| Classe                              | Ús                                                |
+| ----------------------------------- | ------------------------------------------------- |
+| `page-shell`                        | Contenidor de pàgina (padding, max-width)         |
+| `page-shell--wide`                  | Variant més ample (pàgina d'espai)                |
+| `page-shell--flush-x`               | Sense padding horitzontal mobile (toolbar sticky) |
+| `page-toolbar`                      | Capçalera sticky de la pàgina d'espai             |
+| `page-header` / `page-header-title` | Capçalera secundària (search, QR)                 |
 
 ### Botons
 
-| Classe | Ús |
-| ------ | ---- |
-| `btn-primary` | CTA amber (modals, imprimir) |
-| `btn-secondary` | Acció secundària amb vora brand |
-| `btn-toolbar` / `btn-toolbar-icon` | Navegació neutra |
-| `btn-sheet-close` | Tancar modals |
-| `btn-text-link` / `btn-text-link-underline` | Enllaços de text |
-| `btn-header-action` | Header: text zinc, icones amber |
+| Classe                                      | Ús                              |
+| ------------------------------------------- | ------------------------------- |
+| `btn-primary`                               | CTA amber (modals, imprimir)    |
+| `btn-secondary`                             | Acció secundària amb vora brand |
+| `btn-toolbar` / `btn-toolbar-icon`          | Navegació neutra                |
+| `btn-sheet-close`                           | Tancar modals                   |
+| `btn-text-link` / `btn-text-link-underline` | Enllaços de text                |
+| `btn-header-action`                         | Header: text zinc, icones amber |
 
 ### Cards i resultats
 
-| Classe | Ús |
-| ------ | ---- |
-| `card-interactive` | Hover/focus de tota la card |
-| `card-focus-wrap` | Wrapper clicable (resultats, espais) |
-| `card-action-chevron` | Chevron secundari al hover |
-| `item-tag` / `item-tags` | Chips de tags als resultats |
-| `list-item-optimized` | `content-visibility: auto` per llistes llargues |
+| Classe                   | Ús                                              |
+| ------------------------ | ----------------------------------------------- |
+| `card-interactive`       | Hover/focus de tota la card                     |
+| `card-focus-wrap`        | Wrapper clicable (resultats, espais)            |
+| `card-action-chevron`    | Chevron secundari al hover                      |
+| `item-tag` / `item-tags` | Chips de tags als resultats                     |
+| `list-item-optimized`    | `content-visibility: auto` per llistes llargues |
 
 ### Modals (bottom sheets)
 
-| Classe | Ús |
-| ------ | ---- |
-| `sheet-overlay` | Backdrop + contenidor fix |
-| `sheet-backdrop` | Fons fosc amb blur |
-| `sheet-panel` | Panell (tall / medium variants) |
-| `sheet-handle` / `sheet-handle-bar` | Drag handle mobile |
-| `sheet-footer` | Peu amb CTA |
+| Classe                              | Ús                              |
+| ----------------------------------- | ------------------------------- |
+| `sheet-overlay`                     | Backdrop + contenidor fix       |
+| `sheet-backdrop`                    | Fons fosc amb blur              |
+| `sheet-panel`                       | Panell (tall / medium variants) |
+| `sheet-handle` / `sheet-handle-bar` | Drag handle mobile              |
+| `sheet-footer`                      | Peu amb CTA                     |
 
 Preferir reutilitzar aquestes classes abans d'afegir Tailwind inline repetit.
 
@@ -62,13 +62,13 @@ Preferir reutilitzar aquestes classes abans d'afegir Tailwind inline repetit.
 
 ## Components clau
 
-| Component | Rol |
-| --------- | --- |
-| `SearchField` | SearchBar + cerques recents + drecera `/` |
-| `SearchResultsList` | Grid de resultats amb windowing >100 items |
-| `UiIcon` | SVG compartits (`search`, `close`, `back`, `qr`, …) |
-| `LazyQRCode` | QR renderitzat només quan entra al viewport |
-| `HomePageClient` | Shell client de la home (cerca + browse + footer) |
+| Component           | Rol                                                 |
+| ------------------- | --------------------------------------------------- |
+| `SearchField`       | SearchBar + cerques recents + drecera `/`           |
+| `SearchResultsList` | Grid de resultats amb windowing >100 items          |
+| `UiIcon`            | SVG compartits (`search`, `close`, `back`, `qr`, …) |
+| `LazyQRCode`        | QR renderitzat només quan entra al viewport         |
+| `HomePageClient`    | Shell client de la home (cerca + browse + footer)   |
 
 ---
 

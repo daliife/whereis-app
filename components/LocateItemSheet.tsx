@@ -69,9 +69,7 @@ export default function LocateItemSheet({ result, onClose }: Props) {
               <span className="font-medium text-zinc-800 dark:text-zinc-200">
                 {space.name}
               </span>
-              <span className="mx-1.5 text-zinc-400 dark:text-zinc-500">
-                ›
-              </span>
+              <span className="mx-1.5 text-zinc-400 dark:text-zinc-500">›</span>
               <span className="font-semibold text-zinc-800 dark:text-zinc-200">
                 {section.name}
               </span>
@@ -101,10 +99,7 @@ export default function LocateItemSheet({ result, onClose }: Props) {
         </div>
 
         <div className="sheet-footer">
-          <Link
-            href={listUrl}
-            className="btn-primary flex-col gap-0.5"
-          >
+          <Link href={listUrl} className="btn-primary flex-col gap-0.5">
             <span>{t.space.goToSpace}</span>
             <span className="max-w-full truncate text-sm font-medium text-zinc-950/75">
               {space.name}

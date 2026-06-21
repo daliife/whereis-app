@@ -17,9 +17,7 @@ if (!fs.existsSync(LOG_FILE)) {
 
 const output = fs.readFileSync(LOG_FILE, "utf8");
 
-const sharedMatch = output.match(
-  /First Load JS shared by all\s+([\d.]+)\s+kB/,
-);
+const sharedMatch = output.match(/First Load JS shared by all\s+([\d.]+)\s+kB/);
 if (!sharedMatch) {
   console.error("verify-bundle: could not parse shared bundle size");
   process.exit(1);

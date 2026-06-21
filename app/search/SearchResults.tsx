@@ -12,10 +12,9 @@ import type { SearchResult } from "@/lib/inventory";
 import { useDebouncedValue } from "@/lib/useDebouncedValue";
 import { useI18n } from "@/lib/i18n";
 
-const LocateItemSheet = dynamic(
-  () => import("@/components/LocateItemSheet"),
-  { ssr: false },
-);
+const LocateItemSheet = dynamic(() => import("@/components/LocateItemSheet"), {
+  ssr: false,
+});
 
 export default function SearchResults() {
   const searchParams = useSearchParams();

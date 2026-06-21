@@ -18,10 +18,7 @@ export default function HomeBrowseSection({ spaces }: Props) {
   if (isSearching) return null;
 
   return (
-    <section
-      className="home-browse"
-      aria-labelledby="home-browse-heading"
-    >
+    <section className="home-browse" aria-labelledby="home-browse-heading">
       <header className="home-browse-header">
         <h2 id="home-browse-heading" className="home-browse-title">
           {t.home.browseHeading}

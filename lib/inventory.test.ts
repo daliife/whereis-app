@@ -34,9 +34,9 @@ describe("inventory", () => {
     );
 
     expect(index).toHaveLength(expectedCount);
-    expect(index.every((entry) => entry.item && entry.section && entry.space)).toBe(
-      true,
-    );
+    expect(
+      index.every((entry) => entry.item && entry.section && entry.space),
+    ).toBe(true);
   });
 
   it("uses updated section naming without pis", () => {
@@ -45,7 +45,9 @@ describe("inventory", () => {
       "3r prestatge",
     );
     expect(
-      armari?.sections.some((section) => section.name.toLowerCase().includes("pis")),
+      armari?.sections.some((section) =>
+        section.name.toLowerCase().includes("pis"),
+      ),
     ).toBe(false);
   });
 });

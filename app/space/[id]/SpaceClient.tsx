@@ -92,9 +92,7 @@ export default function SpaceClient({ space }: { space: Space }) {
           <h1 className="page-header-title min-w-0 flex-1 truncate">
             {space.name}
           </h1>
-          <span className="badge-neutral">
-            {t.home.items(itemCount)}
-          </span>
+          <span className="badge-neutral">{t.home.items(itemCount)}</span>
         </div>
 
         <div className="px-4 pb-3">

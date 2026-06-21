@@ -9,8 +9,7 @@ export const en: typeof ca = {
     searchHeading: "Search for an item",
     flowOr: "or",
     locateFoundIn: "is in",
-    locateFoundAt: (item: string, place: string) =>
-      `«${item}» is in ${place}`,
+    locateFoundAt: (item: string, place: string) => `«${item}» is in ${place}`,
     browseHeading: "Browse your spaces",
     statsSpaces: "Spaces",
     statsItems: "Items",

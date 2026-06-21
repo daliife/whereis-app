@@ -6,14 +6,14 @@
 
 ## Per on començar
 
-| Si vols… | Llegeix |
-| -------- | ------- |
-| Entendre l'app en 5 minuts | [../README.md](../README.md) |
-| Donar context a Cursor / Copilot | [../AGENTS.md](../AGENTS.md) |
-| Demanar canvis amb IA sense soroll | [AI-WORKFLOW.md](AI-WORKFLOW.md) |
-| Afegir o reorganitzar objectes | [DATA.md](DATA.md) |
-| Entendre com encaixa el codi | [ARCHITECTURE.md](ARCHITECTURE.md) |
-| Tocar UI, colors o components | [UI.md](UI.md) |
+| Si vols…                           | Llegeix                            |
+| ---------------------------------- | ---------------------------------- |
+| Entendre l'app en 5 minuts         | [../README.md](../README.md)       |
+| Donar context a Cursor / Copilot   | [../AGENTS.md](../AGENTS.md)       |
+| Demanar canvis amb IA sense soroll | [AI-WORKFLOW.md](AI-WORKFLOW.md)   |
+| Afegir o reorganitzar objectes     | [DATA.md](DATA.md)                 |
+| Entendre com encaixa el codi       | [ARCHITECTURE.md](ARCHITECTURE.md) |
+| Tocar UI, colors o components      | [UI.md](UI.md)                     |
 
 ---
 
@@ -25,7 +25,7 @@ Quan obres un xat nou amb un assistent, adjunta o indica que llegeixi:
 2. El doc del tema (`DATA.md`, `UI.md`, etc.)
 3. Els fitxers concrets del canvi
 
-Això redueix respostes que proposen API routes, npm, o patrons antics (p. ex. `lib/search.ts` com a únic mòdul de cerca).
+Això redueix respostes que proposen API routes, npm, o patrons antics (p. ex. un mòdul de cerca separat de `fuse-search.ts`).
 
 ---
 

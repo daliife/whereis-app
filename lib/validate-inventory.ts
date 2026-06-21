@@ -14,7 +14,9 @@ function path(parts: Array<string | number>): string {
   return parts.join(".");
 }
 
-export function validateInventory(inventory: unknown): InventoryValidationResult {
+export function validateInventory(
+  inventory: unknown,
+): InventoryValidationResult {
   const errors: string[] = [];
   const warnings: string[] = [];
 

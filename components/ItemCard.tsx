@@ -65,13 +65,18 @@ export default function ItemCard({
             </>
           ) : null}
           {spaceName}
-          <span className="mx-1 text-zinc-300 dark:text-zinc-600" aria-hidden="true">
+          <span
+            className="mx-1 text-zinc-300 dark:text-zinc-600"
+            aria-hidden="true"
+          >
             ›
           </span>
           {sectionName}
         </p>
       </div>
-      {showAction && <UiIcon name="chevron-right" className="card-action-chevron" />}
+      {showAction && (
+        <UiIcon name="chevron-right" className="card-action-chevron" />
+      )}
     </div>
   );
 }

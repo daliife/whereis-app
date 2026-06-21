@@ -11,27 +11,15 @@
           "items": [
             {
               "name": "2 bosses bandolera grans",
-              "tags": [
-                "bandolera",
-                "grans"
-              ]
+              "tags": ["bandolera", "grans"]
             },
             {
               "name": "Barbacoa",
-              "tags": [
-                "barbacoa",
-                "graella",
-                "cuina"
-              ]
+              "tags": ["barbacoa", "graella", "cuina"]
             },
             {
               "name": "Caixa cartró: trampes i verins rates",
-              "tags": [
-                "cartro",
-                "trampes",
-                "verins",
-                "rates"
-              ]
+              "tags": ["cartro", "trampes", "verins", "rates"]
             }
           ]
         },
@@ -45,25 +33,15 @@
             },
             {
               "name": "Maletí buit",
-              "tags": [
-                "maleti"
-              ]
+              "tags": ["maleti"]
             },
             {
               "name": "Caixa cartró: aigua plast i 2 rasquetes",
-              "tags": [
-                "cartro",
-                "aigua",
-                "rasquetes"
-              ]
+              "tags": ["cartro", "aigua", "rasquetes"]
             },
             {
               "name": "Caixa: serres i similars",
-              "tags": [
-                "serra",
-                "serres",
-                "eines"
-              ]
+              "tags": ["serra", "serres", "eines"]
             }
           ]
         },
@@ -73,20 +51,11 @@
           "items": [
             {
               "name": "Caixetes: cargols i estris petits diversos",
-              "tags": [
-                "cargol",
-                "cargols",
-                "fixació",
-                "estris",
-                "petits"
-              ]
+              "tags": ["cargol", "cargols", "fixació", "estris", "petits"]
             },
             {
               "name": "Caixa: cordills i fils",
-              "tags": [
-                "cordills",
-                "fils"
-              ]
+              "tags": ["cordills", "fils"]
             },
             {
               "name": "Caixa: triples, fils i connectors electricitat",
@@ -101,17 +70,11 @@
             },
             {
               "name": "Caixa: fils i connectors àudio TV",
-              "tags": [
-                "fils",
-                "connectors",
-                "audio"
-              ]
+              "tags": ["fils", "connectors", "audio"]
             },
             {
               "name": "Diferents sprays",
-              "tags": [
-                "sprays"
-              ]
+              "tags": ["sprays"]
             }
           ]
         },
@@ -132,69 +95,35 @@
             },
             {
               "name": "Caixa: peus de rei / mini enclusa / similars",
-              "tags": [
-                "peus",
-                "rei",
-                "mini",
-                "enclusa"
-              ]
+              "tags": ["peus", "rei", "mini", "enclusa"]
             },
             {
               "name": "Caixeta fusta: broques diverses",
-              "tags": [
-                "broca",
-                "broques",
-                "eines",
-                "diverses"
-              ]
+              "tags": ["broca", "broques", "eines", "diverses"]
             },
             {
               "name": "Caixa gris: pops i bandoleres",
-              "tags": [
-                "pops",
-                "bandoleres"
-              ]
+              "tags": ["pops", "bandoleres"]
             },
             {
               "name": "Caixa gris: peces fusta (falques i més grans)",
-              "tags": [
-                "falques",
-                "mes",
-                "grans"
-              ]
+              "tags": ["falques", "mes", "grans"]
             },
             {
               "name": "Caixa gris: L prestatges / frontises armaris / similars",
-              "tags": [
-                "prestatges",
-                "frontises",
-                "armaris"
-              ]
+              "tags": ["prestatges", "frontises", "armaris"]
             },
             {
               "name": "Bossa plàstic: potes llit",
-              "tags": [
-                "plastic",
-                "potes",
-                "llit"
-              ]
+              "tags": ["plastic", "potes", "llit"]
             },
             {
               "name": "Capsa cartró: casets antics",
-              "tags": [
-                "cartro",
-                "casets",
-                "antics"
-              ]
+              "tags": ["cartro", "casets", "antics"]
             },
             {
               "name": "Capsa negra: claus hexagonals",
-              "tags": [
-                "clau",
-                "claus",
-                "hexagonal",
-                "hexagonals"
-              ]
+              "tags": ["clau", "claus", "hexagonal", "hexagonals"]
             }
           ]
         },
@@ -228,18 +157,11 @@
           "items": [
             {
               "name": "Borrassa (damunt)",
-              "tags": [
-                "borrassa",
-                "pintura",
-                "neteja"
-              ]
+              "tags": ["borrassa", "pintura", "neteja"]
             },
             {
               "name": "2 màquines d'escriure",
-              "tags": [
-                "maquines",
-                "escriure"
-              ]
+              "tags": ["maquines", "escriure"]
             },
             {
               "name": "Capsa fusta buida",
@@ -253,11 +175,7 @@
           "items": [
             {
               "name": "Estris pintura i pintures",
-              "tags": [
-                "pintura",
-                "pintures",
-                "estris"
-              ]
+              "tags": ["pintura", "pintures", "estris"]
             }
           ]
         },
@@ -267,45 +185,23 @@
           "items": [
             {
               "name": "Taladro gran",
-              "tags": [
-                "taladro",
-                "trepant",
-                "eines",
-                "eina",
-                "gran"
-              ]
+              "tags": ["taladro", "trepant", "eines", "eina", "gran"]
             },
             {
               "name": "Tapa WC",
-              "tags": [
-                "tapa"
-              ]
+              "tags": ["tapa"]
             },
             {
               "name": "Colzes grans prestatge",
-              "tags": [
-                "colzes",
-                "grans",
-                "prestatge"
-              ]
+              "tags": ["colzes", "grans", "prestatge"]
             },
             {
               "name": "2 cubells pintura / draps pintura",
-              "tags": [
-                "pintura",
-                "pintures",
-                "cubells",
-                "draps"
-              ]
+              "tags": ["pintura", "pintures", "cubells", "draps"]
             },
             {
               "name": "Cortina plàstic verda",
-              "tags": [
-                "cortina",
-                "cortines",
-                "plastic",
-                "verda"
-              ]
+              "tags": ["cortina", "cortines", "plastic", "verda"]
             }
           ]
         },
@@ -315,46 +211,23 @@
           "items": [
             {
               "name": "Caixa: bombetes i focus",
-              "tags": [
-                "bombeta",
-                "bombetes",
-                "llum",
-                "focus"
-              ]
+              "tags": ["bombeta", "bombetes", "llum", "focus"]
             },
             {
               "name": "Caixa: endolls, interruptors, etc",
-              "tags": [
-                "endoll",
-                "endolls",
-                "electricitat",
-                "interruptors"
-              ]
+              "tags": ["endoll", "endolls", "electricitat", "interruptors"]
             },
             {
               "name": "Caixa cartró: coses cortines, tiradors i similars",
-              "tags": [
-                "cartro",
-                "cortines",
-                "tiradors"
-              ]
+              "tags": ["cartro", "cortines", "tiradors"]
             },
             {
               "name": "Maleta amb infladors piscina",
-              "tags": [
-                "inflador",
-                "piscina",
-                "maleta",
-                "infladors"
-              ]
+              "tags": ["inflador", "piscina", "maleta", "infladors"]
             },
             {
               "name": "Borrassa (2n prestatge)",
-              "tags": [
-                "borrassa",
-                "pintura",
-                "neteja"
-              ]
+              "tags": ["borrassa", "pintura", "neteja"]
             }
           ]
         },
@@ -364,18 +237,11 @@
           "items": [
             {
               "name": "Caixa eines",
-              "tags": [
-                "eines"
-              ]
+              "tags": ["eines"]
             },
             {
               "name": "Caixa amb taladro i altres eines",
-              "tags": [
-                "taladro",
-                "trepant",
-                "eines",
-                "eina"
-              ]
+              "tags": ["taladro", "trepant", "eines", "eina"]
             },
             {
               "name": "Caixa amb taladro bateria",
@@ -396,20 +262,11 @@
           "items": [
             {
               "name": "Allargos electricitat",
-              "tags": [
-                "electricitat",
-                "cables",
-                "fil",
-                "allargos"
-              ]
+              "tags": ["electricitat", "cables", "fil", "allargos"]
             },
             {
               "name": "Caixa plàstic: fils elèctrics",
-              "tags": [
-                "plastic",
-                "fils",
-                "electrics"
-              ]
+              "tags": ["plastic", "fils", "electrics"]
             }
           ]
         }
@@ -426,47 +283,27 @@
           "items": [
             {
               "name": "Brides",
-              "tags": [
-                "brides",
-                "fixació"
-              ]
+              "tags": ["brides", "fixació"]
             },
             {
               "name": "Regletes",
-              "tags": [
-                "regleta",
-                "regletes",
-                "endoll"
-              ]
+              "tags": ["regleta", "regletes", "endoll"]
             },
             {
               "name": "Estris habituals",
-              "tags": [
-                "estris",
-                "habituals"
-              ]
+              "tags": ["estris", "habituals"]
             },
             {
               "name": "Molles elàstiques",
-              "tags": [
-                "molles",
-                "elastiques"
-              ]
+              "tags": ["molles", "elastiques"]
             },
             {
               "name": "Cargols L i de ganxo",
-              "tags": [
-                "cargol",
-                "cargols",
-                "fixació",
-                "ganxo"
-              ]
+              "tags": ["cargol", "cargols", "fixació", "ganxo"]
             },
             {
               "name": "Diversos estris",
-              "tags": [
-                "estris"
-              ]
+              "tags": ["estris"]
             }
           ]
         },
@@ -476,31 +313,19 @@
           "items": [
             {
               "name": "Focus",
-              "tags": [
-                "focus",
-                "llum",
-                "bombeta"
-              ]
+              "tags": ["focus", "llum", "bombeta"]
             },
             {
               "name": "Draps",
-              "tags": [
-                "draps"
-              ]
+              "tags": ["draps"]
             },
             {
               "name": "Plàstics",
-              "tags": [
-                "plastics"
-              ]
+              "tags": ["plastics"]
             },
             {
               "name": "Peces sobreres armaris nous",
-              "tags": [
-                "sobreres",
-                "armaris",
-                "nous"
-              ]
+              "tags": ["sobreres", "armaris", "nous"]
             }
           ]
         },
@@ -510,35 +335,19 @@
           "items": [
             {
               "name": "Cel·lo gran",
-              "tags": [
-                "cello",
-                "cel·lo",
-                "embalatge",
-                "cel",
-                "gran"
-              ]
+              "tags": ["cello", "cel·lo", "embalatge", "cel", "gran"]
             },
             {
               "name": "Màquina embalar",
-              "tags": [
-                "maquina",
-                "embalar"
-              ]
+              "tags": ["maquina", "embalar"]
             },
             {
               "name": "Cinta aïllant",
-              "tags": [
-                "cinta",
-                "aïllant",
-                "aillant"
-              ]
+              "tags": ["cinta", "aïllant", "aillant"]
             },
             {
               "name": "Caixetes amb petits estris",
-              "tags": [
-                "petits",
-                "estris"
-              ]
+              "tags": ["petits", "estris"]
             }
           ]
         },
@@ -548,9 +357,7 @@
           "items": [
             {
               "name": "Capses buides de diferents tamanys i materials",
-              "tags": [
-                "capses"
-              ]
+              "tags": ["capses"]
             }
           ]
         }

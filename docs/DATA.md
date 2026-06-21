@@ -10,23 +10,23 @@ Tot el contingut de casa viu a **`data/inventory.json`**. No hi ha base de dades
 {
   "spaces": [
     {
-      "id": "armari-1",              // URL: /space/armari-1/
+      "id": "armari-1", // URL: /space/armari-1/
       "name": "Armari soterrani esquerra", // Visible a la UI (català)
-      "type": "cabinet",             // "cabinet" | "drawers" | "shelf"
+      "type": "cabinet", // "cabinet" | "drawers" | "shelf"
       "sections": [
         {
-          "id": "prestatge-1",       // Únic dins l'espai
+          "id": "prestatge-1", // Únic dins l'espai
           "name": "4t prestatge (dalt)",
           "items": [
             {
               "name": "Barbacoa",
-              "tags": ["barbacoa", "graella", "cuina"]  // opcional però recomanat
-            }
-          ]
-        }
-      ]
-    }
-  ]
+              "tags": ["barbacoa", "graella", "cuina"], // opcional però recomanat
+            },
+          ],
+        },
+      ],
+    },
+  ],
 }
 ```
 
@@ -34,11 +34,11 @@ Tot el contingut de casa viu a **`data/inventory.json`**. No hi ha base de dades
 
 ## Tipus d'espai (`type`)
 
-| Valor | Plànol | Notes |
-| ----- | ------ | ----- |
+| Valor     | Plànol                    | Notes                                                        |
+| --------- | ------------------------- | ------------------------------------------------------------ |
 | `cabinet` | Prestatges apilats + peus | Seccions «sobre l'armari» es detecten per id/nom amb «sobre» |
-| `drawers` | Calaixos amb nansa | Totes les seccions són calaixos |
-| `shelf` | Prestatges (estanteria) | Mateix component que cabinet amb variants |
+| `drawers` | Calaixos amb nansa        | Totes les seccions són calaixos                              |
+| `shelf`   | Prestatges (estanteria)   | Mateix component que cabinet amb variants                    |
 
 El plànol (`SpaceFloorPlan`) adapta formes i silueta segons `type`.
 
@@ -103,10 +103,10 @@ Comprova:
 
 ## Idioma del contingut
 
-| Què | Idioma |
-| --- | ------ |
-| Noms d'objectes, seccions, tags | **Català** (fix) |
-| Botons, placeholders, errors | ca / es / en (`lib/translations/`) |
+| Què                             | Idioma                             |
+| ------------------------------- | ---------------------------------- |
+| Noms d'objectes, seccions, tags | **Català** (fix)                   |
+| Botons, placeholders, errors    | ca / es / en (`lib/translations/`) |
 
 No demanis a la IA que tradueixi `inventory.json` quan canviïs idioma de la UI.
 

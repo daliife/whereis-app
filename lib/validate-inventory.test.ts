@@ -35,9 +35,9 @@ describe("validateInventory", () => {
       ],
     });
 
-    expect(result.errors.some((error) => error.includes("type must be one of"))).toBe(
-      true,
-    );
+    expect(
+      result.errors.some((error) => error.includes("type must be one of")),
+    ).toBe(true);
   });
 
   it("reports empty item names", () => {
@@ -47,7 +47,9 @@ describe("validateInventory", () => {
           id: "space",
           name: "Space",
           type: "cabinet",
-          sections: [{ id: "section", name: "Section", items: [{ name: "  " }] }],
+          sections: [
+            { id: "section", name: "Section", items: [{ name: "  " }] },
+          ],
         },
       ],
     });
@@ -81,15 +83,19 @@ describe("validateInventory", () => {
     });
 
     expect(result.errors).toEqual([]);
-    expect(result.warnings.some((warning) => warning.includes("duplicate item name"))).toBe(
-      true,
-    );
+    expect(
+      result.warnings.some((warning) =>
+        warning.includes("duplicate item name"),
+      ),
+    ).toBe(true);
   });
 });
 
 describe("validate-inventory script data", () => {
   it("matches the file on disk", () => {
-    const fileInventory = JSON.parse(readFileSync("data/inventory.json", "utf8"));
+    const fileInventory = JSON.parse(
+      readFileSync("data/inventory.json", "utf8"),
+    );
     const result = validateInventory(fileInventory);
 
     expect(result.errors).toEqual([]);

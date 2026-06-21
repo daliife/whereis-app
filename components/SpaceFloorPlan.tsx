@@ -94,9 +94,7 @@ export default function SpaceFloorPlan({
   }, [compact, planOnly]);
 
   const activeSectionId =
-    !interactive && highlightSectionId
-      ? highlightSectionId
-      : selectedSectionId;
+    !interactive && highlightSectionId ? highlightSectionId : selectedSectionId;
 
   function selectSection(sectionId: string) {
     setSelectedSectionId(sectionId);
@@ -153,25 +151,23 @@ export default function SpaceFloorPlan({
       )}
 
       {showPlanDiagram && (
-      <div
-        className={[
-          "mx-auto flex w-full flex-col",
-          compact ? "max-w-sm gap-1.5" : "max-w-sm gap-2",
-          isDrawers ? "gap-1.5" : "gap-2",
-        ].join(" ")}
-      >
-        {topSections.length > 0 && (
-          <div className="flex flex-col gap-1.5">
-            {topSections.map((section) => (
+        <div
+          className={[
+            "mx-auto flex w-full flex-col",
+            compact ? "max-w-sm gap-1.5" : "max-w-sm gap-2",
+            isDrawers ? "gap-1.5" : "gap-2",
+          ].join(" ")}
+        >
+          {topSections.length > 0 && (
+            <div className="flex flex-col gap-1.5">
+              {topSections.map((section) => (
                 <PlanSectionButton
                   key={section.id}
                   section={section}
                   active={activeSectionId === section.id}
                   shape="top"
                   onClick={
-                    interactive
-                      ? () => selectSection(section.id)
-                      : undefined
+                    interactive ? () => selectSection(section.id) : undefined
                   }
                   refProp={
                     sectionHasHighlight(section, normalizedHighlight)
@@ -181,75 +177,73 @@ export default function SpaceFloorPlan({
                   itemsLabel={t.home.items(section.items.length)}
                 />
               ))}
-          </div>
-        )}
+            </div>
+          )}
 
-        <div
-          className={[
-            "plan-stack relative flex flex-col",
-            isDrawers
-              ? compact
-                ? "min-h-[220px]"
-                : "min-h-[280px]"
-              : compact
-                ? "min-h-[260px]"
-                : "min-h-[320px]",
-          ].join(" ")}
-        >
-          {bodySections.map((section) => {
-                const hasHighlight = sectionHasHighlight(
-                  section,
-                  normalizedHighlight,
-                );
-
-                return (
-                  <PlanSectionButton
-                    key={section.id}
-                    section={section}
-                    active={activeSectionId === section.id}
-                    stacked
-                    shape={
-                      isDrawers
-                        ? "drawer"
-                        : isFloorSection(section)
-                          ? "floor"
-                          : "shelf"
-                    }
-                    onClick={
-                      interactive
-                        ? () => selectSection(section.id)
-                        : undefined
-                    }
-                    refProp={hasHighlight ? activeRef : undefined}
-                    itemsLabel={t.home.items(section.items.length)}
-                  />
-                );
-            })}
-        </div>
-
-        {!isDrawers && (
           <div
             className={[
-              "mx-auto grid w-[86%] grid-cols-2 px-5",
-              compact ? "gap-16" : "gap-24",
+              "plan-stack relative flex flex-col",
+              isDrawers
+                ? compact
+                  ? "min-h-[220px]"
+                  : "min-h-[280px]"
+                : compact
+                  ? "min-h-[260px]"
+                  : "min-h-[320px]",
             ].join(" ")}
-            aria-hidden="true"
           >
-            <div
-              className={[
-                "rounded-b bg-zinc-300/80 dark:bg-zinc-600/50",
-                compact ? "h-2" : "h-3",
-              ].join(" ")}
-            />
-            <div
-              className={[
-                "rounded-b bg-zinc-300/80 dark:bg-zinc-600/50",
-                compact ? "h-2" : "h-3",
-              ].join(" ")}
-            />
+            {bodySections.map((section) => {
+              const hasHighlight = sectionHasHighlight(
+                section,
+                normalizedHighlight,
+              );
+
+              return (
+                <PlanSectionButton
+                  key={section.id}
+                  section={section}
+                  active={activeSectionId === section.id}
+                  stacked
+                  shape={
+                    isDrawers
+                      ? "drawer"
+                      : isFloorSection(section)
+                        ? "floor"
+                        : "shelf"
+                  }
+                  onClick={
+                    interactive ? () => selectSection(section.id) : undefined
+                  }
+                  refProp={hasHighlight ? activeRef : undefined}
+                  itemsLabel={t.home.items(section.items.length)}
+                />
+              );
+            })}
           </div>
-        )}
-      </div>
+
+          {!isDrawers && (
+            <div
+              className={[
+                "mx-auto grid w-[86%] grid-cols-2 px-5",
+                compact ? "gap-16" : "gap-24",
+              ].join(" ")}
+              aria-hidden="true"
+            >
+              <div
+                className={[
+                  "rounded-b bg-zinc-300/80 dark:bg-zinc-600/50",
+                  compact ? "h-2" : "h-3",
+                ].join(" ")}
+              />
+              <div
+                className={[
+                  "rounded-b bg-zinc-300/80 dark:bg-zinc-600/50",
+                  compact ? "h-2" : "h-3",
+                ].join(" ")}
+              />
+            </div>
+          )}
+        </div>
       )}
 
       {!planOnly && selectedSection && (
@@ -287,8 +281,7 @@ function SectionItemsList({
 
       <ul className="flex flex-col gap-1.5">
         {section.items.map((item, itemIndex) => {
-          const isHighlighted =
-            item.name.toLowerCase() === normalizedHighlight;
+          const isHighlighted = item.name.toLowerCase() === normalizedHighlight;
           const ref =
             isHighlighted && highlightItemRef ? highlightItemRef : undefined;
 
@@ -428,7 +421,9 @@ function PlanSectionButton({
         <span className="block truncate text-sm font-semibold leading-snug">
           {section.name}
         </span>
-        <span className="mt-0.5 block text-xs text-zinc-600 dark:text-zinc-400">{itemsLabel}</span>
+        <span className="mt-0.5 block text-xs text-zinc-600 dark:text-zinc-400">
+          {itemsLabel}
+        </span>
       </span>
 
       {isDrawer && (

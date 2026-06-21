@@ -34,11 +34,11 @@ Tot passa al client després del primer load. No hi ha backend propi.
 
 ## Static export (Next.js)
 
-| Regla | Detall |
-| ----- | ------ |
-| Config | `next.config.js` → `output: "export"`, `trailingSlash: true` |
-| Imatges | `images.unoptimized: true` |
-| Base path | `NEXT_PUBLIC_BASE_PATH` per GitHub Pages en subpath |
+| Regla            | Detall                                                                             |
+| ---------------- | ---------------------------------------------------------------------------------- |
+| Config           | `next.config.js` → `output: "export"`, `trailingSlash: true`                       |
+| Imatges          | `images.unoptimized: true`                                                         |
+| Base path        | `NEXT_PUBLIC_BASE_PATH` per GitHub Pages en subpath                                |
 | Rutes dinàmiques | `app/space/[id]/page.tsx` exporta `generateStaticParams()` des de `getAllSpaces()` |
 
 ### Suspense obligatori
@@ -74,7 +74,7 @@ lib/fuse-search.ts   → Fuse (keys: item.name, item.tags), searchAll, searchWit
 Components / pages
 ```
 
-`lib/search.ts` només re-exporta — preferir importar des de `inventory` o `fuse-search` en codi nou.
+Importar des de `inventory` o `fuse-search` segons calgui.
 
 ---
 
@@ -88,11 +88,11 @@ Components / pages
 
 ## Routing i estat URL
 
-| URL | Estat |
-| --- | ----- |
-| `/search?q=…` | Query global; `SearchResults` fa `router.replace` debounced |
-| `/space/[id]?highlight=Nom` | Destaca objecte i secció al plànol; scroll a item |
-| Canvi de secció al plànol | `onSectionSelect` elimina `?highlight=` si cal |
+| URL                         | Estat                                                       |
+| --------------------------- | ----------------------------------------------------------- |
+| `/search?q=…`               | Query global; `SearchResults` fa `router.replace` debounced |
+| `/space/[id]?highlight=Nom` | Destaca objecte i secció al plànol; scroll a item           |
+| Canvi de secció al plànol   | `onSectionSelect` elimina `?highlight=` si cal              |
 
 ---
 
@@ -118,21 +118,32 @@ Redueix el JS inicial de la home.
 
 ## i18n i tema
 
-| Concern | Fitxer | Persistència |
-| ------- | ------ | ------------ |
-| Locale | `lib/i18n.tsx` | `localStorage` `stashly-locale` |
-| Theme | `lib/theme.tsx` | `localStorage` `stashly-theme` |
-| Anti-flicker | `app/layout.tsx` inline script | Abans del primer paint |
+| Concern      | Fitxer                         | Persistència                    |
+| ------------ | ------------------------------ | ------------------------------- |
+| Locale       | `lib/i18n.tsx`                 | `localStorage` `stashly-locale` |
+| Theme        | `lib/theme.tsx`                | `localStorage` `stashly-theme`  |
+| Anti-flicker | `app/layout.tsx` inline script | Abans del primer paint          |
 
 ---
 
 ## CI / desplegament
 
-`.github/workflows/deploy.yml`:
+### CI (`.github/workflows/ci.yml`)
 
-1. `pnpm install`
-2. `pnpm build` → `out/`
-3. Publica a `gh-pages` (peaceiris/actions-gh-pages o equivalent)
+S'executa en **pull requests**:
+
+```bash
+pnpm check
+# validate:data → test → lint → typecheck → format:check → build (+ bundle budget)
+```
+
+### Desplegament (`.github/workflows/deploy.yml`)
+
+Només en push a `main` (i manualment via `workflow_dispatch`):
+
+1. `pnpm check` (mateixes comprovacions que el CI)
+2. `touch out/.nojekyll`
+3. Publica `out/` a la branca `gh-pages` (peaceiris/actions-gh-pages)
 
 ---
 

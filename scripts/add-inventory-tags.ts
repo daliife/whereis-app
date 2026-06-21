@@ -54,10 +54,7 @@ const EXTRA: Record<string, string[]> = {
 };
 
 function tagsFromName(name: string): string[] {
-  const normalized = name
-    .toLowerCase()
-    .normalize("NFD")
-    .replace(/\p{M}/gu, "");
+  const normalized = name.toLowerCase().normalize("NFD").replace(/\p{M}/gu, "");
 
   const tags = new Set<string>();
 

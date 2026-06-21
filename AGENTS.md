@@ -19,6 +19,13 @@ Stashly is a **static mobile-first web app** to find household items. Primary fl
 - `pnpm install`, `pnpm dev`, `pnpm build`, `pnpm test`, `pnpm validate:data`
 - Never `npm` or `yarn` — blocked by `.npmrc` `engine-strict=true`
 
+### Lint & format
+
+- **ESLint:** `.eslintrc.cjs` → `next/core-web-vitals`, `next/typescript`, `eslint-config-prettier`; Vitest rules on `*.{test,spec}.{ts,tsx}`
+- **Prettier:** `.prettierrc` + `prettier-plugin-tailwindcss` (class order)
+- **Do not** use `eslint-plugin-prettier` — format runs via `pnpm format` / `pnpm format:check`, separate from lint
+- Before deploy: `pnpm check`
+
 ### Static export
 
 - `next.config.js`: `output: 'export'`, `trailingSlash: true`
@@ -44,21 +51,20 @@ Stashly is a **static mobile-first web app** to find household items. Primary fl
 - `data/inventory.json` — single source of truth
 - `lib/inventory.ts` — types, `getSpace`, `getAllSpaces`, `buildSearchIndex`
 - `lib/fuse-search.ts` — single Fuse instance; `searchAll`, `searchWithinSpace`
-- `lib/search.ts` — re-exports for backward compatibility
 
 ---
 
 ## Key components
 
-| Component | Role |
-| --------- | ---- |
-| `SearchBar` | Controlled search input; class `search-field` |
-| `ItemCard` | Result card; `card-interactive` / `card-highlighted` |
-| `SpaceFloorPlan` | Interactive shelf/drawer diagram; props: `planOnly`, `compact`, `interactive`, `onSectionSelect` |
-| `LocateItemSheet` | Modal preview on home search tap (dynamic import) |
-| `AboutSheet` | How-it-works modal (dynamic import) |
-| `SettingsMenu` | Theme + locale; portal-based panel |
-| `SpaceIcon` / `AppIcon` | Type icons and app logo |
+| Component               | Role                                                                                             |
+| ----------------------- | ------------------------------------------------------------------------------------------------ |
+| `SearchBar`             | Controlled search input; class `search-field`                                                    |
+| `ItemCard`              | Result card; `card-interactive` / `card-highlighted`                                             |
+| `SpaceFloorPlan`        | Interactive shelf/drawer diagram; props: `planOnly`, `compact`, `interactive`, `onSectionSelect` |
+| `LocateItemSheet`       | Modal preview on home search tap (dynamic import)                                                |
+| `AboutSheet`            | How-it-works modal (dynamic import)                                                              |
+| `SettingsMenu`          | Theme + locale; portal-based panel                                                               |
+| `SpaceIcon` / `AppIcon` | Type icons and app logo                                                                          |
 
 Removed / do not recreate: `ThemeToggle.tsx`, `LocaleSwitcher.tsx` (logic lives in `SettingsMenu`).
 
@@ -66,13 +72,13 @@ Removed / do not recreate: `ThemeToggle.tsx`, `LocaleSwitcher.tsx` (logic lives 
 
 ## Page map
 
-| File | Notes |
-| ---- | ----- |
-| `app/page.tsx` | Home: search → results → `LocateItemSheet`; browse spaces grid |
-| `app/space/[id]/SpaceClient.tsx` | Sticky `page-toolbar`, local search, `SpaceFloorPlan`, `?highlight=` |
-| `app/search/SearchResults.tsx` | Global search, debounced URL sync |
-| `app/qr/page.tsx` | QR grid + print |
-| `app/globals.css` | Shared classes: `btn-header-action`, `card-*`, `search-field`, `page-toolbar` |
+| File                             | Notes                                                                         |
+| -------------------------------- | ----------------------------------------------------------------------------- |
+| `app/page.tsx`                   | Home: search → results → `LocateItemSheet`; browse spaces grid                |
+| `app/space/[id]/SpaceClient.tsx` | Sticky `page-toolbar`, local search, `SpaceFloorPlan`, `?highlight=`          |
+| `app/search/SearchResults.tsx`   | Global search, debounced URL sync                                             |
+| `app/qr/page.tsx`                | QR grid + print                                                               |
+| `app/globals.css`                | Shared classes: `btn-header-action`, `card-*`, `search-field`, `page-toolbar` |
 
 ---
 

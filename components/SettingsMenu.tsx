@@ -122,7 +122,7 @@ export default function SettingsMenu() {
       ? createPortal(
           <div
             ref={containerRef}
-            className="fixed inset-0 z-40 pointer-events-none sm:pointer-events-none"
+            className="pointer-events-none fixed inset-0 z-40 sm:pointer-events-none"
           >
             <button
               type="button"
@@ -137,7 +137,7 @@ export default function SettingsMenu() {
               role="dialog"
               aria-modal={isMobileViewport ? "true" : "false"}
               aria-labelledby="settings-title"
-              className="pointer-events-auto fixed z-50 w-[calc(100%-2rem)] max-w-sm rounded-2xl border border-zinc-200 bg-white p-4 shadow-2xl dark:border-zinc-800 dark:bg-zinc-900 dark:shadow-black/40 inset-x-4 bottom-[max(1rem,env(safe-area-inset-bottom))] sm:inset-x-auto sm:bottom-auto sm:w-64 sm:max-w-none sm:rounded-lg sm:p-3 sm:shadow-lg sm:shadow-zinc-200/70 sm:dark:shadow-black/30"
+              className="pointer-events-auto fixed inset-x-4 bottom-[max(1rem,env(safe-area-inset-bottom))] z-50 w-[calc(100%-2rem)] max-w-sm rounded-2xl border border-zinc-200 bg-white p-4 shadow-2xl dark:border-zinc-800 dark:bg-zinc-900 dark:shadow-black/40 sm:inset-x-auto sm:bottom-auto sm:w-64 sm:max-w-none sm:rounded-lg sm:p-3 sm:shadow-lg sm:shadow-zinc-200/70 sm:dark:shadow-black/30"
               style={
                 desktopPos
                   ? {

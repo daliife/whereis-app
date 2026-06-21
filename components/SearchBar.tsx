@@ -1,6 +1,12 @@
 "use client";
 
-import { forwardRef, useEffect, useId, useImperativeHandle, useRef } from "react";
+import {
+  forwardRef,
+  useEffect,
+  useId,
+  useImperativeHandle,
+  useRef,
+} from "react";
 import UiIcon from "@/components/icons/UiIcon";
 
 interface SearchBarProps {

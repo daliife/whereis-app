@@ -64,8 +64,9 @@ export default function SearchResultsList({
   nothingFoundHint,
   footer,
 }: Props) {
-  const { range, topSpacerHeight, bottomSpacerHeight } =
-    useWindowedRange(results.length);
+  const { range, topSpacerHeight, bottomSpacerHeight } = useWindowedRange(
+    results.length,
+  );
 
   if (results.length === 0) {
     return (
@@ -91,8 +92,7 @@ export default function SearchResultsList({
         {visible.map((result, offset) => {
           const index = range.start + offset;
           const isActive =
-            selectedResult !== null &&
-            sameSearchResult(selectedResult, result);
+            selectedResult !== null && sameSearchResult(selectedResult, result);
 
           return (
             <ResultButton

@@ -40,7 +40,9 @@ function getSpaceFuse(spaceId: string): Fuse<SearchResult> {
 
 export function searchAll(query: string): SearchResult[] {
   if (!query.trim()) return [];
-  return getGlobalFuse().search(query).map((r) => r.item);
+  return getGlobalFuse()
+    .search(query)
+    .map((r) => r.item);
 }
 
 export function searchWithinSpace(
@@ -48,5 +50,7 @@ export function searchWithinSpace(
   query: string,
 ): SearchResult[] {
   if (!query.trim()) return [];
-  return getSpaceFuse(spaceId).search(query).map((r) => r.item);
+  return getSpaceFuse(spaceId)
+    .search(query)
+    .map((r) => r.item);
 }

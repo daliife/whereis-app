@@ -10,10 +10,9 @@ import { useDebouncedValue } from "@/lib/useDebouncedValue";
 import { useI18n } from "@/lib/i18n";
 import { useHomeSearch } from "./HomeSearchContext";
 
-const LocateItemSheet = dynamic(
-  () => import("@/components/LocateItemSheet"),
-  { ssr: false },
-);
+const LocateItemSheet = dynamic(() => import("@/components/LocateItemSheet"), {
+  ssr: false,
+});
 
 const AboutSheet = dynamic(() => import("@/components/AboutSheet"), {
   ssr: false,
@@ -40,10 +39,7 @@ export default function HomeSearchSection() {
 
   return (
     <>
-      <section
-        className="home-primary"
-        aria-labelledby="home-search-heading"
-      >
+      <section className="home-primary" aria-labelledby="home-search-heading">
         <header className="home-primary-header">
           <h2 id="home-search-heading" className="home-primary-title">
             {t.home.searchHeading}

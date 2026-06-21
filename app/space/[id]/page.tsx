@@ -42,7 +42,10 @@ export default function SpacePage({ params }: { params: { id: string } }) {
 
   if (!space) {
     return (
-      <main id="main-content" className="mx-auto max-w-lg px-4 pt-16 text-center">
+      <main
+        id="main-content"
+        className="mx-auto max-w-lg px-4 pt-16 text-center"
+      >
         <p className="text-4xl" aria-hidden="true">
           📦
         </p>

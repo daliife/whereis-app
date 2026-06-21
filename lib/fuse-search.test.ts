@@ -12,25 +12,28 @@ describe("fuse-search", () => {
     const results = searchAll("Barbacoa");
 
     expect(results.length).toBeGreaterThan(0);
-    expect(results.some((result) => result.item.name === "Barbacoa")).toBe(true);
+    expect(results.some((result) => result.item.name === "Barbacoa")).toBe(
+      true,
+    );
   });
 
   it("finds items case-insensitively", () => {
     const results = searchAll("barbacoa");
 
-    expect(results.some((result) => result.item.name === "Barbacoa")).toBe(true);
+    expect(results.some((result) => result.item.name === "Barbacoa")).toBe(
+      true,
+    );
   });
 
   it("searchWithinSpace limits results to one space", () => {
     const results = searchWithinSpace("armari-2", "Borrassa");
 
     expect(results.length).toBe(2);
-    expect(results.every((result) => result.space.id === "armari-2")).toBe(true);
+    expect(results.every((result) => result.space.id === "armari-2")).toBe(
+      true,
+    );
     expect(results.map((result) => result.item.name)).toEqual(
-      expect.arrayContaining([
-        "Borrassa (damunt)",
-        "Borrassa (2n prestatge)",
-      ]),
+      expect.arrayContaining(["Borrassa (damunt)", "Borrassa (2n prestatge)"]),
     );
   });
 

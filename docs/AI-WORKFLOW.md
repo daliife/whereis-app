@@ -59,29 +59,28 @@ Preferir canvis petits; no reescriure mòduls sencers.
 
 ## Mapa ràpid: «on ho toco?»
 
-| Vols canviar… | Fitxers |
-| ------------- | ------- |
-| Inventari | `data/inventory.json` |
-| Cerca fuzzy | `lib/fuse-search.ts` |
-| Resultats home | `app/page.tsx`, `components/ItemCard.tsx` |
-| Plànol armari/calaix | `components/SpaceFloorPlan.tsx` |
-| Modal «on està» | `components/LocateItemSheet.tsx` |
-| Cerca dins espai | `app/space/[id]/SpaceClient.tsx` |
-| Cerca global | `app/search/SearchResults.tsx` |
-| QR | `app/qr/page.tsx`, `components/QRCode.tsx` |
-| Idioma | `lib/translations/*.ts`, `lib/i18n.tsx` |
-| Tema clar/fosc | `lib/theme.tsx`, `app/globals.css` |
-| Configuració (header) | `components/SettingsMenu.tsx` |
-| Estils compartits | `app/globals.css` |
-| PWA / offline | `public/sw.js`, `components/ServiceWorkerRegistration.tsx` |
+| Vols canviar…         | Fitxers                                                    |
+| --------------------- | ---------------------------------------------------------- |
+| Inventari             | `data/inventory.json`                                      |
+| Cerca fuzzy           | `lib/fuse-search.ts`                                       |
+| Resultats home        | `app/page.tsx`, `components/ItemCard.tsx`                  |
+| Plànol armari/calaix  | `components/SpaceFloorPlan.tsx`                            |
+| Modal «on està»       | `components/LocateItemSheet.tsx`                           |
+| Cerca dins espai      | `app/space/[id]/SpaceClient.tsx`                           |
+| Cerca global          | `app/search/SearchResults.tsx`                             |
+| QR                    | `app/qr/page.tsx`, `components/QRCode.tsx`                 |
+| Idioma                | `lib/translations/*.ts`, `lib/i18n.tsx`                    |
+| Tema clar/fosc        | `lib/theme.tsx`, `app/globals.css`                         |
+| Configuració (header) | `components/SettingsMenu.tsx`                              |
+| Estils compartits     | `app/globals.css`                                          |
+| PWA / offline         | `public/sw.js`, `components/ServiceWorkerRegistration.tsx` |
 
 ---
 
 ## Comprovacions després d'un canvi d'IA
 
 ```bash
-pnpm exec tsc --noEmit
-pnpm build
+pnpm check
 pnpm validate:data    # si has tocat inventory.json
 ```
 
@@ -96,15 +95,15 @@ Prova manual mínim:
 
 ## Errors freqüents de la IA (i com evitar-los)
 
-| Error | Correcció |
-| ----- | --------- |
-| Proposa `npm install` | Digues «pnpm only» o referencia `AGENTS.md` |
-| Afegeix API route | Recorda `output: 'export'` |
-| `useSearchParams` sense Suspense | Segueix `app/search/page.tsx` |
-| Tradueix noms d'objectes | Inventari sempre en català |
-| Card grossa al voltant del plànol | Plànol = files interactives; veure `docs/UI.md` |
-| Duplica estat selecció + highlight | Un sol actiu al plànol; `onSectionSelect` neteja URL |
-| Crea `ThemeToggle` / `LocaleSwitcher` | Ja dins `SettingsMenu` |
+| Error                                 | Correcció                                            |
+| ------------------------------------- | ---------------------------------------------------- |
+| Proposa `npm install`                 | Digues «pnpm only» o referencia `AGENTS.md`          |
+| Afegeix API route                     | Recorda `output: 'export'`                           |
+| `useSearchParams` sense Suspense      | Segueix `app/search/page.tsx`                        |
+| Tradueix noms d'objectes              | Inventari sempre en català                           |
+| Card grossa al voltant del plànol     | Plànol = files interactives; veure `docs/UI.md`      |
+| Duplica estat selecció + highlight    | Un sol actiu al plànol; `onSectionSelect` neteja URL |
+| Crea `ThemeToggle` / `LocaleSwitcher` | Ja dins `SettingsMenu`                               |
 
 ---
 
