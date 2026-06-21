@@ -128,22 +128,43 @@ Redueix el JS inicial de la home.
 
 ## CI / desplegament
 
-### CI (`.github/workflows/ci.yml`)
+Metodologia: **validar en PR**, **desplegar només quan passa `pnpm check`**, un sol camí de build compartit.
 
-S'executa en **pull requests**:
+| Workflow            | Quan s'executa         | Què fa                                      |
+| ------------------- | ---------------------- | ------------------------------------------- |
+| `ci.yml`            | Pull requests          | `pnpm check` (sense desplegar)              |
+| `deploy.yml`        | Push a `main`          | Desplegament automàtic a GitHub Pages       |
+| `deploy-manual.yml` | Manual (Actions)       | Desplegament d'una branca concreta          |
+| `deploy-pages.yml`  | Reutilitzable (intern) | Check + build + publica `out/` → `gh-pages` |
+
+### CI (`ci.yml`)
 
 ```bash
 pnpm check
 # validate:data → test → lint → typecheck → format:check → build (+ bundle budget)
 ```
 
-### Desplegament (`.github/workflows/deploy.yml`)
+- Permisos mínims (`contents: read`)
+- `concurrency`: cancel·la execucions antigues del mateix PR
 
-Només en push a `main` (i manualment via `workflow_dispatch`):
+### Desplegament automàtic (`deploy.yml`)
 
-1. `pnpm check` (mateixes comprovacions que el CI)
-2. `touch out/.nojekyll`
-3. Publica `out/` a la branca `gh-pages` (peaceiris/actions-gh-pages)
+Push a `main` → crida `deploy-pages.yml` amb el SHA del commit.
+
+### Desplegament manual (`deploy-manual.yml`)
+
+1. GitHub → **Actions** → **Deploy to GitHub Pages (manual)** → **Run workflow**
+2. Indica la **branca** (p. ex. `main`, `feature/qr-print`)
+3. Executa el mateix pipeline que producció (check + build + deploy)
+
+`concurrency` compartit (`github-pages-deploy`): no es solapen dos desplegaments a `gh-pages`.
+
+### Pipeline compartit (`deploy-pages.yml`)
+
+1. Checkout del ref indicat
+2. `pnpm check`
+3. `touch out/.nojekyll`
+4. Publica `out/` a la branca `gh-pages` (peaceiris/actions-gh-pages)
 
 ---
 

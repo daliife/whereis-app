@@ -1,21 +1,28 @@
-name: CI
+name: Deploy Pages (reusable)
 
 on:
-  pull_request:
-
-concurrency:
-  group: ci-${{ github.event.pull_request.number }}
-  cancel-in-progress: true
+  workflow_call:
+    inputs:
+      ref:
+        description: Git ref to build (branch name, tag, or SHA)
+        required: true
+        type: string
 
 permissions:
-  contents: read
+  contents: write
+
+concurrency:
+  group: github-pages-deploy
+  cancel-in-progress: false
 
 jobs:
-  check:
+  deploy:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          ref: ${{ inputs.ref }}
 
       - name: Set up pnpm
         uses: pnpm/action-setup@v4
@@ -34,3 +41,12 @@ jobs:
         env:
           NEXT_PUBLIC_BASE_PATH: "/whereis-app"
           NEXT_PUBLIC_SITE_URL: https://${{ github.repository_owner }}.github.io/whereis-app
+
+      - name: Add .nojekyll
+        run: touch out/.nojekyll
+
+      - name: Deploy to gh-pages branch
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./out

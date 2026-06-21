@@ -95,6 +95,8 @@ scripts/
 
 Push a `main` → GitHub Actions → branca `gh-pages`.
 
+Desplegament manual d'una altra branca: **Actions** → **Deploy to GitHub Pages (manual)**. Veure [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md).
+
 Si l'URL és `https://usuari.github.io/whereis-app/`, configura `NEXT_PUBLIC_BASE_PATH=/whereis-app` a `.github/workflows/deploy.yml` i en local (`.env.local`).
 
 ---

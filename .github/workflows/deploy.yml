@@ -4,42 +4,13 @@ on:
   push:
     branches:
       - main
-  workflow_dispatch:
 
 permissions:
-  contents: write
+  contents: read
 
 jobs:
   deploy:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Set up pnpm
-        uses: pnpm/action-setup@v4
-
-      - name: Set up Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: 20
-          cache: pnpm
-
-      - name: Install dependencies
-        run: pnpm install --frozen-lockfile
-
-      - name: Check
-        run: pnpm check
-        env:
-          NEXT_PUBLIC_BASE_PATH: "/whereis-app"
-          NEXT_PUBLIC_SITE_URL: https://${{ github.repository_owner }}.github.io/whereis-app
-
-      - name: Add .nojekyll
-        # Prevents GitHub Pages from ignoring _next/ static assets
-        run: touch out/.nojekyll
-
-      - name: Deploy to gh-pages branch
-        uses: peaceiris/actions-gh-pages@v3
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./out
+    uses: ./.github/workflows/deploy-pages.yml
+    with:
+      ref: ${{ github.sha }}
+    secrets: inherit

@@ -1,0 +1,20 @@
+name: Deploy to GitHub Pages (manual)
+
+on:
+  workflow_dispatch:
+    inputs:
+      branch:
+        description: Branch to build and deploy
+        required: true
+        type: string
+        default: main
+
+permissions:
+  contents: read
+
+jobs:
+  deploy:
+    uses: ./.github/workflows/deploy-pages.yml
+    with:
+      ref: ${{ inputs.branch }}
+    secrets: inherit
