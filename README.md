@@ -53,7 +53,7 @@ Contingut de l'inventari en **català** (noms d'objectes). La UI suporta **ca / 
 | Cerca        | fuse.js · client-side · sense backend |
 | QR           | qrcode.react (import dinàmic)         |
 | Desplegament | `output: 'export'` → GitHub Pages     |
-| PWA          | Service worker (`public/sw.js`)       |
+| PWA          | Service worker (`out/sw.js`, generated at build) |
 | Qualitat     | ESLint (Next + TS + Vitest), Prettier |
 
 ---

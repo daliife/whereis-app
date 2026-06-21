@@ -73,7 +73,7 @@ Preferir canvis petits; no reescriure mòduls sencers.
 | Tema clar/fosc        | `lib/theme.tsx`, `app/globals.css`                         |
 | Configuració (header) | `components/SettingsMenu.tsx`                              |
 | Estils compartits     | `app/globals.css`                                          |
-| PWA / offline         | `public/sw.js`, `components/ServiceWorkerRegistration.tsx` |
+| PWA / offline         | `scripts/generate-sw.mjs` → `out/sw.js`, `components/ServiceWorkerRegistration.tsx` |
 
 ---
 

@@ -110,8 +110,8 @@ Redueix el JS inicial de la home.
 
 ## PWA / offline
 
-- `public/sw.js` — cache d'assets
-- `components/ServiceWorkerRegistration.tsx` — registre al client
+- `scripts/generate-sw.mjs` → `out/sw.js` (precache + offline pages)
+- `components/ServiceWorkerRegistration.tsx` — registre al client (prod only; dev unregisters stale workers)
 - `app/manifest.ts` — manifest web
 
 ---
